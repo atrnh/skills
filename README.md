@@ -21,7 +21,13 @@ docs/
 | `skills/technical-documentation/` | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
 | `docs/` | Repository-level design notes and supporting documentation. |
 
-These directories are starting points. No skills have been added yet.
+## Available skills
+
+| Skill | Domain | Judgment it guides |
+| --- | --- | --- |
+| [Let context do its work](skills/shared/principle-let-context-do-its-work/SKILL.md) | Shared | Remove repetition while preserving the relationships readers need. |
+| [Format by meaning](skills/shared/principle-format-by-meaning/SKILL.md) | Shared | Choose inline formatting by the text's role and the reader's task. |
+| [Match language to teaching purpose](skills/education/principle-match-language-to-teaching-purpose/SKILL.md) | Education | Explain concepts, narrate demonstrations, and direct practice with appropriate language. |
 
 ## Choosing a domain
 
