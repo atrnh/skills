@@ -24,15 +24,12 @@ Shared skills apply alongside domain skills. When domain guidance differs, the a
 | Skill | Domain | Judgment it guides |
 | --- | --- | --- |
 | [Let context do its work](skills/shared/principle-let-context-do-its-work/SKILL.md) | Shared | Remove repetition while preserving the relationships readers need. |
-| [Format by meaning](skills/shared/principle-format-by-meaning/SKILL.md) | Shared | Choose inline formatting by the text's role and the reader's task. |
 | [Bound analysis by the decision](skills/shared/principle-bound-analysis-by-the-decision/SKILL.md) | Shared | Scope research around the uncertainty that could change the decision. |
 | [Match language to teaching purpose](skills/education/principle-match-language-to-teaching-purpose/SKILL.md) | Education | Explain concepts, narrate demonstrations, and direct practice with appropriate language. |
 | [Make the progression meaningful](skills/education/principle-make-the-progression-meaningful/SKILL.md) | Education | Order learning around questions, prerequisites, and the work ahead. |
-| [Connect examples to concepts](skills/education/principle-connect-examples-to-concepts/SKILL.md) | Education | Ground examples and connect their details to transferable ideas. |
+| [Connect examples to concepts](skills/education/principle-connect-examples-to-concepts/SKILL.md) | Education | Ground examples, connect their details to transferable ideas, and scope demonstrations. |
 | [Protect practice time](skills/education/principle-protect-practice-time/SKILL.md) | Education | Reduce incidental work while preserving the intended challenge. |
-| [Let demonstrations serve the lesson](skills/education/principle-let-demonstrations-serve-the-lesson/SKILL.md) | Education | Demonstrate where observation improves understanding. |
 | [Put essential reasoning in view](skills/education/principle-put-essential-reasoning-in-view/SKILL.md) | Education | Keep necessary context and connections in the learner's experience. |
-| [Separate the workflow from the tool](skills/engineering/principle-separate-the-workflow-from-the-tool/SKILL.md) | Engineering | Preserve reusable workflow decisions across tool-specific operations. |
 | [Reconcile from declared authority](skills/engineering/principle-reconcile-from-declared-authority/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
 | [Place content by applicability](skills/technical-documentation/principle-place-content-by-applicability/SKILL.md) | Technical documentation | Determine where information applies before choosing its home. |
 | [Make instruction paths complete](skills/technical-documentation/principle-make-instruction-paths-complete/SKILL.md) | Technical documentation | Help readers identify and follow the procedure for their situation. |
