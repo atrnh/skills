@@ -1,0 +1,35 @@
+{
+  "name": "atrnh-skills",
+  "description": "Ashley Trinh's agent skills for education, engineering, and technical documentation",
+  "owner": {
+    "name": "Ashley Trinh",
+    "url": "https://github.com/atrnh"
+  },
+  "plugins": [
+    {
+      "name": "shared",
+      "description": "Skills whose guidance transfers across engineering, education, and technical documentation",
+      "source": "./skills/shared"
+    },
+    {
+      "name": "education",
+      "description": "Skills for curriculum, lectures, labs, exercises, and demos",
+      "source": "./skills/education"
+    },
+    {
+      "name": "engineering",
+      "description": "Skills for building and maintaining software, extensions, and internal tooling",
+      "source": "./skills/engineering"
+    },
+    {
+      "name": "technical-documentation",
+      "description": "Skills for explanations, procedures, reference material, and guides",
+      "source": "./skills/technical-documentation"
+    },
+    {
+      "name": "all-skills",
+      "description": "Every skill in this repository. Install it instead of the domain plugins, not alongside them",
+      "source": "./"
+    }
+  ]
+}

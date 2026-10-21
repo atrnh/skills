@@ -7,6 +7,8 @@ This repository is the canonical source for the collection: the place to reinsta
 ## Organization
 
 ```text
+.claude-plugin/marketplace.json
+.github/plugin/marketplace.json
 skills/
   shared/
   engineering/
@@ -22,6 +24,7 @@ docs/
 | `skills/education/` | Curriculum design, teaching prose, exercises, assessments, and demos that develop learners' understanding and ability. |
 | `skills/technical-documentation/` | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
 | `docs/` | Repository-level design notes and supporting documentation. |
+| `.claude-plugin/`, `.github/plugin/` | Plugin marketplace manifests. See [Installing](#installing). |
 
 ## Available skills
 
@@ -41,6 +44,49 @@ docs/
 | [Place content by applicability](skills/technical-documentation/principle-place-content-by-applicability/SKILL.md) | Technical documentation | Determine where information applies before choosing its home. |
 | [Make instruction paths complete](skills/technical-documentation/principle-make-instruction-paths-complete/SKILL.md) | Technical documentation | Help readers identify and follow the procedure for their situation. |
 | [Document the current state](skills/technical-documentation/principle-document-the-current-state/SKILL.md) | Technical documentation | Reconcile the current explanation while preserving useful history. |
+
+## Installing
+
+This repository is a plugin marketplace named `atrnh-skills`. It offers one plugin per domain (`shared`, `education`, `engineering`, and `technical-documentation`) and an `all-skills` plugin containing every skill. Install either `all-skills` or the domain plugins you need. Installing both loads the same skills twice.
+
+The commands below install `all-skills`. To install a single domain, replace `all-skills` with the domain's plugin name.
+
+### Claude Code
+
+```sh
+claude plugin marketplace add atrnh/skills
+claude plugin install all-skills@atrnh-skills
+```
+
+To update, run `claude plugin marketplace update atrnh-skills`, then `claude plugin update all-skills@atrnh-skills`.
+
+### Codex CLI
+
+```sh
+codex plugin marketplace add atrnh/skills
+codex plugin add all-skills@atrnh-skills
+```
+
+To update, run `codex plugin marketplace upgrade atrnh-skills`.
+
+### GitHub Copilot CLI
+
+```sh
+copilot plugin marketplace add atrnh/skills
+copilot plugin install all-skills@atrnh-skills
+```
+
+To update, run `copilot plugin marketplace update atrnh-skills`, then `copilot plugin update all-skills@atrnh-skills`.
+
+### Other agents
+
+Use the [`skills` CLI](https://github.com/vercel-labs/skills) when your agent doesn't support plugins, or when you want individual skills:
+
+```sh
+npx skills@latest add atrnh/skills
+```
+
+Add `--list` to see the available skills, or `--skill <name>` to install specific ones. To install one domain, add its path, as in `npx skills@latest add atrnh/skills/skills/education`. To update, run `npx skills update`.
 
 ## Choosing a domain
 
@@ -62,11 +108,17 @@ Keep principles and workflows together within their domain. Use the `principle-`
 
 Agents load skills, including principles, by matching their descriptions to the current work. Begin a description with when the skill applies, and name the concrete artifacts or tasks where that happens, such as slides, labs, READMEs, or sync tooling. Keep originating examples out of the body so the guidance stays general.
 
+A new skill in an existing domain needs no manifest changes. A new domain needs:
+
+- An entry in `.claude-plugin/marketplace.json`, and its path added to the `all-skills` entry there.
+- A matching entry in `.github/plugin/marketplace.json`, which GitHub Copilot CLI reads instead because it ignores the other manifest's `skills` paths.
+- A `skills/<domain>/.github/plugin/plugin.json` for GitHub Copilot CLI, modeled on the existing ones.
+
+Run `claude plugin validate . --strict` after changing either marketplace manifest.
+
 Keep skill-specific examples, scripts, and references with their skill. Add further organizational layers only when the collection needs them.
 
 Project-specific syntax, folder conventions, and build commands usually belong in the project's own instructions or workflows. Extract a reusable principle only when the broader judgment is useful independently of those details.
-
-This layout organizes the source skills. Installation and agent discovery are not configured yet.
 
 The [October 6 principle extraction](docs/principle-extraction-2026-10-06.md) records the conversation evidence and selection decisions behind the principles added on that date.
 
