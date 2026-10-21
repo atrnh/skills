@@ -7,7 +7,7 @@ This repository is the canonical source for Ashley's reusable agent skills and t
 - Identify the current work's audience and purpose, then look in the matching directory under `skills/`.
 - Check `skills/shared/` for applicable guidance and read the relevant `SKILL.md` files before using or changing them.
 - Search existing skills before creating another one. Extend an existing skill when it already covers the same judgment or workflow.
-- Use `docs/` for repository-level design notes. The [October 6 principle extraction](docs/principle-extraction-2026-10-06.md) records the conversation evidence and selection decisions behind the principles added on that date.
+- Use `docs/` for repository-level design notes.
 
 ## Preserve domain distinctions
 
