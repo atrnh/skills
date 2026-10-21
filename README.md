@@ -71,3 +71,7 @@ This layout organizes the source skills. Installation and agent discovery are no
 The [October 6 principle extraction](docs/principle-extraction-2026-10-06.md) records the conversation evidence and selection decisions behind the principles added on that date.
 
 See [AGENTS.md](AGENTS.md) for instructions on working in this repository.
+
+## License
+
+Released under the [MIT License](LICENSE). Skills adapted from other authors keep their original license files beside their `SKILL.md`.
