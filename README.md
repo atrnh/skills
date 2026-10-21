@@ -1,21 +1,8 @@
 # Ashley's skills
 
-Reusable agent skills for engineering, education, and technical documentation. Skills capture both the judgments that guide the work and the workflows that carry it out.
-
-This repository is the canonical source for the collection: the place to reinstall skills from and, eventually, to distribute them publicly. Skills still kept in agent- or provider-specific folders will move here.
+Reusable agent skills for engineering, education, and technical documentation. Principle skills, prefixed `principle-`, guide judgment. Workflow skills describe how to carry out a task.
 
 ## Organization
-
-```text
-.claude-plugin/marketplace.json
-.github/plugin/marketplace.json
-skills/
-  shared/
-  engineering/
-  education/
-  technical-documentation/
-docs/
-```
 
 | Directory | Purpose |
 | --- | --- |
@@ -23,8 +10,14 @@ docs/
 | `skills/engineering/` | Building and maintaining software, extensions, and internal tooling. |
 | `skills/education/` | Curriculum design, teaching prose, exercises, assessments, and demos that develop learners' understanding and ability. |
 | `skills/technical-documentation/` | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
-| `docs/` | Repository-level design notes and supporting documentation. |
-| `.claude-plugin/`, `.github/plugin/` | Plugin marketplace manifests. See [Installing](#installing). |
+
+Domains follow the primary audience and purpose of the work. File format and technology alone do not determine the domain:
+
+- Python for a student exercise belongs primarily to education.
+- Python for a Sphinx extension belongs to engineering.
+- An administrator's guide to that extension belongs to technical documentation.
+
+Shared skills apply alongside domain skills. When domain guidance differs, the artifact's primary audience and purpose decide which applies. A course demo can use engineering guidance for correctness while education determines what the code needs to teach.
 
 ## Available skills
 
@@ -87,42 +80,6 @@ npx skills@latest add atrnh/skills
 ```
 
 Add `--list` to see the available skills, or `--skill <name>` to install specific ones. To install one domain, add its path, as in `npx skills@latest add atrnh/skills/skills/education`. To update, run `npx skills update`.
-
-## Choosing a domain
-
-Classify work by its primary audience and purpose. File format and technology alone do not determine the domain:
-
-- Python for a student exercise belongs primarily to education.
-- Python for a Sphinx extension belongs to engineering.
-- An administrator's guide to that extension belongs to technical documentation.
-
-Select skills according to the purpose of the current work. Apply shared principles alongside relevant domain skills. When domain guidance differs, follow the guidance for the artifact's primary audience and purpose. A course demo can use engineering guidance for correctness while education determines what the code needs to teach.
-
-Keep a skill in the domain where its guidance has concrete support. Move it into `shared/` when that guidance applies across domains without losing the distinctions that make it useful.
-
-## Adding skills
-
-Give each skill its own directory containing a `SKILL.md`, such as `skills/education/principle-connect-examples-to-concepts/SKILL.md`. Keep names unique across the repository.
-
-Keep principles and workflows together within their domain. Use the `principle-` prefix for compact skills that guide judgment. A principle should explain when it applies, what judgment to make, how that changes the work, and where the guidance stops applying. Workflow skills describe how to carry out a task.
-
-Agents load skills, including principles, by matching their descriptions to the current work. Begin a description with when the skill applies, and name the concrete artifacts or tasks where that happens, such as slides, labs, READMEs, or sync tooling. Keep originating examples out of the body so the guidance stays general.
-
-A new skill in an existing domain needs no manifest changes. A new domain needs:
-
-- An entry in `.claude-plugin/marketplace.json`, and its path added to the `all-skills` entry there.
-- A matching entry in `.github/plugin/marketplace.json`, which GitHub Copilot CLI reads instead because it ignores the other manifest's `skills` paths.
-- A `skills/<domain>/.github/plugin/plugin.json` for GitHub Copilot CLI, modeled on the existing ones.
-
-Run `claude plugin validate . --strict` after changing either marketplace manifest.
-
-Keep skill-specific examples, scripts, and references with their skill. Add further organizational layers only when the collection needs them.
-
-Project-specific syntax, folder conventions, and build commands usually belong in the project's own instructions or workflows. Extract a reusable principle only when the broader judgment is useful independently of those details.
-
-The [October 6 principle extraction](docs/principle-extraction-2026-10-06.md) records the conversation evidence and selection decisions behind the principles added on that date.
-
-See [AGENTS.md](AGENTS.md) for instructions on working in this repository.
 
 ## License
 
