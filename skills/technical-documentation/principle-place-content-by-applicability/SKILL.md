@@ -13,4 +13,4 @@ A page's location tells you where information appears. Establish who can use tha
 - Preserve genuinely local requirements beside the work they affect.
 - Consolidate the information before shortening its sources. The best shared explanation may need material from several passages.
 
-Do not infer universality from similar wording either. Verify uncertain applicability before moving a claim. Keep brief local orientation or repetition when it helps readers complete a task or find a direct answer.
+Do not infer universality from similar wording either. Verify uncertain applicability before moving a claim. Keep brief local orientation or repetition when it helps readers complete a task or find a direct answer. Placement decides where each claim is maintained; how readers identify and follow procedures that differ by situation is a separate judgment.
