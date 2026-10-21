@@ -13,4 +13,4 @@ Write for a reader who has followed the explanation so far. Let established cont
 - Make missing connections explicit. Related facts still need an explanation of their relationship.
 - Prefer familiar, concrete language. Fewer words should not require more decoding.
 
-Concision depends on what the reader can reasonably infer. Repeat what prevents ambiguity or helps the reader regain their place. Preserve conditions, distinctions, and causal links that carry the meaning.
+Concision depends on what the reader can reasonably infer. Repeat what prevents ambiguity or helps the reader regain their place. Preserve conditions, distinctions, and causal links that carry the meaning. This principle decides what the surrounding passage lets you leave unsaid. Word choice and sentence-level style rules belong to the document's style guide.
