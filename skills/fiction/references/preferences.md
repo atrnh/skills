@@ -18,7 +18,7 @@ line-editor.delivery: chat
 developmental-editor.delivery: chat
 ```
 
-`inline` posts comments on the identified manuscript, placed as the [feedback guidance](feedback.md) describes. `chat` returns all feedback in chat without writing feedback to the manuscript. Neither setting permits rewriting prose. Resolve each editor's setting separately. Missing settings inherit the next level. If a setting is invalid or conflicting within a file, disclose it and use chat for that review rather than guessing write authority.
+`inline` posts comments on the identified manuscript, placed as [review conduct](review-conduct.md) describes. `chat` returns all feedback in chat without writing feedback to the manuscript. Neither setting permits rewriting prose. Resolve each editor's setting separately. Missing settings inherit the next level. If a setting is invalid or conflicting within a file, disclose it and use chat for that review rather than guessing write authority.
 
 An explicit destination in the current request takes precedence. If multiple documents could be the feedback destination, clarify the target before posting. Do not persist a one-review override unless asked.
 

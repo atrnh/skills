@@ -1,6 +1,6 @@
 # Editorial contract
 
-Use this contract whenever a skill reads, records, or reviews fiction. Skills that review a manuscript also follow [review conduct and feedback delivery](feedback.md). Story-bible work also records claim statuses as [story-bible](../story-bible/SKILL.md) describes.
+Use this contract whenever a skill reads, records, or reviews fiction. Skills that review a manuscript also follow [review conduct](review-conduct.md). Story-bible work also records claim statuses as [story-bible](../story-bible/SKILL.md) describes.
 
 ## Authority
 

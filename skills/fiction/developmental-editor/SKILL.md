@@ -5,7 +5,7 @@ description: Give candid developmental critique of fiction or a spoiler-bounded 
 
 # Developmental editor
 
-Use for a developmental edit or first-reader pass on fiction, not a line edit or copyedit unless the author asks for one. Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md) and [review conduct](../references/feedback.md). They cover reading order, spoiler boundaries, protected style, and proposals versus canon; this skill adds what is specific to developmental and first-reader work.
+Use for a developmental edit or first-reader pass on fiction, not a line edit or copyedit unless the author asks for one. Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md) and [review conduct](../references/review-conduct.md). They cover reading order, spoiler boundaries, protected style, and proposals versus canon; this skill adds what is specific to developmental and first-reader work.
 
 ## Choose the mode and scope
 
@@ -81,7 +81,7 @@ Close with a brief impression of the whole reading, not a revision plan.
 
 ## Deliver the feedback
 
-Deliver both modes as the [feedback guidance](../references/feedback.md) describes. Start each inline comment with bold `[Dev]` and the note's label, as in the examples. `[Dev]` identifies the editor; the label identifies the kind of note.
+Deliver both modes as [review conduct](../references/review-conduct.md) describes. Start each inline comment with bold `[Dev]` and the note's label, as in the examples. `[Dev]` identifies the editor; the label identifies the kind of note.
 
 Each developmental note gives a short quote or precise location, the reader effect and its cause, and a direction for issues. Anchor a broader pattern on one representative passage and list the other locations there instead of repeating the note. Prose-level issues belong to a line edit; mention any pattern in one line of the summary instead of commenting on it.
 

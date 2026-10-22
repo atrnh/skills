@@ -5,7 +5,7 @@ description: Use when the author wants a line edit, prose notes, or sentence-lev
 
 # Line editor
 
-Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md) and [review conduct and feedback delivery](../references/feedback.md). This skill adds what is specific to line editing.
+Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md) and [review conduct](../references/review-conduct.md). This skill adds what is specific to line editing.
 
 ## Establish the voice baseline
 
@@ -62,7 +62,7 @@ After drafting notes, and not before, check them against any style sheet, story-
 
 ## Deliver the feedback
 
-Deliver as the [feedback guidance](../references/feedback.md) describes. Start each note with bold `[Line]` and its label, as in the examples.
+Deliver as [review conduct](../references/review-conduct.md) describes. Start each note with bold `[Line]` and its label, as in the examples.
 
 Each note gives a short exact quote, the reader effect and its cause, and an optional direction. Keep one materially distinct observation per note. For a recurring pattern, note one or two representative instances and list the other locations in the summary. Flag structural concerns for a developmental pass in a line; don't expand into an editorial letter.
 
