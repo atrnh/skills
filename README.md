@@ -1,6 +1,6 @@
 # Ashley's skills
 
-Reusable agent skills for engineering, education, and technical documentation. Principle skills, prefixed `principle-`, guide judgment. Workflow skills describe how to carry out a task.
+Reusable agent skills for engineering, education, technical documentation, fiction, and personal workflows. Principle skills, prefixed `principle-`, guide judgment. Workflow skills describe how to carry out a task.
 
 ## Organization
 
@@ -10,6 +10,8 @@ Reusable agent skills for engineering, education, and technical documentation. P
 | `skills/engineering/` | Building and maintaining software, extensions, and internal tooling. |
 | `skills/education/` | Curriculum design, teaching prose, exercises, assessments, and demos that develop learners' understanding and ability. |
 | `skills/technical-documentation/` | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
+| `skills/fiction/` | Developing, editing, and keeping a story bible for Ashley's fiction. Skills here share the editorial contract and delivery guidance in `skills/fiction/references/`. |
+| `skills/personal/` | Ashley's own assistant workflows, such as sending messages on her behalf and saving responses to Obsidian. |
 
 Domains follow the primary audience and purpose of the work. File format and technology alone do not determine the domain:
 
@@ -25,19 +27,32 @@ Shared skills apply alongside domain skills. When domain guidance differs, the a
 | --- | --- | --- |
 | [Let context do its work](skills/shared/principle-let-context-do-its-work/SKILL.md) | Shared | Remove repetition while preserving the relationships readers need. |
 | [Bound analysis by the decision](skills/shared/principle-bound-analysis-by-the-decision/SKILL.md) | Shared | Scope research around the uncertainty that could change the decision. |
+| [Deep quality review](skills/shared/deep-quality-review/SKILL.md) | Shared | Review writing for functional and deep quality using Diátaxis, then triage fixes in a dashboard. |
 | [Match language to teaching purpose](skills/education/principle-match-language-to-teaching-purpose/SKILL.md) | Education | Explain concepts, narrate demonstrations, and direct practice with appropriate language. |
 | [Make the progression meaningful](skills/education/principle-make-the-progression-meaningful/SKILL.md) | Education | Order learning around questions, prerequisites, and the work ahead. |
 | [Connect examples to concepts](skills/education/principle-connect-examples-to-concepts/SKILL.md) | Education | Ground examples, connect their details to transferable ideas, and scope demonstrations. |
 | [Protect practice time](skills/education/principle-protect-practice-time/SKILL.md) | Education | Reduce incidental work while preserving the intended challenge. |
 | [Put essential reasoning in view](skills/education/principle-put-essential-reasoning-in-view/SKILL.md) | Education | Keep necessary context and connections in the learner's experience. |
+| [Create lecture](skills/education/create-lecture/SKILL.md) | Education | Sequence a list of topics into an outline, then write the full RST lecture. |
+| [Create MCQ](skills/education/create-mcq/SKILL.md) | Education | Generate multiple choice questions from supplied text or documents. |
+| [Review lab](skills/education/review-lab/SKILL.md) | Education | Give structured editorial feedback on a subject matter expert's lab or exercise draft. |
+| [Student question pass](skills/education/student-question-pass/SKILL.md) | Education | Roleplay a target learner, add their questions as comments, and turn selected ones into content. |
 | [Reconcile from declared authority](skills/engineering/principle-reconcile-from-declared-authority/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
 | [Place content by applicability](skills/technical-documentation/principle-place-content-by-applicability/SKILL.md) | Technical documentation | Determine where information applies before choosing its home. |
 | [Make instruction paths complete](skills/technical-documentation/principle-make-instruction-paths-complete/SKILL.md) | Technical documentation | Help readers identify and follow the procedure for their situation. |
 | [Document the current state](skills/technical-documentation/principle-document-the-current-state/SKILL.md) | Technical documentation | Reconcile the current explanation while preserving useful history. |
+| [Developmental editor](skills/fiction/developmental-editor/SKILL.md) | Fiction | Give candid structural critique or a spoiler-bounded first-reader response. |
+| [Line editor](skills/fiction/line-editor/SKILL.md) | Fiction | Edit prose closely for local reader effect while preserving deliberate style. |
+| [Grill my story](skills/fiction/grill-my-story/SKILL.md) | Fiction | Pressure-test a premise, character choice, scene, or plot problem through questioning. |
+| [Review fiction](skills/fiction/review-fiction/SKILL.md) | Fiction | Critique a chapter in a two-column HTML page with anchored comments. |
+| [Story bible](skills/fiction/story-bible/SKILL.md) | Fiction | Build and query a fiction wiki that tracks evidence, canon status, and chronology. |
+| [Set up fiction skills](skills/fiction/setup-fiction-skills/SKILL.md) | Fiction | Save how the editors deliver feedback by default. |
+| [Beep](skills/personal/beep/SKILL.md) | Personal | Write and send messages on Ashley's behalf as her identified robot assistant. |
+| [Vaultit](skills/personal/vaultit/SKILL.md) | Personal | Save an assistant response to Obsidian. |
 
 ## Installing
 
-This repository is a plugin marketplace named `atrnh-skills`. It offers one plugin per domain (`shared`, `education`, `engineering`, and `technical-documentation`) and an `all-skills` plugin containing every skill. Install either `all-skills` or the domain plugins you need. Installing both loads the same skills twice.
+This repository is a plugin marketplace named `atrnh-skills`. It offers one plugin per domain (`shared`, `education`, `engineering`, `technical-documentation`, `fiction`, and `personal`) and an `all-skills` plugin containing every skill. Install either `all-skills` or the domain plugins you need. Installing both loads the same skills twice.
 
 The commands below install `all-skills`. To install a single domain, replace `all-skills` with the domain's plugin name.
 

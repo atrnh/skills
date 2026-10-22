@@ -1,6 +1,6 @@
 {
   "name": "atrnh-skills",
-  "description": "Ashley Trinh's agent skills for education, engineering, and technical documentation",
+  "description": "Ashley Trinh's agent skills for education, engineering, technical documentation, fiction, and personal workflows",
   "owner": {
     "name": "Ashley Trinh",
     "url": "https://github.com/atrnh"
@@ -43,6 +43,24 @@
       ]
     },
     {
+      "name": "fiction",
+      "description": "Skills for developing, editing, and keeping a story bible for fiction",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/fiction"
+      ]
+    },
+    {
+      "name": "personal",
+      "description": "Skills for Ashley's own assistant workflows, such as messaging and note capture",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/personal"
+      ]
+    },
+    {
       "name": "all-skills",
       "description": "Every skill in this repository. Install it instead of the domain plugins, not alongside them",
       "source": "./",
@@ -51,7 +69,9 @@
         "./skills/shared",
         "./skills/education",
         "./skills/engineering",
-        "./skills/technical-documentation"
+        "./skills/technical-documentation",
+        "./skills/fiction",
+        "./skills/personal"
       ]
     }
   ]

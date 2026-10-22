@@ -1,0 +1,69 @@
+{
+  "skill_name": "line-editor",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Line edit this scene from my novel: evals/files/01-farmhouse.md. Notes in chat, please.",
+      "expected_output": "Finds seven planted craft problems of different kinds, each with an effect and a cause, and routes the two typos to the summary.",
+      "files": ["evals/files/01-farmhouse.md"],
+      "expectations": [
+        "The summary states a voice baseline covering at least two of: sentence shape, register, psychic distance, tense, period",
+        "Flags the ambiguous pronoun in \"Ruth told her sister she had left the back gate open\"",
+        "Flags the blocking problem in \"With the lamp held in both hands, she turned the key\"",
+        "Flags \"Climbing the stairs, the smell grew stronger\" as a dangling modifier",
+        "Flags \"Fear was a cold hand at her throat, and she swallowed it down\" as a mixed figure",
+        "Flags \"process\" in \"She needed a minute to process it\" as out of period or register",
+        "Flags \"You know Daddy's been dead three years this March\" as characters telling each other what both already know",
+        "Flags the echo of \"blister\" across \"begun to blister\" and \"A blister of damp\"",
+        "Lists \"off off\" and \"form\" as mechanical errors in the summary rather than as separate line notes",
+        "Labels every note as Likely issue, Continuity, Taste, or Protect",
+        "Every Likely issue note names a cause, not only an impression",
+        "No note supplies replacement words, phrases, or sentences"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you line edit evals/files/02-flood.md? Just reply in chat.",
+      "expected_output": "Treats the narrator's dialect, refrain, fragments, and cumulative sentences as style, while still catching a POV slip and a tense slip.",
+      "files": ["evals/files/02-flood.md"],
+      "expectations": [
+        "The voice baseline names at least two of the passage's deliberate devices: the refrain, fragments, anaphora, the long cumulative sentence, or dialect",
+        "Does not flag the refrain \"The water was coming up\" as a Likely issue",
+        "Does not flag the fragments \"Beans first.\" or \"Brown water. Cold.\" as Likely issues",
+        "Does not flag the \"I thought about\" anaphora or the long \"and how\" sentence as Likely issues",
+        "Does not flag \"would of\", \"ain't\", or \"Get them shoes on\" as errors, including in any mechanical-errors list",
+        "Flags \"He was thinking he ought to have sold her in March\" as knowledge the narrator can't have from the porch",
+        "Flags \"Pa is leading\" as a tense slip",
+        "No note supplies replacement words, phrases, or sentences"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Line edit evals/files/03-letter.md. Chat is fine.",
+      "expected_output": "A clean passage. The edit stays short, invents no problems, and grounds any Protect notes in a cause.",
+      "files": ["evals/files/03-letter.md"],
+      "expectations": [
+        "The summary states a voice baseline",
+        "Contains at most one Likely issue note",
+        "Does not flag the parallel \"It was addressed to him. It was dated\" or the \"and ... and\" final sentence as Likely issues",
+        "Every Protect note names the cause of the effect it protects",
+        "Contains no generic praise or notes without a named cause"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Line edit evals/files/04-saltmarsh.md. My style sheet is evals/files/04-saltmarsh-style-sheet.md. Notes in chat.",
+      "expected_output": "Respects every style-sheet decision, flags the one line that breaks the sheet, and still catches a local craft problem.",
+      "files": ["evals/files/04-saltmarsh.md", "evals/files/04-saltmarsh-style-sheet.md"],
+      "expectations": [
+        "Does not flag the spelling \"grey\"",
+        "Does not flag \"tidewife\" or \"drownfolk\" for italics, capitalization, or a missing gloss",
+        "Does not flag the dropped g's in Del's lines \"pickin'\" or \"Nothin'\"",
+        "Does not flag the present tense",
+        "Flags Tessa's \"I'm comin' back\" as conflicting with the style sheet, which reserves dropped g's for Del",
+        "Flags \"like a mirror, like a knife blade, like the skin on warm milk\" as stacked or competing figures",
+        "No note supplies replacement words, phrases, or sentences"
+      ]
+    }
+  ]
+}

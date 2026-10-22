@@ -1,0 +1,7 @@
+interface:
+  display_name: "Developmental Editor"
+  short_description: "Candid fiction feedback without rewrites"
+  default_prompt: "Use $developmental-editor to give this fiction draft a candid developmental edit."
+
+policy:
+  allow_implicit_invocation: true

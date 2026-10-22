@@ -1,0 +1,6 @@
+interface:
+  display_name: "Line Editor"
+  short_description: "Close fiction edits that preserve voice"
+  default_prompt: "Use $line-editor to comment inline on this fiction passage without rewriting it."
+policy:
+  allow_implicit_invocation: true

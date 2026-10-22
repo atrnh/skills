@@ -1,0 +1,4 @@
+interface:
+  display_name: "Set Up Fiction Skills"
+  short_description: "Save fiction feedback delivery preferences"
+  default_prompt: "Use $setup-fiction-skills to configure where my line-editor feedback is delivered."

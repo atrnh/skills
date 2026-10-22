@@ -1,0 +1,4 @@
+interface:
+  display_name: "Story Bible"
+  short_description: "Build and query a source-backed fiction wiki"
+  default_prompt: "Use $story-bible to build or update my story bible in my chosen destination from the sources I provide."

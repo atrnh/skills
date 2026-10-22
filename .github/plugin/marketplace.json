@@ -1,6 +1,6 @@
 {
   "name": "atrnh-skills",
-  "description": "Ashley Trinh's agent skills for education, engineering, and technical documentation",
+  "description": "Ashley Trinh's agent skills for education, engineering, technical documentation, fiction, and personal workflows",
   "owner": {
     "name": "Ashley Trinh",
     "url": "https://github.com/atrnh"
@@ -25,6 +25,16 @@
       "name": "technical-documentation",
       "description": "Skills for explanations, procedures, reference material, and guides",
       "source": "./skills/technical-documentation"
+    },
+    {
+      "name": "fiction",
+      "description": "Skills for developing, editing, and keeping a story bible for fiction",
+      "source": "./skills/fiction"
+    },
+    {
+      "name": "personal",
+      "description": "Skills for Ashley's own assistant workflows, such as messaging and note capture",
+      "source": "./skills/personal"
     },
     {
       "name": "all-skills",

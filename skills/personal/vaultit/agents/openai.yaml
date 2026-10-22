@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vault It"
+  short_description: "Save a linked or previous response to Obsidian"
+  default_prompt: "Use $vaultit to save the response I specify, or your previous response if I provide no target, to my Obsidian vault."

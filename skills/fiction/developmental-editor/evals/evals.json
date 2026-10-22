@@ -1,0 +1,74 @@
+{
+  "skill_name": "developmental-editor",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Give me a first-reader pass on evals/files/01-salt-house.md, through the end of part II only. My notes are in evals/files/01-salt-house-notes.md if they help. Reply in chat.",
+      "expected_output": "A spoiler-bounded reading of parts I and II that leaks nothing from part III or the private notes, reports reactions in order, and makes no diagnoses.",
+      "files": [
+        "evals/files/01-salt-house.md",
+        "evals/files/01-salt-house-notes.md"
+      ],
+      "expectations": [
+        "States that the reading stops at the end of part II",
+        "States whether the reading was fresh or a reconstruction with prior knowledge",
+        "Does not mention Halifax, a biscuit tin, letters from Rafe, or the false-bottomed wardrobe",
+        "Does not draw on the notes file: no mention of Aunt Maud, Rafe leaving because of his father, or the mother's loyalty to Rafe",
+        "Reactions follow reading order, and each is tied to a quote or location",
+        "Includes a reaction to finding the boat in the shed that records a change in interpretation",
+        "Labels each reaction as Reaction",
+        "No reaction diagnoses a craft problem or proposes a revision"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Developmental edit of evals/files/02-last-pick.md, please. Chat is fine.",
+      "expected_output": "Names the story's question, then finds three planted structural problems: an external resolution, an unpaid setup, and a scene that repeats an earlier one. Gives directions without inventing plot.",
+      "files": [
+        "evals/files/02-last-pick.md"
+      ],
+      "expectations": [
+        "Gives a story-as-read summary that identifies the central question as whether Lise will keep or sell the orchard",
+        "Flags that the withdrawn offer resolves the story from outside, so Lise never makes the choice the story sets up, and marks it major",
+        "Flags the locked shed and the father's key as a setup the story never pays off",
+        "Flags the pub scene as repeating the kitchen argument without changing anything",
+        "Labels every note as Premise, Execution, Continuity, Taste, Protect, or Question",
+        "Every issue note names a structural cause, not only an impression such as slow, flat, or unsatisfying",
+        "No note says what is in the shed or scripts a replacement scene, event, or line of dialogue",
+        "Lists the major issues in priority order"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Can you do a dev edit on evals/files/03-fallboard.md? My notes on what I'm going for are in evals/files/03-fallboard-notes.md. Notes in chat.",
+      "expected_output": "Protects the deliberate ambiguity by naming what sustains it, and finds the gap between the resentment the notes call for and the draft, where it appears only in the last scene.",
+      "files": [
+        "evals/files/03-fallboard.md",
+        "evals/files/03-fallboard-notes.md"
+      ],
+      "expectations": [
+        "Does not recommend resolving whether the piano is her mother or Wren",
+        "Includes a Protect note on the ambiguity that names its cause, such as the undisturbed dust set against Wren waking on the sofa",
+        "Flags that Wren's resentment, which the notes want under every scene, first appears in the final scene",
+        "Treats the resentment gap as a major issue",
+        "Does not suggest making the mother more sympathetic or Wren's resentment softer"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Dev edit evals/files/04-contusion.md. Chat is fine.",
+      "expected_output": "A well-built story with a prickly protagonist. The edit stays short, invents no major problems, and does not soften Dorothy.",
+      "files": [
+        "evals/files/04-contusion.md"
+      ],
+      "expectations": [
+        "Gives a story-as-read summary",
+        "Marks at most one issue as major",
+        "Does not suggest making Dorothy more likable, softer, or more sympathetic",
+        "Does not frame feedback in terms of three-act structure, beat sheets, or genre templates",
+        "Includes at least one Protect note, and every Protect note names the cause of the effect it protects",
+        "Contains no generic praise or notes without a named cause"
+      ]
+    }
+  ]
+}

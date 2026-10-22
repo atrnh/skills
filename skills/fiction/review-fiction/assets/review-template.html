@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="review-fiction">
+<meta name="review:paragraphs" content="__PARA_COUNT__">
+<meta name="review:source-sha" content="__SRC_SHA__">
+<title>__PAGE_TITLE__</title>
+<style>
+  :root{
+    --bg:#f7f4ee;
+    --panel:#fffdf8;
+    --ink:#1f1c18;
+    --ink-soft:#57514a;
+    --ink-faint:#8b8377;
+    --rule:#e0d9cc;
+    --rule-soft:#ece6db;
+    --accent:__ACCENT_LIGHT__;
+    --c-big:__ACCENT_LIGHT__;
+    --c-cont:__C_CONT_LIGHT__;
+    --c-char:#3f5f8a;
+    --c-prose:#5b6b3a;
+    --c-nit:#6c5a7a;
+    --c-good:#2f6b52;
+    --chip-bg:rgba(0,0,0,.045);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16151a;
+      --panel:#1d1c22;
+      --ink:#e9e5dd;
+      --ink-soft:#b1aaa0;
+      --ink-faint:#837c73;
+      --rule:#302e37;
+      --rule-soft:#26252c;
+      --accent:__ACCENT_DARK__;
+      --c-big:__ACCENT_DARK__;
+      --c-cont:__C_CONT_DARK__;
+      --c-char:#8fb2dd;
+      --c-prose:#a8bf85;
+      --c-nit:#bda6cf;
+      --c-good:#7fc6a4;
+      --chip-bg:rgba(255,255,255,.06);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.6;-webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:1400px;margin:0 auto;padding:0 clamp(16px,3vw,40px) 96px}
+
+  header.mast{border-bottom:1px solid var(--rule);padding:clamp(32px,5vw,60px) 0 24px}
+  .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 14px}
+  h1{
+    font-family:"Iowan Old Style",Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
+    font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.1;margin:0 0 12px;
+    font-weight:600;letter-spacing:-.01em;
+  }
+  h1 em{font-style:italic;color:var(--accent)}
+  .dek{font-size:1.02rem;color:var(--ink-soft);max-width:64ch;margin:0 0 22px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.8rem;color:var(--ink-faint);padding-top:6px;border-top:1px solid var(--rule-soft)}
+  .meta b{color:var(--ink-soft);font-weight:600}
+  .meta a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+  .meta a:hover{border-bottom-color:var(--accent)}
+
+  .letter{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:clamp(22px,3.5vw,44px);margin:36px 0 8px}
+  .letter h2{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:1.5rem;margin:0 0 6px;font-weight:600}
+  .letter h3{font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin:34px 0 10px;font-weight:700}
+  .letter h3:first-of-type{margin-top:26px}
+  .letter p{margin:0 0 14px;max-width:74ch;color:var(--ink-soft)}
+  .letter p strong,.letter li strong{color:var(--ink)}
+  .letter ol,.letter ul{margin:0 0 14px;padding-left:22px;max-width:74ch;color:var(--ink-soft)}
+  .letter li{margin-bottom:9px}
+  .verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:24px 0 30px}
+  .verdict div{background:var(--panel);padding:14px 16px}
+  .verdict dt{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+  .verdict dd{margin:0;font-size:.93rem;color:var(--ink);font-weight:600}
+
+  .rebuild{counter-reset:step;list-style:none;padding:0;margin:0 0 8px;max-width:74ch}
+  .rebuild li{counter-increment:step;position:relative;padding-left:38px;margin-bottom:12px;color:var(--ink-soft)}
+  .rebuild li::before{
+    content:counter(step);position:absolute;left:0;top:1px;width:24px;height:24px;
+    border-radius:50%;background:var(--chip-bg);color:var(--ink);
+    font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:40px 0 8px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+
+  .sectionhead{margin:44px 0 4px;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .row{
+    display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    gap:clamp(20px,3vw,44px);align-items:start;border-bottom:1px solid var(--rule-soft);
+  }
+  .row:last-of-type{border-bottom:none}
+  .ms{
+    padding:16px 0 16px 46px;position:relative;
+    font-family:"Iowan Old Style",Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
+    font-size:1.07rem;line-height:1.68;color:var(--ink);
+  }
+  .ms .n{
+    position:absolute;left:0;top:19px;font-family:system-ui,sans-serif;
+    font-size:.68rem;font-variant-numeric:tabular-nums;color:var(--ink-faint);
+    width:34px;text-align:right;user-select:none;
+  }
+  .ms p{margin:0 0 .85em}
+  .ms p:last-child{margin-bottom:0}
+  .cmt{padding:16px 0}
+
+  .card{border-left:3px solid var(--rule);padding:0 0 0 14px;margin-bottom:16px}
+  .card:last-child{margin-bottom:0}
+  .card p{margin:0 0 9px;font-size:.87rem;color:var(--ink-soft);line-height:1.58}
+  .card p:last-child{margin-bottom:0}
+  .card strong{color:var(--ink)}
+  .card .hd{font-size:.87rem;font-weight:700;color:var(--ink);margin:0 0 6px;line-height:1.4}
+  .tag{
+    display:inline-block;font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;
+    font-weight:700;padding:2px 7px;border-radius:2px;background:var(--chip-bg);margin:0 6px 7px 0;
+  }
+  .t-big{color:var(--c-big)}     .card.big{border-left-color:var(--c-big)}
+  .t-cont{color:var(--c-cont)}   .card.cont{border-left-color:var(--c-cont)}
+  .t-char{color:var(--c-char)}   .card.char{border-left-color:var(--c-char)}
+  .t-prose{color:var(--c-prose)} .card.prose{border-left-color:var(--c-prose)}
+  .t-nit{color:var(--c-nit)}     .card.nit{border-left-color:var(--c-nit)}
+  .t-good{color:var(--c-good)}   .card.good{border-left-color:var(--c-good)}
+
+  .quote{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-style:italic;color:var(--ink)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;background:var(--chip-bg);padding:1px 4px;border-radius:2px}
+
+  .pass,.movement{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+    margin:34px 0 0;padding:12px 0 12px 46px;
+    border-top:2px solid var(--accent);border-bottom:1px solid var(--rule-soft);
+  }
+  .pass .lbl,.movement .lbl{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+  .pass .txt,.movement .txt{font-size:.85rem;color:var(--ink-soft);max-width:80ch}
+  .seam{margin:0;padding:14px 0 14px 46px;border-top:1px dashed var(--accent);font-size:.85rem;color:var(--ink-soft)}
+  .seam b{color:var(--accent)}
+
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-faint);max-width:74ch}
+  footer a{color:var(--accent)}
+
+  @media (max-width:900px){
+    .row{grid-template-columns:1fr;gap:0;padding-bottom:8px}
+    .ms{padding:16px 0 8px 34px}
+    .ms .n{width:24px;top:19px}
+    .cmt{padding:0 0 18px 34px}
+    .pass,.movement,.seam{padding-left:34px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">__KICKER__</p>
+  <h1>__H1__</h1>
+  <p class="dek">__DEK__</p>
+  <div class="meta">__META__</div>
+</header>
+
+<section class="letter">
+__LETTER__
+</section>
+
+<div class="legend">
+  <span class="tag t-big">structure</span>
+  <span class="tag t-char">character</span>
+  <span class="tag t-cont">continuity</span>
+  <span class="tag t-prose">prose</span>
+  <span class="tag t-nit">nit</span>
+  <span class="tag t-good">this works</span>
+</div>
+
+<p class="sectionhead">Paragraph by paragraph</p>
+
+__BODY__
+
+<footer>
+<p>__FOOTER__</p>
+</footer>
+
+</div>
+</body>
+</html>
