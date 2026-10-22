@@ -12,7 +12,7 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/shared",
+        "./skills/general",
         "./skills/principles",
         "./skills/education",
         "./skills/fiction",

@@ -5,7 +5,7 @@ This repository is the canonical source for Ashley's reusable agent skills and t
 ## Find the relevant guidance
 
 - Identify the current work's audience and purpose, then look for that domain's principles in `skills/principles/` and its workflows in the matching directory under `skills/`.
-- Check shared principles and `skills/shared/` for applicable guidance, and read the relevant `SKILL.md` files before using or changing them.
+- Check general principles and `skills/general/` for applicable guidance, and read the relevant `SKILL.md` files before using or changing them.
 - Search existing skills before creating another one. Extend an existing skill when it already covers the same judgment or workflow.
 - Use `docs/` for repository-level design notes.
 
@@ -23,7 +23,7 @@ Ashley works as an educator, technical writer, and platform engineer. Apply stan
 
 - Assign a skill to the domain whose audience and purpose its guidance serves, as described in the README's [Organization](README.md#organization) section, and record it in the README's skill table.
 - Put principles in `skills/principles/` and workflows in their domain's directory, such as `skills/education/`.
-- Keep a skill in the domain where its guidance has concrete support. Make it shared when that guidance applies across domains without losing the distinctions that make it useful. A shared workflow moves into `skills/shared/`.
+- Keep a skill in the domain where its guidance has concrete support. Make it general when that guidance applies across domains without losing the distinctions that make it useful. A general workflow moves into `skills/general/`.
 - Give each skill its own directory containing a `SKILL.md`, such as `skills/principles/principle-connect-examples-to-concepts/SKILL.md`. Keep names unique across the repository.
 - Keep skill-specific examples, scripts, and references beside their `SKILL.md`. Add further organizational layers only when the collection needs them.
 - Keep project-specific syntax, folder conventions, and build commands in the project's own instructions or workflows. Extract a reusable principle only when the broader judgment is useful independently of those details.

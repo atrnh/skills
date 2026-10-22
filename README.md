@@ -8,7 +8,7 @@ Principle skills live together in `skills/principles/`. Workflow skills live in 
 
 | Domain | Purpose |
 | --- | --- |
-| Shared | Principles and workflows whose guidance transfers intact across domains. |
+| General | Principles and workflows whose guidance transfers intact across domains. |
 | Engineering | Building and maintaining software, extensions, and internal tooling. |
 | Education | Curriculum design, teaching prose, exercises, assessments, and demos that develop learners' understanding and ability. |
 | Documentation | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
@@ -21,14 +21,14 @@ Domains follow the primary audience and purpose of the work. File format and tec
 - Python for a Sphinx extension belongs to engineering.
 - An administrator's guide to that extension belongs to documentation.
 
-Shared skills apply alongside domain skills. When domain guidance differs, the artifact's primary audience and purpose decide which applies. A course demo can use engineering guidance for correctness while education determines what the code needs to teach.
+General skills apply alongside domain skills. When domain guidance differs, the artifact's primary audience and purpose decide which applies. A course demo can use engineering guidance for correctness while education determines what the code needs to teach.
 
 ## Available skills
 
 | Skill | Domain | Judgment it guides |
 | --- | --- | --- |
-| [Bound analysis by the decision](skills/principles/principle-bound-analysis-by-the-decision/SKILL.md) | Shared | Scope research around the uncertainty that could change the decision. |
-| [Deep quality review](skills/shared/deep-quality-review/SKILL.md) | Shared | Review writing for functional and deep quality using Diátaxis, then triage fixes in a dashboard. |
+| [Bound analysis by the decision](skills/principles/principle-bound-analysis-by-the-decision/SKILL.md) | General | Scope research around the uncertainty that could change the decision. |
+| [Deep quality review](skills/general/deep-quality-review/SKILL.md) | General | Review writing for functional and deep quality using Diátaxis, then triage fixes in a dashboard. |
 | [Match language to teaching purpose](skills/principles/principle-match-language-to-teaching-purpose/SKILL.md) | Education | Explain concepts, narrate demonstrations, and direct practice with appropriate language. |
 | [Make the progression meaningful](skills/principles/principle-make-the-progression-meaningful/SKILL.md) | Education | Order learning around questions, prerequisites, and the work ahead. |
 | [Connect examples to concepts](skills/principles/principle-connect-examples-to-concepts/SKILL.md) | Education | Ground examples, connect their details to transferable ideas, and scope demonstrations. |

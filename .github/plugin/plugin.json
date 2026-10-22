@@ -1,7 +1,7 @@
 {
   "name": "all-skills",
   "skills": [
-    "./skills/shared",
+    "./skills/general",
     "./skills/principles",
     "./skills/education",
     "./skills/fiction",
