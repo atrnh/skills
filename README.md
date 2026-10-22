@@ -52,7 +52,15 @@ General skills apply alongside domain skills. When domain guidance differs, the 
 
 ## Installing
 
-This repository is a plugin marketplace named `atrnh-skills`. It offers a single plugin, `all-skills`, containing every skill.
+This repository is a plugin marketplace named `atrnh-skills`. It offers three plugins:
+
+- `core` contains every skill except fiction.
+- `fiction` contains the fiction skills.
+- `all-skills` contains both.
+
+Install `all-skills`, or install `core`, `fiction`, or both. Installing `all-skills` alongside either of the others loads the same skills twice.
+
+The commands below install `all-skills`. To install another plugin, replace `all-skills` with its name.
 
 ### Claude Code
 

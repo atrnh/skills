@@ -7,16 +7,37 @@
   },
   "plugins": [
     {
-      "name": "all-skills",
-      "description": "Every skill in this repository",
+      "name": "core",
+      "description": "Every skill except fiction",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/general",
         "./skills/principles",
         "./skills/education",
-        "./skills/fiction",
         "./skills/personal"
+      ]
+    },
+    {
+      "name": "fiction",
+      "description": "Skills for developing, editing, and keeping a story bible for fiction",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/fiction"
+      ]
+    },
+    {
+      "name": "all-skills",
+      "description": "Every skill in this repository: core and fiction. Install it instead of those plugins, not alongside them",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/general",
+        "./skills/principles",
+        "./skills/education",
+        "./skills/personal",
+        "./skills/fiction"
       ]
     }
   ]

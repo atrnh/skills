@@ -4,7 +4,7 @@
     "./skills/general",
     "./skills/principles",
     "./skills/education",
-    "./skills/fiction",
-    "./skills/personal"
+    "./skills/personal",
+    "./skills/fiction"
   ]
 }

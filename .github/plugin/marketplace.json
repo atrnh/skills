@@ -7,8 +7,18 @@
   },
   "plugins": [
     {
+      "name": "core",
+      "description": "Every skill except fiction",
+      "source": "./skills"
+    },
+    {
+      "name": "fiction",
+      "description": "Skills for developing, editing, and keeping a story bible for fiction",
+      "source": "./skills/fiction"
+    },
+    {
       "name": "all-skills",
-      "description": "Every skill in this repository",
+      "description": "Every skill in this repository: core and fiction. Install it instead of those plugins, not alongside them",
       "source": "./"
     }
   ]

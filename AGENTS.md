@@ -38,10 +38,9 @@ Ashley works as an educator, technical writer, and platform engineer. Apply stan
 
 ## Maintain the packaging
 
-The repository publishes every skill as a single `all-skills` plugin. A new principle, or a new workflow in an existing domain directory, needs no manifest changes. A new domain directory needs its path added to the `skills` list in both:
+The repository publishes three plugins: `fiction` for `skills/fiction/`, `core` for every other domain directory, and `all-skills` for both. A new principle, or a new workflow in an existing domain directory, needs no manifest changes. A new domain directory needs its path added to the `core` and `all-skills` entries in `.claude-plugin/marketplace.json`, which Claude Code and Codex CLI read.
 
-- `.claude-plugin/marketplace.json`, which Claude Code and Codex CLI read.
-- `.github/plugin/plugin.json`, which GitHub Copilot CLI reads because it ignores the marketplace's `skills` paths.
+GitHub Copilot CLI ignores the marketplace's `skills` paths and reads a `plugin.json` in each plugin's source directory instead. Add the new path to `skills/.github/plugin/plugin.json` for `core` and `.github/plugin/plugin.json` for `all-skills`.
 
 Run `claude plugin validate . --strict` after changing either manifest.
 

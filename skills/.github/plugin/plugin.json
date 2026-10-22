@@ -1,0 +1,9 @@
+{
+  "name": "core",
+  "skills": [
+    "./general",
+    "./principles",
+    "./education",
+    "./personal"
+  ]
+}
