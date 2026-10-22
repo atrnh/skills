@@ -1,6 +1,6 @@
 # Ashley's skills
 
-Reusable agent skills for engineering, education, technical documentation, fiction, and personal workflows. Principle skills, prefixed `principle-`, guide judgment. Workflow skills describe how to carry out a task.
+Reusable agent skills for engineering, education, documentation, fiction, and personal workflows. Principle skills, prefixed `principle-`, guide judgment. Workflow skills describe how to carry out a task.
 
 ## Organization
 
@@ -9,7 +9,7 @@ Reusable agent skills for engineering, education, technical documentation, ficti
 | `skills/shared/` | Principles and workflows whose guidance transfers intact across domains. |
 | `skills/engineering/` | Building and maintaining software, extensions, and internal tooling. |
 | `skills/education/` | Curriculum design, teaching prose, exercises, assessments, and demos that develop learners' understanding and ability. |
-| `skills/technical-documentation/` | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
+| `skills/documentation/` | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
 | `skills/fiction/` | Developing, editing, and keeping a story bible for Ashley's fiction. Skills here share the editorial contract and delivery guidance in `skills/fiction/references/`. |
 | `skills/personal/` | Ashley's own assistant workflows, such as sending messages on her behalf and saving responses to Obsidian. |
 
@@ -17,7 +17,7 @@ Domains follow the primary audience and purpose of the work. File format and tec
 
 - Python for a student exercise belongs primarily to education.
 - Python for a Sphinx extension belongs to engineering.
-- An administrator's guide to that extension belongs to technical documentation.
+- An administrator's guide to that extension belongs to documentation.
 
 Shared skills apply alongside domain skills. When domain guidance differs, the artifact's primary audience and purpose decide which applies. A course demo can use engineering guidance for correctness while education determines what the code needs to teach.
 
@@ -38,9 +38,7 @@ Shared skills apply alongside domain skills. When domain guidance differs, the a
 | [Review lab](skills/education/review-lab/SKILL.md) | Education | Give structured editorial feedback on a subject matter expert's lab or exercise draft. |
 | [Student question pass](skills/education/student-question-pass/SKILL.md) | Education | Roleplay a target learner, add their questions as comments, and turn selected ones into content. |
 | [Reconcile from declared authority](skills/engineering/principle-reconcile-from-declared-authority/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
-| [Place content by applicability](skills/technical-documentation/principle-place-content-by-applicability/SKILL.md) | Technical documentation | Determine where information applies before choosing its home. |
-| [Make instruction paths complete](skills/technical-documentation/principle-make-instruction-paths-complete/SKILL.md) | Technical documentation | Help readers identify and follow the procedure for their situation. |
-| [Document the current state](skills/technical-documentation/principle-document-the-current-state/SKILL.md) | Technical documentation | Reconcile the current explanation while preserving useful history. |
+| [Document the current state](skills/documentation/principle-document-the-current-state/SKILL.md) | Documentation | Reconcile the current explanation while preserving useful history. |
 | [Developmental editor](skills/fiction/developmental-editor/SKILL.md) | Fiction | Give candid structural critique or a spoiler-bounded first-reader response. |
 | [Line editor](skills/fiction/line-editor/SKILL.md) | Fiction | Edit prose closely for local reader effect while preserving deliberate style. |
 | [Grill my story](skills/fiction/grill-my-story/SKILL.md) | Fiction | Pressure-test a premise, character choice, scene, or plot problem through questioning. |
@@ -52,7 +50,7 @@ Shared skills apply alongside domain skills. When domain guidance differs, the a
 
 ## Installing
 
-This repository is a plugin marketplace named `atrnh-skills`. It offers one plugin per domain (`shared`, `education`, `engineering`, `technical-documentation`, `fiction`, and `personal`) and an `all-skills` plugin containing every skill. Install either `all-skills` or the domain plugins you need. Installing both loads the same skills twice.
+This repository is a plugin marketplace named `atrnh-skills`. It offers one plugin per domain (`shared`, `education`, `engineering`, `documentation`, `fiction`, and `personal`) and an `all-skills` plugin containing every skill. Install either `all-skills` or the domain plugins you need. Installing both loads the same skills twice.
 
 The commands below install `all-skills`. To install a single domain, replace `all-skills` with the domain's plugin name.
 

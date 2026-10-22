@@ -1,6 +1,6 @@
 {
   "name": "atrnh-skills",
-  "description": "Ashley Trinh's agent skills for education, engineering, technical documentation, fiction, and personal workflows",
+  "description": "Ashley Trinh's agent skills for education, engineering, documentation, fiction, and personal workflows",
   "owner": {
     "name": "Ashley Trinh",
     "url": "https://github.com/atrnh"
@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "shared",
-      "description": "Skills whose guidance transfers across engineering, education, and technical documentation",
+      "description": "Skills whose guidance transfers across engineering, education, and documentation",
       "source": "./",
       "strict": false,
       "skills": [
@@ -34,12 +34,12 @@
       ]
     },
     {
-      "name": "technical-documentation",
+      "name": "documentation",
       "description": "Skills for explanations, procedures, reference material, and guides",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/technical-documentation"
+        "./skills/documentation"
       ]
     },
     {
@@ -69,7 +69,7 @@
         "./skills/shared",
         "./skills/education",
         "./skills/engineering",
-        "./skills/technical-documentation",
+        "./skills/documentation",
         "./skills/fiction",
         "./skills/personal"
       ]
