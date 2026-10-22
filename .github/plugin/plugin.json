@@ -1,0 +1,11 @@
+{
+  "name": "all-skills",
+  "skills": [
+    "./skills/shared",
+    "./skills/education",
+    "./skills/engineering",
+    "./skills/documentation",
+    "./skills/fiction",
+    "./skills/personal"
+  ]
+}

@@ -37,13 +37,12 @@ Ashley works as an educator, technical writer, and platform engineer. Apply stan
 
 ## Maintain the packaging
 
-A new skill in an existing domain needs no manifest changes. A new domain needs:
+The repository publishes every skill as a single `all-skills` plugin. A new skill in an existing domain needs no manifest changes. A new domain needs its path added to the `skills` list in both:
 
-- An entry in `.claude-plugin/marketplace.json`, and its path added to the `all-skills` entry there. Claude Code and Codex CLI read this manifest.
-- A matching entry in `.github/plugin/marketplace.json`. GitHub Copilot CLI reads this manifest instead because it ignores the other manifest's `skills` paths.
-- A `skills/<domain>/.github/plugin/plugin.json` for GitHub Copilot CLI, modeled on the existing ones.
+- `.claude-plugin/marketplace.json`, which Claude Code and Codex CLI read.
+- `.github/plugin/plugin.json`, which GitHub Copilot CLI reads because it ignores the marketplace's `skills` paths.
 
-Run `claude plugin validate . --strict` after changing either marketplace manifest.
+Run `claude plugin validate . --strict` after changing either manifest.
 
 ## Make focused changes
 

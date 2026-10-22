@@ -50,9 +50,7 @@ Shared skills apply alongside domain skills. When domain guidance differs, the a
 
 ## Installing
 
-This repository is a plugin marketplace named `atrnh-skills`. It offers one plugin per domain (`shared`, `education`, `engineering`, `documentation`, `fiction`, and `personal`) and an `all-skills` plugin containing every skill. Install either `all-skills` or the domain plugins you need. Installing both loads the same skills twice.
-
-The commands below install `all-skills`. To install a single domain, replace `all-skills` with the domain's plugin name.
+This repository is a plugin marketplace named `atrnh-skills`. It offers a single plugin, `all-skills`, containing every skill.
 
 ### Claude Code
 

@@ -7,38 +7,8 @@
   },
   "plugins": [
     {
-      "name": "shared",
-      "description": "Skills whose guidance transfers across engineering, education, and documentation",
-      "source": "./skills/shared"
-    },
-    {
-      "name": "education",
-      "description": "Skills for curriculum, lectures, labs, exercises, and demos",
-      "source": "./skills/education"
-    },
-    {
-      "name": "engineering",
-      "description": "Skills for building and maintaining software, extensions, and internal tooling",
-      "source": "./skills/engineering"
-    },
-    {
-      "name": "documentation",
-      "description": "Skills for explanations, procedures, reference material, and guides",
-      "source": "./skills/documentation"
-    },
-    {
-      "name": "fiction",
-      "description": "Skills for developing, editing, and keeping a story bible for fiction",
-      "source": "./skills/fiction"
-    },
-    {
-      "name": "personal",
-      "description": "Skills for Ashley's own assistant workflows, such as messaging and note capture",
-      "source": "./skills/personal"
-    },
-    {
       "name": "all-skills",
-      "description": "Every skill in this repository. Install it instead of the domain plugins, not alongside them",
+      "description": "Every skill in this repository",
       "source": "./"
     }
   ]
