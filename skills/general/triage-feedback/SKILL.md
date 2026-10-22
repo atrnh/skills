@@ -1,9 +1,22 @@
-# Triage dashboard
+---
+name: triage-feedback
+description: >
+  Use after an agent or reviewer has produced a batch of proposed changes to text files, such as
+  a deep-quality review, Bugbot or code-review findings, a subagent's critique, or review notes
+  pasted into the chat, and the user wants to decide what to act on. Builds a local dashboard
+  where the user approves or rejects each change, seeing its problem, evidence, the case against
+  it, the affected lines, and the exact replacement. Then applies the approved fixes or drafts a
+  GitHub review. Use when the user asks for a triage dashboard, wants to go through feedback one
+  item at a time, or asks which suggestions to accept. Do NOT use for triaging issues in an issue
+  tracker, or for decisions that aren't tied to specific text in files.
+---
 
-The dashboard turns a finished review into a page where the user approves or rejects each
+# Triage feedback
+
+The dashboard turns a batch of feedback into a page where the user approves or rejects each
 proposed fix. Each card shows the problem, its evidence, the case against changing it, the
-affected lines in context, and the exact replacement. The scripts in `../dashboard/` need only
-Python 3 and Git; posting a review also needs `gh`.
+affected lines in context, and the exact replacement. The scripts in this skill's `dashboard/`
+folder need only Python 3 and Git; posting a review also needs `gh`.
 
 | Script | Does |
 |---|---|
@@ -13,14 +26,24 @@ Python 3 and Git; posting a review also needs `gh`.
 | `review.py RUN --summary TEXT` | Drafts a GitHub review from approved fixes as `RUN/review.json` (doesn't post) |
 
 `apply.py` and `review.py` read approvals from `decisions.json`. When the user pasted their
-decisions into the chat instead, pass `--approve A1,C3,...`.
+decisions into the chat instead, pass `--approve F1,F3,...`.
 
-## 1. Make a run folder
+## 1. Gather the feedback
 
-Use `/tmp/dqr-triage/<slug>/`, for example `/tmp/dqr-triage/pr-619/` or
-`/tmp/dqr-triage/launch-email/`. Everything for this review lives there.
+The feedback can be a review you wrote in this session, another agent's output, a file, or
+notes pasted into the chat. If a review skill produced it, follow that skill's guidance on IDs,
+categories, and priorities.
 
-## 2. Point at the source
+Cards need a location in a file. Feedback about a design choice, a plan, or anything else
+without one doesn't belong on the page. Leave it out, and tell the user which items you left
+out so they can decide on them in the chat.
+
+## 2. Make a run folder
+
+Use `/tmp/feedback-triage/<slug>/`, for example `/tmp/feedback-triage/pr-42/` or
+`/tmp/feedback-triage/launch-email/`. Everything for this triage lives there.
+
+## 3. Point at the source
 
 Line numbers must come from the exact text the user will judge.
 
@@ -30,7 +53,7 @@ Line numbers must come from the exact text the user will judge.
   ```bash
   gh pr view N --json headRefOid,baseRefName
   git fetch origin <baseRefName> pull/N/head
-  git worktree add --detach /tmp/dqr-triage/pr-N/checkout <headRefOid>
+  git worktree add --detach /tmp/feedback-triage/pr-N/checkout <headRefOid>
   ```
 
   Source: `{"kind": "pr", "root": "checkout", "url": "<PR URL>", "base": "origin/<baseRefName>"}`.
@@ -45,10 +68,29 @@ Line numbers must come from the exact text the user will judge.
 
 A relative `root` is resolved from the run folder.
 
-## 3. Write `findings.json`
+## 4. Check each item before making a card
 
-One finding per item in the report, with the same ID. The cards are only as useful as their
-fields:
+Treat feedback as claims to check, including feedback you wrote yourself. Reviewers, and
+agents especially, cite lines that don't exist, flag problems the text doesn't have, and
+report the same problem more than once.
+
+- **Find the text.** If the quoted text or the cited lines aren't there, or the problem isn't
+  where the feedback says, drop the item.
+- **Confirm the problem.** Check it against the source, the code, or the facts where you can.
+  If you can't confirm it, keep the card and begin its `problem` with "Unverified:".
+- **Merge duplicates** into one card, and name every item it covers in `problem`.
+- **Keep items you disagree with** when the user might still want them, and put your
+  disagreement in `counter`.
+
+## 5. Write `findings.json`
+
+Give each card an ID. Keep any IDs the feedback already uses, so the user can refer to items
+the same way in the chat and on the page. If it has none, number the items `F1`, `F2`, and so
+on, in the order they appear. Use the feedback's own categories when it has them. Otherwise,
+pick a few plain ones, such as Bug, Accuracy, Clarity, and Style. Priority 1 breaks the work or
+misleads its reader, 2 noticeably hurts it, and 3 is polish.
+
+The cards are only as useful as their fields:
 
 - **`counter`** is the strongest honest case against making the change: scope, audience,
   intent, or cost. It's what lets the user reject with confidence. Don't leave it empty or
@@ -63,32 +105,32 @@ fields:
 
 ```json
 {
-  "title": "PR #619 deep-quality review",
+  "title": "PR #42 review",
   "source": {
     "kind": "pr",
     "root": "checkout",
-    "label": "hackbrightacademy/csharp-curriculum#619",
-    "url": "https://github.com/hackbrightacademy/csharp-curriculum/pull/619",
+    "label": "owner/repo#42",
+    "url": "https://github.com/owner/repo/pull/42",
     "base": "origin/main"
   },
   "findings": [
     {
-      "id": "A1",
+      "id": "F1",
       "category": "Accuracy",
       "priority": 1,
-      "title": "Lecture intro says OIDC secures web APIs",
-      "problem": "The intro says OpenID Connect \"secures web APIs.\" The OIDC slide teaches the opposite: the ID token is never sent to the API.",
-      "evidence": [{"text": "OIDC slide, lines 707–715", "url": "https://..."}],
-      "counter": "Handout-only sentence; \"secure\" could be read loosely.",
+      "title": "Install guide names the wrong minimum Python",
+      "problem": "The guide says Python 3.8 or later, but `pyproject.toml` requires 3.10.",
+      "evidence": [{"text": "pyproject.toml, requires-python", "url": "https://..."}],
+      "counter": "Older versions may still run the parts of the tool this guide covers.",
       "comment": "",
       "context": [
-        {"file": "contents/lectures/jm-auth/index.rst", "match": "OpenID Connect secure web APIs"},
-        {"file": "contents/lectures/jm-auth/index.rst", "start": 706, "end": 715,
-         "highlight": [714, 715], "label": "The lecture's own claim"}
+        {"file": "docs/install.md", "match": "Python 3.8 or later"},
+        {"file": "pyproject.toml", "match": "requires-python", "around": 0,
+         "label": "What the package requires"}
       ],
       "fixes": [
-        {"file": "contents/lectures/jm-auth/index.rst", "start": 9, "end": 10,
-         "replacement": "   Learn how to ...\n   Core Identity, how web APIs use bearer tokens ..."}
+        {"file": "docs/install.md", "match": "Python 3.8 or later",
+         "replacement": "You need Python 3.10 or later."}
       ]
     }
   ]
@@ -114,11 +156,7 @@ comment point to.
 
 **Fix:** `file`, `replacement`, and either `match` or `start` and `end`. Optional `label`.
 
-Use the report's category names and ID letters: A Accuracy, M Completeness, C Consistency,
-U Usefulness, P Precision, D Deep quality. Priority 1 misleads the reader or breaks the
-material, 2 noticeably hurts it, 3 is polish.
-
-## 4. Build and check
+## 6. Build and check
 
 ```bash
 python3 .../dashboard/build.py RUN/findings.json --check
@@ -134,7 +172,7 @@ Then deal with the warnings:
   one's `fixNote`.
 - **A file that differs from HEAD** means its GitHub links won't match the snippets.
 
-## 5. Launch
+## 7. Launch
 
 ```bash
 python3 .../dashboard/serve.py start RUN
@@ -156,12 +194,13 @@ Tell the user:
 - how to decide: Approve or Reject on each card, an optional note to adjust a fix, and the
   keys `a`, `r`, `u`, `j`, `k`, and `Enter`;
 - that decisions are saved as they go, so they only need to say when they're done;
+- which items you dropped, merged, left out, or couldn't verify;
 - which fixes deserve a close look, such as diagrams, generated files, or anything you
   couldn't render or verify.
 
-## 6. Act on the decisions
+## 8. Act on the decisions
 
-When the user says they're done, read `RUN/decisions.json`.
+When the user says they're done, read `RUN/decisions.json`. Rejected findings stay as they are.
 
 1. **Notes first.** A note on an approved finding may change its fix. Update that finding in
    `findings.json`, rebuild, and pass `--notes-handled` from then on. The scripts refuse to run
@@ -170,6 +209,8 @@ When the user says they're done, read `RUN/decisions.json`.
    - If the PR belongs to someone else (`gh pr view N --json author` doesn't match
      `gh api user --jq .login`), suggest posting a review.
    - For the user's own PR, local changes, or pasted text, suggest editing.
+   - If the feedback came from comments already on the PR, suggest editing, because a review
+     would repeat them.
 3. **Edit:**
 
    ```bash
@@ -195,12 +236,12 @@ When the user says they're done, read `RUN/decisions.json`.
    - Show the user the printed preview, edit `RUN/review.json` if needed, and post it with the
      printed `gh api` command only after they confirm.
 
-## 7. Clean up
+## 9. Clean up
 
 When the user is finished:
 
 - Stop the server with `serve.py stop RUN`.
-- For a PR, remove the worktree with `git worktree remove /tmp/dqr-triage/pr-N/checkout`.
+- For a PR, remove the worktree with `git worktree remove /tmp/feedback-triage/pr-N/checkout`.
 - Delete the run folder, or tell the user it's there.
 
 The server also stops on its own after 12 idle hours, or within a minute of its run folder

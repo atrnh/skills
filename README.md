@@ -28,7 +28,8 @@ General skills apply alongside domain skills. When domain guidance differs, the 
 | Skill | Domain | Judgment it guides |
 | --- | --- | --- |
 | [Bound analysis by the decision](skills/principles/principle-bound-analysis-by-the-decision/SKILL.md) | General | Scope research around the uncertainty that could change the decision. |
-| [Deep quality review](skills/general/deep-quality-review/SKILL.md) | General | Review writing for functional and deep quality using Diátaxis, then triage fixes in a dashboard. |
+| [Deep quality review](skills/general/deep-quality-review/SKILL.md) | General | Review writing for functional and deep quality using Diátaxis. |
+| [Triage feedback](skills/general/triage-feedback/SKILL.md) | General | Check a batch of proposed changes, then approve or reject each one in a dashboard before applying them. |
 | [Match language to teaching purpose](skills/principles/principle-match-language-to-teaching-purpose/SKILL.md) | Education | Explain concepts, narrate demonstrations, and direct practice with appropriate language. |
 | [Make the progression meaningful](skills/principles/principle-make-the-progression-meaningful/SKILL.md) | Education | Order learning around questions, prerequisites, and the work ahead. |
 | [Connect examples to concepts](skills/principles/principle-connect-examples-to-concepts/SKILL.md) | Education | Ground examples, connect their details to transferable ideas, and scope demonstrations. |

@@ -7,8 +7,8 @@ description: >
   review", or wants to know whether writing is truly excellent rather than merely correct:
   "is this actually good?", "why does this feel clunky?", "review this for flow", "does this
   serve the reader?". Also use when a draft is accurate and complete but still feels off.
-  Can follow the review with a triage dashboard where the user approves or rejects each
-  proposed fix, then applies the approved ones or posts them as a GitHub review.
+  Can hand the findings to the triage-feedback skill, whose dashboard lets the user approve or
+  reject each proposed fix.
   Do NOT use for pure proofreading, brand-voice checks, or writing new material from scratch.
 ---
 
@@ -153,30 +153,16 @@ asking for it.
 
 ## Step 5: Triage dashboard
 
-Follow [references/dashboard.md](references/dashboard.md). In short:
+Follow the [triage-feedback](../triage-feedback/SKILL.md) skill, giving it one card per report
+finding:
 
-1. Put the review in a run folder under `/tmp/dqr-triage/`, with the exact text that was
-   reviewed: a worktree at the PR's head commit, the user's checkout, the files, or pasted
-   text saved to a file.
-2. Write `findings.json` with one entry per report finding, using the same IDs. Each entry
-   needs the exact replacement text and an honest case against making the change.
-3. Build it with `dashboard/build.py --check`. Fix every error, and read every highlighted
-   and replaced line.
-4. Start it with `dashboard/serve.py start`, open it in the in-app browser preview if there is
-   one or in the default browser if not, and tell the user how to decide.
+- Keep the report's IDs, and use its category names: Accuracy, Completeness, Consistency,
+  Usefulness, Precision, and Deep quality.
+- Deep-quality fixes are often structural moves with no line-level edit. Describe those in
+  `fixNote`.
 
-## Step 6: Act on the decisions
-
-When the user says they're done, read their decisions. Update any fix that a note changes
-before anything else. Then ask whether to edit the files or post a GitHub review:
-
-- **Someone else's PR:** suggest posting a review (`dashboard/review.py`). Show the draft, and
-  post only after they confirm.
-- **The user's own work:** suggest editing (`dashboard/apply.py`). Run it with `--dry-run`
-  first, then apply, then run any validation the repository requires.
-
-Rejected findings stay as they are. When the user is finished, stop the server and offer to
-remove the run folder and any worktree.
+If the triage-feedback skill isn't installed, say so. Offer to apply the fixes the user names
+by ID in the chat instead.
 
 ## Limits (be honest about them)
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a triage dashboard from a deep-quality-review findings.json.
+"""Build a triage dashboard from a findings.json.
 
 Usage: build.py RUN_DIR/findings.json [--check]
 
@@ -254,7 +254,7 @@ def resolve(data, findings_path):
               "mergeBase": src.merge_base, "head": src.head, "changeLabel": src.change_label}
     key_basis = json.dumps([data.get("title"), source["label"], source["url"], src.head])
     run = {"title": data.get("title") or "Review triage",
-           "key": "dqr:" + hashlib.sha1(key_basis.encode()).hexdigest()[:12],
+           "key": "triage:" + hashlib.sha1(key_basis.encode()).hexdigest()[:12],
            "source": source, "findings": out}
     return run, warnings
 
