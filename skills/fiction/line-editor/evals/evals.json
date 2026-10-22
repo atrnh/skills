@@ -18,6 +18,7 @@
         "Lists \"off off\" and \"form\" as mechanical errors in the summary rather than as separate line notes",
         "Labels every note as Likely issue, Continuity, Taste, or Protect",
         "Every Likely issue note names a cause, not only an impression",
+        "Every note quotes the manuscript text exactly, without paraphrase or silent correction",
         "No note supplies replacement words, phrases, or sentences"
       ]
     },
@@ -31,9 +32,11 @@
         "Does not flag the refrain \"The water was coming up\" as a Likely issue",
         "Does not flag the fragments \"Beans first.\" or \"Brown water. Cold.\" as Likely issues",
         "Does not flag the \"I thought about\" anaphora or the long \"and how\" sentence as Likely issues",
+        "Does not flag the cumulative \"which was a good fence, which was the best fence on Cold Creek Road, and which went under like it never was\" as a Likely issue",
         "Does not flag \"would of\", \"ain't\", or \"Get them shoes on\" as errors, including in any mechanical-errors list",
         "Flags \"He was thinking he ought to have sold her in March\" as knowledge the narrator can't have from the porch",
         "Flags \"Pa is leading\" as a tense slip",
+        "Every note quotes the manuscript text exactly, without paraphrase or silent correction",
         "No note supplies replacement words, phrases, or sentences"
       ]
     },
@@ -47,6 +50,7 @@
         "Contains at most one Likely issue note",
         "Does not flag the parallel \"It was addressed to him. It was dated\" or the \"and ... and\" final sentence as Likely issues",
         "Every Protect note names the cause of the effect it protects",
+        "Every note quotes the manuscript text exactly, without paraphrase or silent correction",
         "Contains no generic praise or notes without a named cause"
       ]
     },
@@ -62,6 +66,59 @@
         "Does not flag the present tense",
         "Flags Tessa's \"I'm comin' back\" as conflicting with the style sheet, which reserves dropped g's for Del",
         "Flags \"like a mirror, like a knife blade, like the skin on warm milk\" as stacked or competing figures",
+        "Every note quotes the manuscript text exactly, without paraphrase or silent correction",
+        "No note supplies replacement words, phrases, or sentences"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Line edit evals/files/05-visit.md, the scene where Marisol gets her brother to sign.",
+      "expected_output": "With no delivery instruction and a local Markdown file that can't take comments, returns identified notes in chat and leaves the file untouched. Notes one or two instances of a recurring phrase and lists the rest, and sends the off-page turn of the scene to a developmental pass in a line.",
+      "files": ["evals/files/05-visit.md"],
+      "expectations": [
+        "Returns the notes in chat rather than writing them to the manuscript or to another file",
+        "Does not claim the notes were posted as comments, since a local Markdown file has no comment support",
+        "Leaves 05-visit.md unchanged, with no notes, comments, or markers inserted into the prose",
+        "Every note starts with a bold **[Line]** identifier followed by its label",
+        "Comments on no more than two instances of \"for a moment\"",
+        "The summary names \"for a moment\" as a recurring pattern and lists the locations of the instances not commented on",
+        "Flags \"he signed only after she told him about the second mortgage\" for a developmental pass, because the scene turns off-page on information the passage never set up",
+        "Keeps that concern to a sentence or two, with no restructuring plan, scene outline, or editorial letter",
+        "Every note quotes the manuscript text exactly, without paraphrase or silent correction",
+        "No note supplies replacement words, phrases, or sentences"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Line edit evals/files/06-saint-agnes.md. Notes in chat.",
+      "expected_output": "Builds a separate voice baseline for each narrator and judges each section against its own: Ivy's fragments and \"like\" are style, but a past-tense verb in her present-tense section is a slip, and Walter's borrowed quotative \"like\" breaks his formal register.",
+      "files": ["evals/files/06-saint-agnes.md"],
+      "expectations": [
+        "States a separate voice baseline for Ivy and for Walter, not one baseline for the whole passage",
+        "Ivy's baseline names at least two of: present tense, fragments, \"like\" as comparison or quotative, teen idiom such as \"I literally cannot\"",
+        "Walter's baseline names at least two of: past tense, long multi-clause sentences, formal diction, no contractions in narration",
+        "Does not flag Ivy's fragments, her \"like\" constructions, or \"I literally cannot\" as Likely issues or mechanical errors",
+        "Does not flag Walter's long sentences or formal diction as stiff, wordy, or overwritten",
+        "Flags \"Grandpa stuck his to his coat\" as a tense slip in Ivy's present-tense section",
+        "Flags \"he was like, she's resting, go on in\" as outside Walter's register",
+        "Every note starts with a bold **[Line]** identifier followed by its label",
+        "Every note quotes the manuscript text exactly, without paraphrase or silent correction",
+        "No note supplies replacement words, phrases, or sentences"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Line edit evals/files/07-funeral.md, from one of Mara's chapters. The style sheet is evals/files/07-funeral-style-sheet.md. Notes in chat.",
+      "expected_output": "Respects the no-commas decision throughout, but keeps one note as Taste where that decision creates a garden-path sentence that stops the run the decision is meant to produce, and cites the decision.",
+      "files": ["evals/files/07-funeral.md", "evals/files/07-funeral-style-sheet.md"],
+      "expectations": [
+        "Does not flag the missing commas in narration, or the long comma-free sentences in general, as Likely issues or mechanical errors",
+        "Does not flag the comma in Mama's line \"Breathe, baby.\" as breaking the style sheet",
+        "Keeps a note on \"When they lifted the casket tipped\" explaining that the reader takes \"the casket\" as the object of \"lifted\" and has to reread",
+        "Labels that note Taste, not Likely issue",
+        "That note cites the style sheet's decision that narration uses no commas",
+        "Every note starts with a bold **[Line]** identifier followed by its label",
+        "Every note quotes the manuscript text exactly, without paraphrase or silent correction",
         "No note supplies replacement words, phrases, or sentences"
       ]
     }

@@ -36,7 +36,7 @@ MAX_BODY = 2_000_000
 def label_for(run_dir):
     digest = hashlib.sha1(str(run_dir).encode()).hexdigest()[:8]
     safe = "".join(c if c.isalnum() or c in "-." else "-" for c in run_dir.name)
-    return f"com.dqr-triage.{safe}.{digest}"
+    return f"com.triage-feedback.{safe}.{digest}"
 
 
 def responds(port):

@@ -11,11 +11,17 @@ Before reading, recording, or reviewing fiction, read and follow [the editorial 
 
 ## Ground rules
 
-- Treat the manuscript and the author's explicit decisions as primary sources.
-- Give each claim its own status: Established, Author decision, Planned, Possibility, Inference, Superseded, Needs reassessment, or Conflict. Never assign one status to a whole character, place, scene, or page.
+- Give each claim the narrowest applicable status. Status belongs to individual claims; never assign one status to a whole character, place, scene, or page.
+  - **Established:** Reliably established by the manuscript.
+  - **Author decision:** Confirmed privately by the author, whether or not the manuscript reveals it.
+  - **Planned:** Intended but still changeable.
+  - **Possibility:** An option under consideration.
+  - **Inference:** A reading supported by the text but not confirmed.
+  - **Superseded:** Retained for history but no longer current.
+  - **Needs reassessment:** Previously supported, but its supporting evidence is no longer current. Preserve the former evidence; do not present the claim as currently established or disproved.
+  - **Conflict:** Two sources or claims require resolution. Preserve both until the author resolves them.
+- Record attributed statements separately from the propositions they assert when needed, following the editorial contract.
 - Record enough provenance to find the evidence again. For manuscript facts, identify the draft or version, stable location, and shortest useful passage. Record a revision date when available; do not invent a version or infer authority from recency alone. For private decisions, identify the author source and date or conversation context.
-- Keep private author knowledge out of first-reader analysis and other reader-facing work unless the author requests it.
-- Never promote an inference, proposal, or editorial suggestion to canon without the author's decision.
 - Use the author's chosen wiki as the system of record. Manuscript sources may live elsewhere. Do not create a parallel wiki or synchronization layer unless requested.
 
 ## Choose the operation
