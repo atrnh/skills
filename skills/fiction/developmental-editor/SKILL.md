@@ -81,19 +81,16 @@ Close with a brief impression of the whole reading, not a revision plan.
 
 ## Deliver the feedback
 
-Default to inline comments on the identified manuscript in both modes, resolving overrides with [delivery preferences](../references/preferences.md). A request to review a clearly identified document uses this default without a separate request to post comments. For pasted text or a format without supported comments, return located notes in chat. Never insert feedback into the prose to simulate comments.
-
-Start each inline comment with bold `[Dev]` and the note's label, as in the examples. `[Dev]` identifies the editor; the label identifies the kind of note. Follow the [feedback guidance](../references/feedback.md) for formatting, anchors, duplicate checks, and verification.
+Deliver both modes as the [feedback guidance](../references/feedback.md) describes. Start each inline comment with bold `[Dev]` and the note's label, as in the examples. `[Dev]` identifies the editor; the label identifies the kind of note.
 
 Each developmental note gives a short quote or precise location, the reader effect and its cause, and a direction for issues. Anchor a broader pattern on one representative passage and list the other locations there instead of repeating the note. Prose-level issues belong to a line edit; mention any pattern in one line of the summary instead of commenting on it.
 
-Close with a brief chat summary. Include only what applies:
+In the closing summary, also include what applies:
 
-- what you read, the spoiler boundary, and whether a first reading was fresh or a reconstruction;
+- whether a first reading was fresh or a reconstruction;
 - the story as read;
 - the major issues in priority order, one line each, pointing to their comments;
 - findings with no useful inline anchor;
-- prose patterns worth a line-edit pass;
-- notes that couldn't be posted, and why.
+- prose patterns worth a line-edit pass.
 
-Don't repeat inline notes beyond that one-line index. When the author chooses chat delivery or asks for an editorial letter, give everything in chat instead: the story as read, major issues with evidence and directions, then other notes, choices to protect, and questions.
+When the author chooses chat delivery or asks for an editorial letter, give everything in chat instead: the story as read, major issues with evidence and directions, then other notes, choices to protect, and questions.

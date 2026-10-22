@@ -56,12 +56,10 @@ After drafting notes, and not before, check them against any style sheet, story-
 
 ## Deliverable
 
-Default to inline comments on the identified manuscript, resolving overrides with [delivery preferences](../references/preferences.md). A request to line edit a clearly identified document uses this default without a separate request to post comments. For pasted text or a format without supported comments, return located notes in chat. Never insert feedback into the prose to simulate comments.
-
-Start each inline comment with bold `[Line]` and the note's label, as in the examples. Follow the [feedback guidance](../references/feedback.md) for formatting, anchors, duplicate checks, and verification.
+Deliver as the [feedback guidance](../references/feedback.md) describes. Start each inline comment with bold `[Line]` and the note's label, as in the examples.
 
 Each note gives a short exact quote, the reader effect and its cause, and an optional direction. Keep one materially distinct observation per note. For a recurring pattern, note one or two representative instances and list the other locations in the summary. Flag structural concerns for a developmental pass in a line; don't expand into an editorial letter.
 
 Mechanical errors such as typos and doubled words are outside a line edit unless the author asks for a copyedit. List them with locations in the summary instead of commenting on each.
 
-Close with a brief chat summary: what you read and the spoiler boundary, the voice baseline, recurring patterns, mechanical errors, and any notes that couldn't be posted and why.
+In the closing summary, also include the voice baseline, recurring patterns, and mechanical errors.

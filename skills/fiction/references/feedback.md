@@ -1,6 +1,6 @@
 # Review conduct and feedback delivery
 
-Use this guidance when reviewing a manuscript, alongside [the editorial contract](editorial-contract.md). Follow the selected editorial lens for what to assess and how to organize the review.
+Use this guidance with an editor skill, alongside [the editorial contract](editorial-contract.md). The editor skill decides what to assess, what each note contains, and its comment identifier.
 
 ## Review conduct
 
@@ -13,12 +13,37 @@ Use this guidance when reviewing a manuscript, alongside [the editorial contract
 
 ## Feedback delivery
 
-Use the selected skill's delivery default, saved preferences, and the author's request to decide where feedback goes. Do not assume an app supports comments or tracked changes. If the requested delivery is unavailable, explain the limitation and provide a located review in chat without claiming it was posted elsewhere. Load [Notion guidance](notion.md) only when posting or checking comments in Notion.
+### Choose delivery
 
-For inline review comments, format the editor's identifier in bold using the destination's comment editor or supported rich-text representation. Bold only the identifier, including its brackets. Use Markdown delimiters only when the posting interface explicitly parses them into rendered bold; never leave literal asterisks in the posted comment. Verify the rendered prefix during readback. If comments support only plain text, retain the bracketed identifier without asterisks and disclose the formatting limitation. These prefixes are not required for feedback delivered in chat.
+- Default to inline comments on the identified manuscript. Resolve overrides with the author's request and [delivery preferences](preferences.md).
+- A request to review a clearly identified document uses this default without a separate request to post comments.
+- Return located notes in chat for pasted text or when the author chooses chat delivery. Start each with the same bold identifier and label an inline comment would use.
+- Never insert feedback into the prose to simulate comments.
 
-Each local observation needs a short exact quote and the reader effect. Identify the editorial lens when unclear. Place each comment so the author can see at a glance which words it concerns: attach it with the destination's comment tool at the narrowest location that tool supports, such as a text range or the containing paragraph. When the anchor covers more than the note, the quote identifies the exact words, so make it long enough to be unique within the anchored passage. If the destination supports only whole-document comments, return local notes in chat.
+### Before posting
 
-Before adding feedback to a document or page, read the current passage and existing feedback. Skip an observation already covered unless new evidence materially changes it. If existing feedback cannot be read, disclose that duplicate checking is incomplete.
+- Read the current passage and existing feedback. Skip an observation already covered unless new evidence materially changes it.
+- If existing feedback cannot be read, disclose that duplicate checking is incomplete.
 
-When delivery calls for comments, post them without an additional confirmation if the manuscript and destination are clear. Keep manuscript prose intact during a review. After writing feedback, read it back and verify its location and content. On an uncertain write result, inspect the destination before retrying so a retry does not duplicate a comment. Report failed or unverified delivery separately from completed feedback.
+### Write each comment
+
+- Start with the editor's identifier in bold, brackets included, followed by the note's label. Use the destination's comment editor or supported rich text; use Markdown delimiters only when the posting interface renders them as bold. Never leave literal asterisks in a posted comment.
+- Anchor the comment at the narrowest location the comment tool supports, such as a text range or the containing paragraph. Don't use browser or computer-use tools just to get a narrower anchor.
+- When the anchor covers more than the note, make the quote long enough to be unique within the anchored passage.
+
+### Post and verify
+
+- Post without further confirmation when the manuscript and destination are clear.
+- Read back each comment's location, content, and rendered identifier.
+- On an uncertain write result, inspect the destination before retrying so a retry does not duplicate a comment.
+- Report failed or unverified delivery separately from completed feedback.
+- In Notion, also follow [Notion guidance](notion.md).
+
+### When the destination falls short
+
+- Do not assume an app supports comments or tracked changes. If the destination has no comment support, or supports only whole-document comments, return located notes in chat without claiming they were posted elsewhere.
+- If comments support only plain text, keep the bracketed identifier without asterisks and disclose the formatting limitation.
+
+### Close with a summary
+
+End with a brief chat summary: what you read and the spoiler boundary, the summary items the editor skill adds, and any notes that couldn't be posted and why. When notes were posted inline, point to them rather than repeating them.
