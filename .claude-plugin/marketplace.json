@@ -13,9 +13,8 @@
       "strict": false,
       "skills": [
         "./skills/shared",
+        "./skills/principles",
         "./skills/education",
-        "./skills/engineering",
-        "./skills/documentation",
         "./skills/fiction",
         "./skills/personal"
       ]

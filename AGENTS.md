@@ -4,8 +4,8 @@ This repository is the canonical source for Ashley's reusable agent skills and t
 
 ## Find the relevant guidance
 
-- Identify the current work's audience and purpose, then look in the matching directory under `skills/`.
-- Check `skills/shared/` for applicable guidance and read the relevant `SKILL.md` files before using or changing them.
+- Identify the current work's audience and purpose, then look for that domain's principles in `skills/principles/` and its workflows in the matching directory under `skills/`.
+- Check shared principles and `skills/shared/` for applicable guidance, and read the relevant `SKILL.md` files before using or changing them.
 - Search existing skills before creating another one. Extend an existing skill when it already covers the same judgment or workflow.
 - Use `docs/` for repository-level design notes.
 
@@ -21,10 +21,11 @@ Ashley works as an educator, technical writer, and platform engineer. Apply stan
 
 ## Place skills
 
-- Place a skill in the domain whose audience and purpose its guidance serves, as described in the README's [Organization](README.md#organization) section.
-- Keep a skill in the domain where its guidance has concrete support. Move it into `shared/` when that guidance applies across domains without losing the distinctions that make it useful.
-- Give each skill its own directory containing a `SKILL.md`, such as `skills/education/principle-connect-examples-to-concepts/SKILL.md`. Keep names unique across the repository.
-- Keep principles and workflows together within their domain. Keep skill-specific examples, scripts, and references beside their `SKILL.md`. Add further organizational layers only when the collection needs them.
+- Assign a skill to the domain whose audience and purpose its guidance serves, as described in the README's [Organization](README.md#organization) section, and record it in the README's skill table.
+- Put principles in `skills/principles/` and workflows in their domain's directory, such as `skills/education/`.
+- Keep a skill in the domain where its guidance has concrete support. Make it shared when that guidance applies across domains without losing the distinctions that make it useful. A shared workflow moves into `skills/shared/`.
+- Give each skill its own directory containing a `SKILL.md`, such as `skills/principles/principle-connect-examples-to-concepts/SKILL.md`. Keep names unique across the repository.
+- Keep skill-specific examples, scripts, and references beside their `SKILL.md`. Add further organizational layers only when the collection needs them.
 - Keep project-specific syntax, folder conventions, and build commands in the project's own instructions or workflows. Extract a reusable principle only when the broader judgment is useful independently of those details.
 
 ## Write skills
@@ -37,7 +38,7 @@ Ashley works as an educator, technical writer, and platform engineer. Apply stan
 
 ## Maintain the packaging
 
-The repository publishes every skill as a single `all-skills` plugin. A new skill in an existing domain needs no manifest changes. A new domain needs its path added to the `skills` list in both:
+The repository publishes every skill as a single `all-skills` plugin. A new principle, or a new workflow in an existing domain directory, needs no manifest changes. A new domain directory needs its path added to the `skills` list in both:
 
 - `.claude-plugin/marketplace.json`, which Claude Code and Codex CLI read.
 - `.github/plugin/plugin.json`, which GitHub Copilot CLI reads because it ignores the marketplace's `skills` paths.
