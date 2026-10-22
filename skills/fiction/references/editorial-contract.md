@@ -27,4 +27,4 @@ Keep these distinctions wherever they matter, whether recording a claim or raisi
 
 Determine the manuscript source, reference destination, and feedback destination independently from the request and existing project conventions. They may use different tools or formats. Preserve the chosen locations; do not migrate material or introduce synchronization unless requested. Ask only when a write destination is needed and ambiguous.
 
-Use available document or vault skills and tools for format-specific operations.
+Use the skills and tools available for each source or destination's app or format to work with it.
