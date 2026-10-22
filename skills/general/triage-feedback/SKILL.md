@@ -168,8 +168,8 @@ line and every line a fix replaces, so read it and confirm each one is the line 
 Then deal with the warnings:
 
 - **Blank highlighted lines** usually mean a line-number slip.
-- **Two findings changing the same lines** can both stay, but mention the conflict in each
-  one's `fixNote`.
+- **Two findings changing the same lines** can both stay. The page marks each one and warns if
+  both are approved.
 - **A file that differs from HEAD** means its GitHub links won't match the snippets.
 
 ## 7. Launch

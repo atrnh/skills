@@ -9,7 +9,7 @@
     --bg: #ffffff; --fg: #1f2328; --muted: #656d76; --border: #d0d7de; --card: #ffffff;
     --soft: #f6f8fa; --code: #f6f8fa; --accent: #0969da;
     --ok: #1a7f37; --ok-bg: #dafbe1; --bad: #cf222e; --bad-bg: #ffebe9;
-    --warn: #9a6700; --hl: #fff8c5; --add: #2da44e;
+    --warn: #9a6700; --warn-bg: #fff1e5; --hl: #fff8c5; --add: #2da44e;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     color-scheme: light dark;
@@ -19,7 +19,7 @@
       --bg: #0d1117; --fg: #e6edf3; --muted: #8d96a0; --border: #30363d; --card: #161b22;
       --soft: #1c2128; --code: #0d1117; --accent: #4493f8;
       --ok: #3fb950; --ok-bg: #12261e; --bad: #f85149; --bad-bg: #2d1214;
-      --warn: #d29922; --hl: #3a3218; --add: #3fb950;
+      --warn: #d29922; --warn-bg: #2e2112; --hl: #3a3218; --add: #3fb950;
     }
   }
   * { box-sizing: border-box; }
@@ -34,15 +34,18 @@
 
   .bar { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--border);
          padding: 12px 0; margin: 16px 0 20px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
-  .counts { display: flex; gap: 14px; font-variant-numeric: tabular-nums; }
-  .counts b { font-size: 16px; }
-  .c-ok { color: var(--ok); } .c-bad { color: var(--bad); } .c-pend { color: var(--muted); }
+  .clashes { font-size: 13px; font-variant-numeric: tabular-nums; }
+  .clashes:empty { display: none; }
+  .c-ok { color: var(--ok); } .c-bad { color: var(--bad); } .c-pend { color: var(--muted); } .c-warn { color: var(--warn); }
   .progress { flex: 1 1 160px; height: 8px; background: var(--soft); border-radius: 4px; overflow: hidden; display: flex; min-width: 120px; }
   .progress i { display: block; height: 100%; }
   .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .seg button { border: 0; border-right: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 10px; font: inherit; font-size: 13px; cursor: pointer; }
   .seg button:last-child { border-right: 0; }
   .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .seg button b { font-variant-numeric: tabular-nums; }
+  .seg button[aria-pressed="true"] b { color: inherit; }
+  .seg button.zero:not([aria-pressed="true"]) { color: var(--muted); }
   .tools { display: flex; gap: 8px; align-items: center; margin-left: auto; }
   .btn { border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 10px; border-radius: 6px; font: inherit; font-size: 13px; cursor: pointer; }
   .btn:hover { background: var(--soft); }
@@ -65,6 +68,8 @@
   .tag.p1 { color: var(--bad); border-color: var(--bad); }
   .tag.p2 { color: var(--warn); border-color: var(--warn); }
   .tag.older { border-style: dashed; }
+  .tag.conflict { color: var(--warn); border-color: var(--warn); }
+  .clash .tag.conflict { background: var(--warn); color: #fff; }
 
   .body { display: none; padding: 4px 16px 16px; border-top: 1px solid var(--border); }
   .open .body { display: block; }
@@ -97,6 +102,8 @@
   .dbtn { border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 6px 14px; border-radius: 6px; font: inherit; font-weight: 600; cursor: pointer; }
   .dbtn.ok:hover, .approved .dbtn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
   .dbtn.bad:hover, .rejected .dbtn.bad { background: var(--bad); border-color: var(--bad); color: #fff; }
+  .overlap { width: 100%; border-left: 3px solid var(--warn); background: var(--soft); border-radius: 6px; padding: 8px 12px; }
+  .clash .overlap { background: var(--warn-bg); font-weight: 600; }
   .decide textarea { flex: 1 1 320px; min-height: 36px; resize: vertical; font: inherit; font-size: 13px; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); }
   .kbd { font-size: 12px; color: var(--muted); width: 100%; }
   kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--soft); }
@@ -117,7 +124,7 @@
   <div class="sub" id="sub"></div>
 
   <div class="bar">
-    <div class="counts" id="counts"></div>
+    <div class="clashes" id="clashes"></div>
     <div class="progress" id="progress"></div>
     <div class="seg" id="fstatus"></div>
     <div class="seg" id="fcat"></div>
@@ -168,8 +175,9 @@ function inline(s) {
       .replace(/(^|[^*\w])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>");
   }).join("");
 }
-const para = s => String(s ?? "").split(/\n{2,}/).map(p => `<p>${inline(p)}</p>`).join("");
+const para = s => String(s ?? "").split(/\n{2,}/).filter(p => p.trim()).map(p => `<p>${inline(p)}</p>`).join("");
 const range = (a, b) => `${a}${b !== a ? "–" + b : ""}`;
+const lineSpan = (a, b) => `${a === b ? "line" : "lines"} ${range(a, b)}`;
 const linkName = u => /github\.com/.test(u) ? "View on GitHub ↗" : "View source ↗";
 const link = u => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${linkName(u)}</a>` : "";
 
@@ -194,14 +202,15 @@ function rowsHtml(lines, start, cls) {
 function contextHtml(c) {
   const hl = new Set(c.highlight), add = new Set(c.added);
   const label = c.label ? `${esc(c.label)} · ` : "";
-  return `<div class="code"><div class="code-h"><span>${label}${esc(c.file)} lines ${range(c.start, c.end)}</span>${link(c.url)}</div>
+  return `<div class="code"><div class="code-h"><span>${label}${esc(c.file)} ${lineSpan(c.start, c.end)}</span>${link(c.url)}</div>
     <div class="rows">${rowsHtml(c.lines, c.start, n => [hl.has(n) ? "hl" : "", add.has(n) ? "add" : ""].join(" "))}</div></div>`;
 }
 
 function fixHtml(x) {
   const label = x.label ? `${esc(x.label)} · ` : "";
-  const ins = x.replacement === "" ? rowsHtml(["(delete these lines)"], null, "none") : rowsHtml(x.replacement.split("\n"), null, "ins");
-  return `<div class="code"><div class="code-h"><span>${label}${esc(x.file)} replace lines ${range(x.start, x.end)}</span>${link(x.url)}</div>
+  const del = x.start === x.end ? "(delete this line)" : "(delete these lines)";
+  const ins = x.replacement === "" ? rowsHtml([del], null, "none") : rowsHtml(x.replacement.split("\n"), null, "ins");
+  return `<div class="code"><div class="code-h"><span>${label}${esc(x.file)} replace ${lineSpan(x.start, x.end)}</span>${link(x.url)}</div>
     <div class="rows">${rowsHtml(x.lines, x.start, "del")}${ins}</div></div>`;
 }
 
@@ -211,12 +220,28 @@ const ORIGIN = {
   mixed: [`new + older lines`, `Touches lines added by ${SRC.changeLabel} and older lines`],
 };
 
+const conflictsOf = f => f.conflicts || [];
+const clashesOf = f => st(f.id).d === "approved" ? conflictsOf(f).filter(id => st(id).d === "approved") : [];
+const andList = xs => xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
+const idLink = id => `<a href="#card-${esc(id)}" data-act="goto" data-target="${esc(id)}">${esc(id)}</a>`;
+
+function overlapHtml(f) {
+  const ids = conflictsOf(f);
+  if (!ids.length) return "";
+  const clashes = clashesOf(f);
+  if (clashes.length) return `<div class="overlap">You approved this and ${andList(clashes.map(idLink))}, but they change the same lines, so only one fix can be applied. ${clashes.length === 1 ? "Reject one of them." : "Reject all but one."}</div>`;
+  const named = ids.map(id => idLink(id) + (st(id).d ? ` (${st(id).d})` : ""));
+  return `<div class="overlap">${andList(named)} ${ids.length === 1 ? "changes" : "change"} some of the same lines as this fix. Approve only one.</div>`;
+}
+
 function cardHtml(f) {
   const s = st(f.id);
-  const cls = ["card", s.d || "", open.has(f.id) ? "open" : "", focusId === f.id ? "focus" : ""].join(" ");
+  const cls = ["card", s.d || "", open.has(f.id) ? "open" : "", focusId === f.id ? "focus" : "",
+               clashesOf(f).length ? "clash" : ""].join(" ");
   const icon = s.d === "approved" ? "✓" : s.d === "rejected" ? "✕" : "";
   const o = ORIGIN[f.origin];
   const originTag = o ? `<span class="tag ${f.origin !== "new" ? "older" : ""}" title="${esc(o[1])}">${o[0]}</span>` : "";
+  const conflictTag = conflictsOf(f).length ? `<span class="tag conflict" title="These findings change some of the same lines">conflicts with ${esc(andList(conflictsOf(f)))}</span>` : "";
   const ev = f.evidence.length ? `<h3>Evidence</h3><ul class="ev">${f.evidence.map(e =>
     `<li>${e.url ? `<a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">${inline(e.text)} ↗</a>` : inline(e.text)}</li>`).join("")}</ul>` : "";
   const legend = `<div class="legend"><span><i class="sw" style="background:var(--hl)"></i>problem lines</span>${
@@ -228,7 +253,7 @@ function cardHtml(f) {
       <span class="status">${icon}</span>
       <span class="fid">${esc(f.id)}</span>
       <div><div class="title">${inline(f.title)}</div><div class="loc">${esc(locOf(f))}</div></div>
-      <div class="tags"><span class="tag p${f.priority}">P${f.priority}</span><span class="tag">${esc(f.category)}</span>${originTag}</div>
+      <div class="tags"><span class="tag p${f.priority}">P${f.priority}</span><span class="tag">${esc(f.category)}</span>${originTag}${conflictTag}</div>
     </div>
     <div class="body">
       <h3>Problem</h3>${para(f.problem)}
@@ -237,6 +262,7 @@ function cardHtml(f) {
       ${context}
       ${proposal}
       <div class="decide">
+        ${overlapHtml(f)}
         <button class="dbtn ok" data-act="approved">✓ Approve</button>
         <button class="dbtn bad" data-act="rejected">✕ Reject</button>
         ${s.d ? `<button class="btn" data-act="clear">Undo</button>` : ""}
@@ -247,28 +273,31 @@ function cardHtml(f) {
   </article>`;
 }
 
-function visible() {
-  return FINDINGS.filter(f => {
-    const d = st(f.id).d;
-    const okS = fStatus === "All" || (fStatus === "Pending" ? !d : d === fStatus.toLowerCase());
-    return okS && (fCat === "All" || f.category === fCat);
-  });
-}
+const inStatus = (f, s) => s === "All" || (s === "Pending" ? !st(f.id).d : st(f.id).d === s.toLowerCase());
+const inCat = (f, c) => c === "All" || f.category === c;
+const visible = () => FINDINGS.filter(f => inStatus(f, fStatus) && inCat(f, fCat));
+const STATUS_CLS = { Pending: "c-pend", Approved: "c-ok", Rejected: "c-bad" };
 
 function renderBar() {
   const n = FINDINGS.length;
   const a = FINDINGS.filter(f => st(f.id).d === "approved").length;
   const r = FINDINGS.filter(f => st(f.id).d === "rejected").length;
-  document.getElementById("counts").innerHTML =
-    `<span class="c-pend"><b>${n - a - r}</b> pending</span><span class="c-ok"><b>${a}</b> approved</span><span class="c-bad"><b>${r}</b> rejected</span>`;
+  const clashes = new Set(FINDINGS.flatMap(f => clashesOf(f).map(id => [f.id, id].sort().join(" and "))));
+  document.getElementById("clashes").innerHTML = clashes.size
+    ? `<span class="c-warn" title="Approved findings that change the same lines: ${esc([...clashes].join("; "))}"><b>${clashes.size}</b> ${clashes.size === 1 ? "conflict" : "conflicts"}</span>` : "";
   document.getElementById("progress").innerHTML =
     `<i style="width:${a / n * 100}%;background:var(--ok)"></i><i style="width:${r / n * 100}%;background:var(--bad)"></i>`;
-  const seg = (el, items, cur, set) => {
-    el.innerHTML = items.map(x => `<button aria-pressed="${x === cur}">${esc(x)}</button>`).join("");
+  const seg = (el, items, cur, set, count, cls = () => "") => {
+    el.innerHTML = items.map(x => {
+      const k = x === "All" ? null : count(x);
+      return `<button aria-pressed="${x === cur}"${k === 0 ? ' class="zero"' : ""}>${k == null ? "" : `<b class="${cls(x)}">${k}</b> `}${esc(x)}</button>`;
+    }).join("");
     el.querySelectorAll("button").forEach((b, i) => b.onclick = () => { set(items[i]); render(); });
   };
-  seg(document.getElementById("fstatus"), STATUSES, fStatus, v => fStatus = v);
-  seg(document.getElementById("fcat"), CATS, fCat, v => fCat = v);
+  seg(document.getElementById("fstatus"), STATUSES, fStatus, v => fStatus = v,
+      s => FINDINGS.filter(f => inStatus(f, s) && inCat(f, fCat)).length, s => STATUS_CLS[s]);
+  seg(document.getElementById("fcat"), CATS, fCat, v => fCat = v,
+      c => FINDINGS.filter(f => inStatus(f, fStatus) && inCat(f, c)).length);
 }
 
 function markdown() {
@@ -366,6 +395,13 @@ document.getElementById("list").addEventListener("click", e => {
   if (act === "toggle") { open.has(id) ? open.delete(id) : open.add(id); render(); }
   else if (act === "approved" || act === "rejected") decide(id, st(id).d === act ? null : act);
   else if (act === "clear") decide(id, null);
+  else if (act === "goto") {
+    e.preventDefault();
+    const target = e.target.closest("[data-target]").dataset.target;
+    if (!visible().some(f => f.id === target)) { fStatus = "All"; fCat = "All"; }
+    open.add(target); focusId = target; render();
+    document.getElementById("card-" + target)?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
 });
 document.getElementById("list").addEventListener("input", e => {
   if (e.target.dataset.act !== "note") return;

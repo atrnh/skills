@@ -233,6 +233,7 @@ def resolve(data, findings_path):
             errors.append(str(e))
 
     ranges = sorted((x["file"], x["start"], x["end"], f["id"]) for f in out for x in f["fixes"])
+    conflicts = {}
     for i, a in enumerate(ranges):
         for b in ranges[i + 1:]:
             if b[0] != a[0] or b[1] > a[2]:
@@ -242,6 +243,10 @@ def resolve(data, findings_path):
                 errors.append(f"{a[3]}: two of its fixes both change {where}")
             else:
                 warnings.append(f"{a[3]} and {b[3]} both change {where}; approving both will conflict")
+                conflicts.setdefault(a[3], set()).add(b[3])
+                conflicts.setdefault(b[3], set()).add(a[3])
+    for f in out:
+        f["conflicts"] = [g["id"] for g in out if g["id"] in conflicts.get(f["id"], ())]
     if src.link and "{head}" in src.link:
         for rel, info in src.files.items():
             if info["dirty"]:
