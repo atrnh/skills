@@ -186,7 +186,7 @@ reviewed commit don't change.
 Open the URL in the harness's in-app browser preview if it has one (in T3 Code, the
 `preview_open` tool). Otherwise run `open URL` on macOS or `xdg-open URL` on Linux. If the server
 can't start, open `RUN/index.html` directly. The page then saves decisions in the browser only,
-and the user copies the Markdown at the bottom into the chat.
+and the user copies the Markdown from the page's Decisions panel into the chat.
 
 Tell the user:
 

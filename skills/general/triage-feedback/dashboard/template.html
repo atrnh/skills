@@ -24,7 +24,9 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.5 var(--sans); }
-  main { max-width: 1180px; margin: 0 auto; padding: 24px 20px 120px; }
+  .page { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  header.page { padding-top: 24px; }
+  main.page { padding-bottom: 120px; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   code { font-family: var(--mono); font-size: 12.5px; background: var(--soft); padding: 1px 5px; border-radius: 4px; }
@@ -32,23 +34,27 @@
   .sub { color: var(--muted); font-size: 13px; }
   .sub code { font-size: 12px; }
 
-  .bar { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--border);
-         padding: 12px 0; margin: 16px 0 20px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
-  .clashes { font-size: 13px; font-variant-numeric: tabular-nums; }
+  .bar { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 12px 0 15px; margin: 16px 0 20px; }
+  .bar .page { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; }
+  .group { display: flex; flex-wrap: wrap; gap: 10px 8px; align-items: center; }
+  .group.push { margin-left: auto; }
+  select.jump { width: 120px; border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 6px; border-radius: 6px; font: inherit; font-size: 13px; cursor: pointer; }
+  .clashes { font-size: 13px; color: var(--warn); margin-top: 4px; }
   .clashes:empty { display: none; }
   .c-ok { color: var(--ok); } .c-bad { color: var(--bad); } .c-pend { color: var(--muted); } .c-warn { color: var(--warn); }
-  .progress { flex: 1 1 160px; height: 8px; background: var(--soft); border-radius: 4px; overflow: hidden; display: flex; min-width: 120px; }
-  .progress i { display: block; height: 100%; }
+  .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--border); display: flex; }
+  .progress i { display: block; height: 100%; transition: width .2s; }
   .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-  .seg button { border: 0; border-right: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+  .seg button { border: 0; border-right: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 8px; font: inherit; font-size: 13px; cursor: pointer; }
   .seg button:last-child { border-right: 0; }
   .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
   .seg button b { font-variant-numeric: tabular-nums; }
   .seg button[aria-pressed="true"] b { color: inherit; }
   .seg button.zero:not([aria-pressed="true"]) { color: var(--muted); }
-  .tools { display: flex; gap: 8px; align-items: center; margin-left: auto; }
   .btn { border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 10px; border-radius: 6px; font: inherit; font-size: 13px; cursor: pointer; }
   .btn:hover { background: var(--soft); }
+  .btn.danger:hover { color: var(--bad); background: var(--bad-bg); border-color: var(--bad); }
+  .btn.warn { color: var(--warn); border-color: var(--warn); }
   label.chk { font-size: 13px; display: inline-flex; gap: 5px; align-items: center; color: var(--muted); }
 
   .card { border: 1px solid var(--border); border-radius: 8px; background: var(--card); margin-bottom: 10px; scroll-margin-top: 80px; }
@@ -108,10 +114,13 @@
   .kbd { font-size: 12px; color: var(--muted); width: 100%; }
   kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--soft); }
 
-  .export { margin-top: 28px; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; background: var(--card); }
-  .export h2 { font-size: 15px; margin: 0 0 8px; }
-  .export textarea { width: 100%; min-height: 180px; font: 12.5px/1.5 var(--mono); padding: 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); }
-  .export .row2 { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
+  .pop { position: fixed; inset: auto; margin: 0; width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 120px); overflow: auto;
+         border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; background: var(--card); color: var(--fg);
+         box-shadow: 0 8px 24px rgba(0, 0, 0, .18); }
+  .pop-h { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .pop h2 { font-size: 15px; margin: 0; }
+  .pop textarea { width: 100%; min-height: 220px; margin-top: 8px; font: 12.5px/1.5 var(--mono); padding: 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); }
+  .pop .row2 { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
   .saved { font-size: 13px; color: var(--muted); }
   .saved.ok { color: var(--ok); } .saved.bad { color: var(--warn); }
   .toast { color: var(--ok); font-size: 13px; }
@@ -119,35 +128,49 @@
 </style>
 </head>
 <body>
-<main>
+<header class="page">
   <h1 id="h1"></h1>
   <div class="sub" id="sub"></div>
+</header>
 
-  <div class="bar">
-    <div class="clashes" id="clashes"></div>
-    <div class="progress" id="progress"></div>
-    <div class="seg" id="fstatus"></div>
-    <div class="seg" id="fcat"></div>
-    <div class="tools">
+<div class="bar">
+  <div class="page">
+    <div class="group" role="group" aria-label="Filter findings">
+      <div class="seg" id="fstatus"></div>
+      <div class="seg" id="fcat"></div>
+    </div>
+    <div class="group push" role="group" aria-label="Navigate and display">
+      <select class="jump" id="jump" aria-label="Jump to a finding"></select>
+      <button class="btn" id="expand">Expand</button>
       <label class="chk"><input type="checkbox" id="wrap" checked> Wrap lines</label>
-      <button class="btn" id="expand">Expand all</button>
-      <button class="btn" id="reset" title="Clear all decisions and notes">Reset</button>
+    </div>
+    <div class="group" role="group" aria-label="Decisions">
+      <button class="btn" id="dbtn" popovertarget="decisions">Decisions ▾</button>
+      <button class="btn danger" id="reset" title="Clear all decisions and notes">Reset</button>
     </div>
   </div>
+  <div class="progress" id="progress" role="progressbar" aria-label="Findings decided"></div>
+</div>
 
+<main class="page">
   <div id="list"></div>
 
-  <section class="export">
-    <h2>Decisions</h2>
-    <div class="saved" id="saved"></div>
-    <textarea id="md" readonly style="margin-top:8px"></textarea>
-    <div class="row2">
-      <button class="btn" id="copy">Copy</button>
-      <button class="btn" id="dl">Download .md</button>
-      <span class="toast" id="toast"></span>
-    </div>
-  </section>
 </main>
+
+<section class="pop" id="decisions" popover aria-labelledby="decisions-h">
+  <div class="pop-h">
+    <h2 id="decisions-h">Decisions</h2>
+    <button class="btn" popovertarget="decisions" popovertargetaction="hide" aria-label="Close">✕</button>
+  </div>
+  <div class="saved" id="saved"></div>
+  <div class="clashes" id="clashes"></div>
+  <textarea id="md" readonly aria-label="Decisions as Markdown"></textarea>
+  <div class="row2">
+    <button class="btn" id="copy">Copy</button>
+    <button class="btn" id="dl">Download .md</button>
+    <span class="toast" id="toast"></span>
+  </div>
+</section>
 
 <script>
 const DATA = /*DATA*/null;
@@ -161,7 +184,7 @@ let state = { updatedAt: 0, items: {} };
 try { state = { ...state, ...JSON.parse(localStorage.getItem(DATA.key) || "{}") }; } catch {}
 const st = id => state.items[id] || (state.items[id] = { d: null, note: "" });
 
-let fStatus = "All", fCat = "All", focusId = null, saveTimer = null;
+let fStatus = "All", fCat = "All", focusId = null, saveTimer = null, clashPairs = [], saveProblem = "";
 const open = new Set();
 
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -175,6 +198,7 @@ function inline(s) {
       .replace(/(^|[^*\w])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>");
   }).join("");
 }
+const plain = s => String(s ?? "").replace(/\[([^\]]+)\]\([^)\s]+\)/g, "$1").replace(/`([^`]+)`/g, "$1").replace(/\*\*([^*]+)\*\*/g, "$1");
 const para = s => String(s ?? "").split(/\n{2,}/).filter(p => p.trim()).map(p => `<p>${inline(p)}</p>`).join("");
 const range = (a, b) => `${a}${b !== a ? "–" + b : ""}`;
 const lineSpan = (a, b) => `${a === b ? "line" : "lines"} ${range(a, b)}`;
@@ -282,11 +306,17 @@ function renderBar() {
   const n = FINDINGS.length;
   const a = FINDINGS.filter(f => st(f.id).d === "approved").length;
   const r = FINDINGS.filter(f => st(f.id).d === "rejected").length;
-  const clashes = new Set(FINDINGS.flatMap(f => clashesOf(f).map(id => [f.id, id].sort().join(" and "))));
-  document.getElementById("clashes").innerHTML = clashes.size
-    ? `<span class="c-warn" title="Approved findings that change the same lines: ${esc([...clashes].join("; "))}"><b>${clashes.size}</b> ${clashes.size === 1 ? "conflict" : "conflicts"}</span>` : "";
-  document.getElementById("progress").innerHTML =
-    `<i style="width:${a / n * 100}%;background:var(--ok)"></i><i style="width:${r / n * 100}%;background:var(--bad)"></i>`;
+  const order = id => FINDINGS.findIndex(f => f.id === id);
+  clashPairs = [...new Set(FINDINGS.flatMap(f => clashesOf(f).map(id => [f.id, id].sort((x, y) => order(x) - order(y)).join(" and "))))];
+  document.getElementById("clashes").textContent = clashPairs.length
+    ? `⚠ Approved findings that change the same lines: ${clashPairs.join("; ")}. Reject one of each pair before applying.` : "";
+  flagDecisions();
+  const progress = document.getElementById("progress");
+  progress.innerHTML = `<i style="width:${a / n * 100}%;background:var(--ok)"></i><i style="width:${r / n * 100}%;background:var(--bad)"></i>`;
+  progress.title = `${a + r} of ${n} decided`;
+  progress.setAttribute("aria-valuemax", n);
+  progress.setAttribute("aria-valuenow", a + r);
+  progress.setAttribute("aria-valuetext", progress.title);
   const seg = (el, items, cur, set, count, cls = () => "") => {
     el.innerHTML = items.map(x => {
       const k = x === "All" ? null : count(x);
@@ -298,6 +328,9 @@ function renderBar() {
       s => FINDINGS.filter(f => inStatus(f, s) && inCat(f, fCat)).length, s => STATUS_CLS[s]);
   seg(document.getElementById("fcat"), CATS, fCat, v => fCat = v,
       c => FINDINGS.filter(f => inStatus(f, fStatus) && inCat(f, c)).length);
+  const mark = { approved: "✓", rejected: "✕" };
+  document.getElementById("jump").innerHTML = `<option value="">Jump to…</option>` + FINDINGS.map(f =>
+    `<option value="${esc(f.id)}">${mark[st(f.id).d] || "○"} ${esc(f.id)} · ${esc(plain(f.title))}</option>`).join("");
 }
 
 function markdown() {
@@ -319,6 +352,18 @@ function markdown() {
 function savedStatus(kind, text) {
   const el = document.getElementById("saved");
   el.className = "saved " + kind; el.textContent = text;
+  saveProblem = kind === "bad" ? text : "";
+  flagDecisions();
+}
+
+function flagDecisions() {
+  const problems = [];
+  if (clashPairs.length) problems.push(`${clashPairs.length} ${clashPairs.length === 1 ? "conflict" : "conflicts"} between approved findings.`);
+  if (saveProblem) problems.push(saveProblem);
+  const btn = document.getElementById("dbtn");
+  btn.classList.toggle("warn", problems.length > 0);
+  btn.textContent = problems.length ? "⚠ Decisions ▾" : "Decisions ▾";
+  btn.title = problems.join(" ");
 }
 
 function payload() {
@@ -369,7 +414,13 @@ function render() {
   document.getElementById("list").classList.toggle("wrap", wrap);
   document.querySelectorAll(".rows").forEach(el => el.classList.toggle("wrap", wrap));
   document.getElementById("md").value = markdown();
-  document.getElementById("expand").textContent = v.length && v.every(f => open.has(f.id)) ? "Collapse all" : "Expand all";
+  document.getElementById("expand").textContent = v.length && v.every(f => open.has(f.id)) ? "Collapse" : "Expand";
+}
+
+function jumpTo(id) {
+  if (!visible().some(f => f.id === id)) { fStatus = "All"; fCat = "All"; }
+  open.add(id); focusId = id; render();
+  document.getElementById("card-" + id)?.scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
 function nextPending(afterId) {
@@ -395,14 +446,22 @@ document.getElementById("list").addEventListener("click", e => {
   if (act === "toggle") { open.has(id) ? open.delete(id) : open.add(id); render(); }
   else if (act === "approved" || act === "rejected") decide(id, st(id).d === act ? null : act);
   else if (act === "clear") decide(id, null);
-  else if (act === "goto") {
-    e.preventDefault();
-    const target = e.target.closest("[data-target]").dataset.target;
-    if (!visible().some(f => f.id === target)) { fStatus = "All"; fCat = "All"; }
-    open.add(target); focusId = target; render();
-    document.getElementById("card-" + target)?.scrollIntoView({ block: "start", behavior: "smooth" });
-  }
+  else if (act === "goto") { e.preventDefault(); jumpTo(e.target.closest("[data-target]").dataset.target); }
 });
+document.getElementById("jump").onchange = e => {
+  const id = e.target.value;
+  e.target.blur();
+  if (id) jumpTo(id);
+};
+const pop = document.getElementById("decisions");
+const placePop = () => {
+  const b = document.getElementById("dbtn").getBoundingClientRect(), vw = document.documentElement.clientWidth;
+  const w = Math.min(560, vw - 32);
+  pop.style.top = `${b.bottom + 8}px`;
+  pop.style.left = `${Math.max(16, Math.min(b.right - w, vw - w - 16))}px`;
+};
+pop.addEventListener("beforetoggle", e => { if (e.newState === "open") placePop(); });
+window.addEventListener("resize", () => { if (pop.matches(":popover-open")) placePop(); });
 document.getElementById("list").addEventListener("input", e => {
   if (e.target.dataset.act !== "note") return;
   st(e.target.closest(".card").dataset.id).note = e.target.value; save();
@@ -430,7 +489,8 @@ document.getElementById("dl").onclick = () => {
   a.click();
 };
 document.addEventListener("keydown", e => {
-  if (e.target.matches("textarea, input") || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.target.matches("textarea, input, select") || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === "Enter" && e.target.closest("button, a")) return;
   const v = visible(); if (!v.length) return;
   let i = Math.max(0, v.findIndex(f => f.id === focusId));
   const go = j => { focusId = v[j].id; open.add(focusId); render(); document.getElementById("card-" + focusId).scrollIntoView({ block: "start", behavior: "smooth" }); };
