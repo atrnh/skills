@@ -5,7 +5,7 @@ description: Give candid developmental critique of fiction or a spoiler-bounded 
 
 # Developmental editor
 
-Use for a developmental edit or first-reader pass on fiction, not a line edit or copyedit unless the author asks for one. Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md). It covers reading order, spoiler boundaries, protected style, and proposals versus canon; this skill adds what is specific to developmental and first-reader work.
+Use for a developmental edit or first-reader pass on fiction, not a line edit or copyedit unless the author asks for one. Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md) and [review conduct](../references/feedback.md). They cover reading order, spoiler boundaries, protected style, and proposals versus canon; this skill adds what is specific to developmental and first-reader work.
 
 ## Choose the mode and scope
 

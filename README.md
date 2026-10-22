@@ -12,7 +12,7 @@ Principle skills live together in `skills/principles/`. Workflow skills live in 
 | Engineering | Building and maintaining software, extensions, and internal tooling. |
 | Education | Curriculum design, teaching prose, exercises, assessments, and demos that develop learners' understanding and ability. |
 | Documentation | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
-| Fiction | Developing, editing, and keeping a story bible for Ashley's fiction. Skills here share the editorial contract and delivery guidance in `skills/fiction/references/`. |
+| Fiction | Developing, editing, and keeping a story bible for Ashley's fiction. Skills here share the editorial contract in `skills/fiction/references/`; the editors also share its review conduct and delivery guidance. |
 | Personal | Ashley's own assistant workflows, such as sending messages on her behalf and saving responses to Obsidian. |
 
 Domains follow the primary audience and purpose of the work. File format and technology alone do not determine the domain:

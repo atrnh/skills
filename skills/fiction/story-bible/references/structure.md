@@ -80,7 +80,7 @@ Use **Decisions and changes** for consequential author choices, their sources, a
 
 Every substantive entry should have a useful summary, relevant subject sections, claim status and provenance beside the information they qualify, and related links where useful. Navigation-only indexes need no invented claims or evidence sections.
 
-Use the statuses and authority rules in [the editorial contract](../../references/editorial-contract.md). Status belongs to individual claims, never the whole entry. Do not divide the collection into whole-page "canon" and "planning" buckets. Summaries must preserve the uncertainty of the claims they summarize.
+Use the statuses in [story-bible](../SKILL.md#ground-rules) and the authority rules in [the editorial contract](../../references/editorial-contract.md). Status belongs to individual claims, never the whole entry. Do not divide the collection into whole-page "canon" and "planning" buckets. Summaries must preserve the uncertainty of the claims they summarize.
 
 Choose readable prose, bullets, or a table to suit the material. For example, a claim can use this compact pattern without requiring a database:
 

@@ -5,7 +5,7 @@ description: Closely edit fiction prose for local reader effect, preserving deli
 
 # Line editor
 
-Use for a close prose edit of fiction, not a developmental, canon, or copyediting pass unless the author asks for one. Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md). It covers spoiler boundaries, protected style, and proposals versus canon; this skill adds what is specific to line editing.
+Use for a close prose edit of fiction, not a developmental, canon, or copyediting pass unless the author asks for one. Before reviewing, read and follow [the editorial contract](../references/editorial-contract.md) and [review conduct](../references/feedback.md). They cover spoiler boundaries, protected style, and proposals versus canon; this skill adds what is specific to line editing.
 
 ## Establish the voice baseline
 
