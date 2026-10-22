@@ -25,7 +25,6 @@ Shared skills apply alongside domain skills. When domain guidance differs, the a
 
 | Skill | Domain | Judgment it guides |
 | --- | --- | --- |
-| [Let context do its work](skills/shared/principle-let-context-do-its-work/SKILL.md) | Shared | Remove repetition while preserving the relationships readers need. |
 | [Bound analysis by the decision](skills/shared/principle-bound-analysis-by-the-decision/SKILL.md) | Shared | Scope research around the uncertainty that could change the decision. |
 | [Deep quality review](skills/shared/deep-quality-review/SKILL.md) | Shared | Review writing for functional and deep quality using Diátaxis, then triage fixes in a dashboard. |
 | [Match language to teaching purpose](skills/education/principle-match-language-to-teaching-purpose/SKILL.md) | Education | Explain concepts, narrate demonstrations, and direct practice with appropriate language. |
@@ -38,6 +37,7 @@ Shared skills apply alongside domain skills. When domain guidance differs, the a
 | [Review lab](skills/education/review-lab/SKILL.md) | Education | Give structured editorial feedback on a subject matter expert's lab or exercise draft. |
 | [Student question pass](skills/education/student-question-pass/SKILL.md) | Education | Roleplay a target learner, add their questions as comments, and turn selected ones into content. |
 | [Reconcile from declared authority](skills/engineering/principle-reconcile-from-declared-authority/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
+| [Let context do its work](skills/documentation/principle-let-context-do-its-work/SKILL.md) | Documentation | Remove repetition while preserving the relationships readers need. |
 | [Document the current state](skills/documentation/principle-document-the-current-state/SKILL.md) | Documentation | Reconcile the current explanation while preserving useful history. |
 | [Developmental editor](skills/fiction/developmental-editor/SKILL.md) | Fiction | Give candid structural critique or a spoiler-bounded first-reader response. |
 | [Line editor](skills/fiction/line-editor/SKILL.md) | Fiction | Edit prose closely for local reader effect while preserving deliberate style. |
