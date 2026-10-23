@@ -168,8 +168,8 @@ line and every line a fix replaces, so read it and confirm each one is the line 
 Then deal with the warnings:
 
 - **Blank highlighted lines** usually mean a line-number slip.
-- **Two findings changing the same lines** can both stay, but mention the conflict in each
-  one's `fixNote`.
+- **Two findings changing the same lines** can both stay. The page marks each one and warns if
+  both are approved.
 - **A file that differs from HEAD** means its GitHub links won't match the snippets.
 
 ## 7. Launch
@@ -186,7 +186,7 @@ reviewed commit don't change.
 Open the URL in the harness's in-app browser preview if it has one (in T3 Code, the
 `preview_open` tool). Otherwise run `open URL` on macOS or `xdg-open URL` on Linux. If the server
 can't start, open `RUN/index.html` directly. The page then saves decisions in the browser only,
-and the user copies the Markdown at the bottom into the chat.
+and the user copies the Markdown from the page's Decisions panel into the chat.
 
 Tell the user:
 
