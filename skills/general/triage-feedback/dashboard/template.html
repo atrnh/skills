@@ -25,20 +25,22 @@
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.5 var(--sans); }
   .page { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
-  header.page { padding-top: 24px; }
+  header.page { padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px 24px; }
+  .title-row { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
   main.page { padding-bottom: 120px; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   code { font-family: var(--mono); font-size: 12.5px; background: var(--soft); padding: 1px 5px; border-radius: 4px; }
-  h1 { font-size: 20px; margin: 0 0 4px; }
+  h1 { font-size: 20px; margin: 0; }
   .sub { color: var(--muted); font-size: 13px; }
   .sub code { font-size: 12px; }
 
   .bar { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 12px 0 15px; margin: 16px 0 20px; }
-  .bar .page { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; }
+  .bar .page { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; justify-content: flex-end; }
   .group { display: flex; flex-wrap: wrap; gap: 10px 8px; align-items: center; }
-  .group.push { margin-left: auto; }
+  .group.filters { margin-right: auto; }
   select.jump { width: 120px; border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 6px; border-radius: 6px; font: inherit; font-size: 13px; cursor: pointer; }
+  select.jump:hover { background: var(--soft); }
   .clashes { font-size: 13px; color: var(--warn); margin-top: 4px; }
   .clashes:empty { display: none; }
   .c-ok { color: var(--ok); } .c-bad { color: var(--bad); } .c-pend { color: var(--muted); } .c-warn { color: var(--warn); }
@@ -47,7 +49,9 @@
   .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .seg button { border: 0; border-right: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 4px 8px; font: inherit; font-size: 13px; cursor: pointer; }
   .seg button:last-child { border-right: 0; }
+  .seg button:hover { background: var(--soft); }
   .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .seg button[aria-pressed="true"]:hover { filter: brightness(1.1); }
   .seg button b { font-variant-numeric: tabular-nums; }
   .seg button[aria-pressed="true"] b { color: inherit; }
   .seg button.zero:not([aria-pressed="true"]) { color: var(--muted); }
@@ -104,14 +108,13 @@
   .legend { font-size: 12px; color: var(--muted); display: flex; gap: 14px; margin-top: 2px; }
   .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin-right: 4px; }
 
-  .decide { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border); }
-  .dbtn { border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 6px 14px; border-radius: 6px; font: inherit; font-weight: 600; cursor: pointer; }
-  .dbtn.ok:hover, .approved .dbtn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
-  .dbtn.bad:hover, .rejected .dbtn.bad { background: var(--bad); border-color: var(--bad); color: #fff; }
+  .decide { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border); }
+  .btn.ok:hover, .approved .btn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+  .btn.bad:hover, .rejected .btn.bad { background: var(--bad); border-color: var(--bad); color: #fff; }
   .overlap { width: 100%; border-left: 3px solid var(--warn); background: var(--soft); border-radius: 6px; padding: 8px 12px; }
   .clash .overlap { background: var(--warn-bg); font-weight: 600; }
-  .decide textarea { flex: 1 1 320px; min-height: 36px; resize: vertical; font: inherit; font-size: 13px; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); }
-  .kbd { font-size: 12px; color: var(--muted); width: 100%; }
+  .decide textarea { flex: 1 1 320px; height: 29.5px; min-height: 29.5px; resize: vertical; font: inherit; font-size: 13px; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); }
+  .kbd { font-size: 12px; color: var(--muted); }
   kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--soft); }
 
   .pop { position: fixed; inset: auto; margin: 0; width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 120px); overflow: auto;
@@ -129,17 +132,20 @@
 </head>
 <body>
 <header class="page">
-  <h1 id="h1"></h1>
-  <div class="sub" id="sub"></div>
+  <div class="title-row">
+    <h1 id="h1"></h1>
+    <div class="sub" id="sub"></div>
+  </div>
+  <div class="kbd">Keys: <kbd>a</kbd> approve · <kbd>r</kbd> reject · <kbd>u</kbd> undo · <kbd>j</kbd>/<kbd>k</kbd> next/previous · <kbd>Enter</kbd> expand or collapse</div>
 </header>
 
 <div class="bar">
   <div class="page">
-    <div class="group" role="group" aria-label="Filter findings">
+    <div class="group filters" role="group" aria-label="Filter findings">
       <div class="seg" id="fstatus"></div>
       <div class="seg" id="fcat"></div>
     </div>
-    <div class="group push" role="group" aria-label="Navigate and display">
+    <div class="group" role="group" aria-label="Navigate and display">
       <select class="jump" id="jump" aria-label="Jump to a finding"></select>
       <button class="btn" id="expand">Expand</button>
       <label class="chk"><input type="checkbox" id="wrap" checked> Wrap lines</label>
@@ -287,11 +293,10 @@ function cardHtml(f) {
       ${proposal}
       <div class="decide">
         ${overlapHtml(f)}
-        <button class="dbtn ok" data-act="approved">✓ Approve</button>
-        <button class="dbtn bad" data-act="rejected">✕ Reject</button>
+        <button class="btn ok" data-act="approved">✓ Approve</button>
+        <button class="btn bad" data-act="rejected">✕ Reject</button>
         ${s.d ? `<button class="btn" data-act="clear">Undo</button>` : ""}
         <textarea data-act="note" placeholder="Note (optional): why, or how to adjust the fix">${esc(s.note)}</textarea>
-        <div class="kbd">Keys: <kbd>a</kbd> approve · <kbd>r</kbd> reject · <kbd>u</kbd> undo · <kbd>j</kbd>/<kbd>k</kbd> next/previous · <kbd>Enter</kbd> expand or collapse</div>
       </div>
     </div>
   </article>`;
@@ -507,8 +512,8 @@ document.addEventListener("keydown", e => {
 document.title = DATA.title;
 document.getElementById("h1").textContent = DATA.title;
 const srcLabel = SRC.url ? `<a href="${esc(safeUrl(SRC.url))}" target="_blank" rel="noopener">${esc(SRC.label)}</a>` : esc(SRC.label);
-document.getElementById("sub").innerHTML = [srcLabel, SRC.head ? `head <code>${esc(SRC.head.slice(0, 8))}</code>` : "",
-  `${FINDINGS.length} findings`].filter(Boolean).join(" · ");
+document.getElementById("sub").innerHTML = [srcLabel, SRC.head ? `head <code>${esc(SRC.head.slice(0, 8))}</code>` : ""]
+  .filter(Boolean).join(" · ");
 const firstPending = FINDINGS.find(f => !st(f.id).d);
 if (firstPending) { open.add(firstPending.id); focusId = firstPending.id; }
 render();
