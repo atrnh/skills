@@ -13,6 +13,7 @@
       },
       "skills": [
         "./skills/general",
+        "./skills/engineering",
         "./skills/principles",
         "./skills/education",
         "./skills/personal"
@@ -60,6 +61,7 @@
       },
       "skills": [
         "./skills/general",
+        "./skills/engineering",
         "./skills/principles",
         "./skills/education",
         "./skills/personal",
