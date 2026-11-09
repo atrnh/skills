@@ -1,10 +1,10 @@
 # Ashley's skills
 
-Reusable agent skills for engineering, education, documentation, fiction, and personal workflows. Principle skills, prefixed `principle-`, guide judgment. Workflow skills describe how to carry out a task.
+Reusable agent skills for engineering, education, documentation, fiction, and personal workflows. Principle skills, such as `teaching-principles`, guide judgment. Workflow skills describe how to carry out a task.
 
 ## Organization
 
-Principle skills live together in `skills/principles/`. Workflow skills live in a folder named for their domain, such as `skills/education/`. The [skill table](#available-skills) lists each skill's domain.
+Each skill lives in a folder named for its domain, such as `skills/education/`. The [skill table](#available-skills) lists each skill's domain.
 
 | Domain | Purpose |
 | --- | --- |
@@ -27,22 +27,16 @@ General skills apply alongside domain skills. When domain guidance differs, the 
 
 | Skill | Domain | Judgment it guides |
 | --- | --- | --- |
-| [Bound analysis by the decision](skills/principles/principle-bound-analysis-by-the-decision/SKILL.md) | General | Scope research around the uncertainty that could change the decision. |
+| [Writing principles](skills/general/writing-principles/SKILL.md) | General | Use established context to cut repetition, and present the current state while keeping history distinct. |
 | [Deep quality review](skills/general/deep-quality-review/SKILL.md) | General | Review writing for functional and deep quality using Diátaxis. |
 | [Triage feedback](skills/general/triage-feedback/SKILL.md) | General | Check a batch of proposed changes, then approve or reject each one in a dashboard before applying them. |
-| [Match language to teaching purpose](skills/principles/principle-match-language-to-teaching-purpose/SKILL.md) | Education | Explain concepts, narrate demonstrations, and direct practice with appropriate language. |
-| [Make the progression meaningful](skills/principles/principle-make-the-progression-meaningful/SKILL.md) | Education | Order learning around questions, prerequisites, and the work ahead. |
-| [Connect examples to concepts](skills/principles/principle-connect-examples-to-concepts/SKILL.md) | Education | Ground examples, connect their details to transferable ideas, and scope demonstrations. |
-| [Protect practice time](skills/principles/principle-protect-practice-time/SKILL.md) | Education | Reduce incidental work while preserving the intended challenge. |
-| [Put essential reasoning in view](skills/principles/principle-put-essential-reasoning-in-view/SKILL.md) | Education | Keep necessary context and connections in the learner's experience. |
+| [Teaching principles](skills/education/teaching-principles/SKILL.md) | Education | Sequence lessons, connect examples to concepts, match language to purpose, protect practice time, and keep reasoning in view when presenting. |
 | [Create lecture](skills/education/create-lecture/SKILL.md) | Education | Sequence a list of topics into an outline, then write the full RST lecture. |
 | [Create MCQ](skills/education/create-mcq/SKILL.md) | Education | Generate multiple choice questions from supplied text or documents. |
 | [Review lab](skills/education/review-lab/SKILL.md) | Education | Give structured editorial feedback on a subject matter expert's lab or exercise draft. |
 | [Student question pass](skills/education/student-question-pass/SKILL.md) | Education | Roleplay a target learner, add their questions as comments, and turn selected ones into content. |
-| [Reconcile from declared authority](skills/principles/principle-reconcile-from-declared-authority/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
+| [Sync from the source of truth](skills/engineering/sync-from-the-source-of-truth/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
 | [Graduate skill](skills/engineering/graduate-skill/SKILL.md) | Engineering | Move a tested skill into the plugin repo that fits it, leaving one copy that every host links to. |
-| [Let context do its work](skills/principles/principle-let-context-do-its-work/SKILL.md) | Documentation | Remove repetition while preserving the relationships readers need. |
-| [Document the current state](skills/principles/principle-document-the-current-state/SKILL.md) | Documentation | Reconcile the current explanation while preserving useful history. |
 | [Developmental editor](skills/fiction/developmental-editor/SKILL.md) | Fiction | Give candid structural critique or a spoiler-bounded first-reader response. |
 | [Line editor](skills/fiction/line-editor/SKILL.md) | Fiction | Edit prose closely for local reader effect while preserving deliberate style. |
 | [Grill my story](skills/fiction/grill-my-story/SKILL.md) | Fiction | Pressure-test a premise, character choice, scene, or plot problem through questioning. |
