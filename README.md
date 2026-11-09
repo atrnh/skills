@@ -40,6 +40,7 @@ General skills apply alongside domain skills. When domain guidance differs, the 
 | [Review lab](skills/education/review-lab/SKILL.md) | Education | Give structured editorial feedback on a subject matter expert's lab or exercise draft. |
 | [Student question pass](skills/education/student-question-pass/SKILL.md) | Education | Roleplay a target learner, add their questions as comments, and turn selected ones into content. |
 | [Reconcile from declared authority](skills/principles/principle-reconcile-from-declared-authority/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
+| [Graduate skill](skills/engineering/graduate-skill/SKILL.md) | Engineering | Move a tested skill into the plugin repo that fits it, leaving one copy that every host links to. |
 | [Let context do its work](skills/principles/principle-let-context-do-its-work/SKILL.md) | Documentation | Remove repetition while preserving the relationships readers need. |
 | [Document the current state](skills/principles/principle-document-the-current-state/SKILL.md) | Documentation | Reconcile the current explanation while preserving useful history. |
 | [Developmental editor](skills/fiction/developmental-editor/SKILL.md) | Fiction | Give candid structural critique or a spoiler-bounded first-reader response. |
