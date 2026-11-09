@@ -30,7 +30,7 @@ Apply the approved readiness edits as separate commits after the import, so the 
 ## 3. Update the destination
 
 - Add the skill to the manifests as the destination's rules require. A new domain folder usually needs its path in every plugin entry that should carry it, in every host's manifest.
-- Add the skill's row to the README skill table, in its domain's position.
+- Add the skill's row to the README skill table, in its domain's position. When the destination has no table, update the listing it uses instead, such as a plugin README or a manifest description.
 - Run the destination's validation, such as `claude plugin validate . --strict` for a Claude marketplace, and `git diff --check`.
 
 ## 4. Publish, with approval

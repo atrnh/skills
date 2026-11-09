@@ -1,6 +1,6 @@
 # Graduation proposal template
 
-Use these sections in this order, so that a maintenance run can collect several proposals into one review. Omit a section's table when it has no rows, and say so in a sentence instead.
+Use these sections in this order, so that a maintenance run can collect several proposals into one review. Omit a section's table when it has no rows, and say so in a sentence instead. When a dependency graduates with the skill, put its rows in the same tables and start each row's location with the dependency's name.
 
 ```markdown
 # Graduation proposal: <skill>
