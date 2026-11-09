@@ -15,6 +15,7 @@
         "./skills/general",
         "./skills/principles",
         "./skills/education",
+        "./skills/engineering",
         "./skills/personal"
       ]
     },
@@ -36,6 +37,7 @@
         "./skills/general",
         "./skills/principles",
         "./skills/education",
+        "./skills/engineering",
         "./skills/personal",
         "./skills/fiction"
       ]
