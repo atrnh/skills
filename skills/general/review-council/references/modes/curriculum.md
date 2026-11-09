@@ -306,15 +306,5 @@ Keep the criteria table's format, because `scripts/aggregate.py` reads codes and
 it. Raise the version whenever a change could move scores, so that an improvement loop never
 compares runs scored against different rubrics.
 
-Five criteria turn this repository's education principles into scored descriptions. When a
-principle changes, revise its criterion to match. The other criteria, and the additions on
-purpose, economy, knowing when to apply an idea, and practice over time, come from
-instructional-design research rather than a principle.
-
-| Criterion | Principle |
-| --- | --- |
-| PR | principle-make-the-progression-meaningful |
-| EX | principle-connect-examples-to-concepts |
-| LA | principle-match-language-to-teaching-purpose |
-| PD | principle-protect-practice-time |
-| PF | principle-put-essential-reasoning-in-view |
+This rubric is self-contained. Reviewers receive every criterion in full and nothing else, so
+make changes to the criteria here rather than relying on other skills to supply them.
