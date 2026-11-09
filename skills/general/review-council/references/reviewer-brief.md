@@ -53,7 +53,12 @@ Your final message must contain only one JSON object in a single `json` code fen
       "score": 7,
       "rationale": "Why the score falls in its band, and where it sits within the band.",
       "evidence": [
-        {"file": "/absolute/path/to/file.rst", "quote": "Exact text copied from the file"}
+        {"file": "/absolute/path/to/file.rst", "quote": "Exact text copied from the file"},
+        {
+          "file": "/absolute/path/to/file.rst",
+          "quote": "Step 3: Deploy the app",
+          "missing": "Optional. What you looked for here and didn't find."
+        }
       ]
     }
   ],
@@ -80,9 +85,11 @@ Your final message must contain only one JSON object in a single `json` code fen
 
 - Include one entry in `scores` for every criterion in the rubric.
 - `score` is a whole number from `1` to `10`, `"na"`, or `"cannot_assess"`.
-- Every numeric score needs at least one evidence item. Copy each `quote` exactly from the file,
-  including its markup, keeping it short and on one line where you can. Quotes are checked, and
-  a score whose quotes can't be found is discarded.
+- Every numeric score needs at least one evidence item. Cite only the artifact and context files
+  listed above, by absolute path. Copy each `quote` exactly from the file, including its markup,
+  keeping it short and on one line where you can. Quotes are checked, and a score with no quote
+  that can be found is discarded.
+- For something missing, quote the place where it belongs and say what's missing in `missing`.
 - Give each finding a priority. Priority 1 breaks the material or misleads learners, 2
   noticeably hurts it, and 3 is polish.
 - `findings` and `strengths` can be empty. Don't pad them.

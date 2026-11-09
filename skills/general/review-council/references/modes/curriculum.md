@@ -1,6 +1,6 @@
 # Curriculum rubric
 
-Version: 1
+Version: 2
 
 This rubric judges whether curriculum helps its learners understand and do what it sets out to
 teach. It covers lectures, labs, exercises, homework, assessments, content outlines, and whole
@@ -45,6 +45,17 @@ Read the material once in order as the learner described in the review's context
 pace. Note where you slow down, get lost, would need to search elsewhere, or stop trusting the
 material. Then score each criterion, returning to the text for evidence.
 
+## Where a problem belongs
+
+Score each problem under the criterion that owns it. Lower another criterion only when the
+problem separately harms what that criterion measures.
+
+- Support learners need that the material doesn't supply belongs to **completeness**.
+- Support that's supplied but pitched at the wrong level belongs to **audience fit**.
+- Support that's supplied but arrives after learners need it belongs to **progression**.
+- A wrong fact or a step that doesn't work belongs to **accuracy**, even when it also leaves a
+  gap.
+
 ## Criteria
 
 ### AC Accuracy (gate)
@@ -56,9 +67,10 @@ tools and versions the material names.
   are precise.
 - **Sound (7–8):** Minor slips that a learner would recover from without being misled, such as
   a typo in a name that doesn't matter to any step.
-- **Weak (4–6):** At least one error that would mislead learners or break a step, or many minor
-  ones.
-- **Failing (1–3):** Errors in core concepts, or in steps learners must complete.
+- **Weak (4–6):** Errors learners can recover from, but only with effort or outside help, such
+  as a step that fails until they work out the fix, or a misleading claim on a secondary point.
+- **Failing (1–3):** Errors that prevent the intended outcome or teach a core concept wrongly,
+  such as a required step that can't succeed as written.
 
 If you can't run the code, judge it by reading and name what you couldn't verify in the
 rationale. Answer `"cannot_assess"` only when accuracy depends entirely on something you can't
@@ -133,7 +145,9 @@ beyond the example itself.
   concepts that need an example have none.
 - **Failing (1–3):** The examples mislead, or have no evident connection to the concepts.
 
-Answer `"na"` only when the material's purpose calls for no examples.
+An example can come before its concept when it gives learners a question or something to
+investigate. Judge whether it supplies enough context for that purpose and is connected to the
+concept afterward. Answer `"na"` only when the material's purpose calls for no examples.
 
 ### LA Language for purpose
 
@@ -152,7 +166,8 @@ demonstration, or directing practice.
 ### PD Practice design
 
 Exercises, labs, and other practice spend learners' effort on the skill they're meant to
-develop. Answer `"na"` when the material contains no practice.
+develop. Answer `"na"` when the material has no practice and its purpose calls for none. When it
+needs practice and has none, score it low.
 
 - **Strong (9–10):** Learners make the decisions the skill requires, with starting points
   supplied where inventing them would be incidental work. The expected outcome and deliverable
@@ -178,8 +193,9 @@ reasoning at the point where they meet each idea. Answer `"na"` when there is no
   conclusions without their premises.
 - **Failing (1–3):** Learners can't follow the presented form.
 
-When you can read only the source of the presented form, judge from its structure and say so in
-the rationale.
+When the review supplies rendered slides or pages, judge from them. When you have only the
+source, judge from it if it shows where each slide or page breaks and which text is notes, and
+say so in the rationale. If it doesn't show that, answer `"cannot_assess"`.
 
 ## For the chair
 
@@ -219,6 +235,16 @@ Add the placement to `context.md`:
 - **After it:** <number>, "<title>" (</absolute/path>). Expects learners to: <objectives>
 - **Mismatches:** <where the outline and the files disagree, or "None found">
 ```
+
+List every placement source in `sources.json` under `context`, so reviewers can cite them.
+
+### Provide the presented form
+
+When the material has slides, handouts, or another presented form, reviewers judge presented
+form best from what learners actually see. If the project can render it, such as with a slide
+build or a PDF export, add the rendered pages or slide images to the context files. Otherwise,
+say in `context.md` that reviewers have only the source. Converted text, as from a PowerPoint
+file, should keep each slide's boundary and keep notes separate from what's on the slide.
 
 ### Maintain this rubric
 

@@ -4,7 +4,8 @@ description: >
   Use in T3 Code when the user wants a council, panel, or multi-model review of an artifact:
   independent reviewers from different model families score it against a shared rubric while
   this session chairs the review and combines their results. Curriculum mode reviews lectures,
-  labs, exercises, assessments, content outlines, and whole courses. Produces a scored report and
+  labs, exercises, homework, assessments, content outlines, and whole courses. Produces a scored
+  report and
   a scores file that an improvement loop can use as its measurement, and can hand the findings to
   the triage-feedback dashboard. Do NOT use outside T3 Code, for a single-agent review, or for
   code or UI designs until those modes exist.
@@ -24,7 +25,7 @@ isn't available, tell the user the council runs only in T3 Code and stop.
 
 | Mode | Reviews | Rubric |
 | --- | --- | --- |
-| Curriculum | Lectures, labs, exercises, assessments, content outlines, and courses | [modes/curriculum.md](references/modes/curriculum.md) |
+| Curriculum | Lectures, labs, exercises, homework, assessments, content outlines, and courses | [modes/curriculum.md](references/modes/curriculum.md) |
 
 Code and UI modes aren't written yet. If the user asks for one, say so instead of improvising a
 rubric.
@@ -38,11 +39,13 @@ keep it out of the artifact's repository.
 | File | Holds |
 | --- | --- |
 | `context.md` | The artifact, its place in its larger work, its audience and purpose, and the review's scope |
+| `sources.json` | Absolute paths of the files under review and the context files, which evidence must come from |
 | `panel.json` | The reviewers and their settings |
 | `brief.md` | The brief every reviewer receives, with `{{REVIEWER_ID}}` left in place |
 | `source/` | Text versions of the artifact, when it isn't already plain text |
 | `reviews/<id>.json` | Each reviewer's result, as returned |
-| `scores.json` | Combined scores, written by `scripts/aggregate.py` |
+| `blockers.json` | Confirmed blocking findings, when the chair records any |
+| `scores.json` | Combined scores and input fingerprints, written by `scripts/aggregate.py` |
 | `report.md` | The council's report |
 
 ## 1. Establish what's under review
@@ -61,7 +64,16 @@ keep it out of the artifact's repository.
 5. **Set the scope** using the mode's scope guidance. For a large course, name the units to read
    in depth.
 
-Write all of this to `context.md`.
+Write all of this to `context.md`, listing every file reviewers may read with its absolute path.
+Then write `sources.json`, with the files or folders under review as `artifact` and everything
+else reviewers may cite as `context`:
+
+```json
+{
+  "artifact": ["/tmp/review-council/lab-2-3/source/lab.md"],
+  "context": ["/path/to/course/course-outline.rst", "/path/to/course/lectures/2-2/index.rst"]
+}
+```
 
 ## 2. Build the panel
 
@@ -120,8 +132,7 @@ wait for results. Don't poll.
 
 Each reviewer ends with one JSON object. Save it to `reviews/<id>.json` as returned. If its JSON
 is malformed, repair only the syntax, never the content. A reviewer that fails, times out, or
-returns something unusable counts as missing. Don't replace it. Continue with at least three
-reviews and note the gap in the report. With fewer than three, stop and tell the user.
+returns something unusable counts as missing. Don't replace it.
 
 Then combine the scores:
 
@@ -129,15 +140,26 @@ Then combine the scores:
 python3 <this skill>/scripts/aggregate.py RUN --mode <this skill>/references/modes/curriculum.md
 ```
 
-The script follows [scoring.md](references/scoring.md). It checks that every reviewer scored
-every criterion and that each score quotes text that exists in the cited file. It drops scores
-that fail these checks, lists them, and writes `scores.json`. Don't edit `scores.json` by hand.
+The script follows [scoring.md](references/scoring.md). It checks each review's structure and
+values, and that each score quotes text that exists in a file listed in `sources.json`. It drops
+answers that fail, lists every problem, and writes `scores.json` with fingerprints of every
+input. Don't edit `scores.json` by hand.
+
+- **Invalid:** fewer than three reviews count. The script exits with an error. Stop and tell the
+  user, rather than reporting a score.
+- **Incomplete:** an applicable criterion has too few valid scores. Report the partial score as
+  diagnosis only, and say which criteria couldn't be judged and why.
 
 ## 5. Adjudicate and merge
 
 **Disagreements.** For each criterion the script flags, read the passages each side cited and
-decide which reading of the artifact holds up. Record your ruling and its reasons in the report.
-Rulings explain the spread. They don't replace the scores.
+decide which reading of the artifact holds up. For an applicability flag, decide whether the
+criterion applies. Record your ruling and its reasons in the report. Rulings explain the spread.
+They don't replace the scores.
+
+**Evidence.** The script confirms only that quotes exist. For gate scores below 7, flagged
+criteria, and anything that decides the verdict, check that the cited passages support the
+score, and say in the report where they don't.
 
 **Findings.** Merge findings that describe the same problem at the same place into one, and name
 every reviewer who raised it. A finding raised by several families is strong evidence, but one
@@ -147,14 +169,26 @@ finding you can't confirm with "Unverified:". Give each merged finding an ID mad
 criterion code and a number, such as `AC1` or `PR2`, and a priority. Priority 1 breaks the
 material or misleads learners, 2 noticeably hurts it, and 3 is polish.
 
+**Blockers.** A median can outvote a reviewer who was right. When you've confirmed a priority 1
+finding against the artifact yourself, such as a required step that can't succeed, record it in
+`blockers.json` and run the script again:
+
+```json
+[{"finding": "AC1", "reason": "Step 3 fails: the command needs a flag the lab never installs."}]
+```
+
+The final verdict becomes not ready. The scores and the computed verdict stay as they were.
+Record only blockers you've verified, never a disagreement with the panel's judgment.
+
 ## 6. Report
 
 Write `report.md` with:
 
-1. **Verdict.** The verdict and council score from `scores.json`, and the single biggest thing
-   holding the artifact back.
+1. **Verdict.** The final verdict and council score from `scores.json`, and the single biggest
+   thing holding the artifact back. If a blocker changed the verdict, give the computed verdict
+   too. If the run is incomplete, give the partial score, labeled as partial.
 2. **Scores.** A table with a row per criterion and a column per reviewer, plus the median and
-   spread. Mark gate criteria and disagreements.
+   spread. Mark gate criteria, flags, and criteria that are not applicable or insufficient.
 3. **Disagreements.** Each flagged criterion, what each side cited, and your ruling.
 4. **Findings,** in priority order. Give each one's ID, location, problem, suggested fix, and the
    reviewers who raised it.
@@ -162,7 +196,7 @@ Write `report.md` with:
 6. **Panel.** Each reviewer's provider, model, and settings, plus any missing reviewers and
    dropped scores.
 
-Reply with the verdict, the council score, the top three findings, and the report's path.
+Reply with the final verdict, the council score, the top three findings, and the report's path.
 
 ## 7. Hand off
 
@@ -170,8 +204,13 @@ Reply with the verdict, the council score, the top three findings, and the repor
   card per merged finding that has a location. Use the merged IDs, and the criterion names as
   categories. If they didn't ask, end your reply with a one-line offer.
 - **Improvement loop.** A loop that uses the council as its measurement needs the same
-  measurement each time. Reuse the run's `panel.json` and `brief.md` unchanged. Check that the
-  mode file's version matches `rubricVersion` in `scores.json`. The metric is `councilScore`,
-  where higher is better, and `verdict` and the gate criteria act as a floor. Reviewers' scores
-  vary between runs, so score the unchanged artifact more than once to learn how much they vary
-  before trusting any single change.
+  measurement each time. Give each measurement its own run folder. Copy `panel.json` without
+  its task IDs, and copy `brief.md`, `context.md`, and `sources.json` unchanged. When the
+  artifact needs converting to text, keep the converted text in one folder outside the run
+  folders, and convert into it again for each version of the artifact. Its paths then stay the
+  same, and reviewers never read a stale copy.
+  The metric is `councilScore`, where higher is better, and `finalVerdict` acts as a floor. Two
+  runs are comparable only when both are complete, apply the same criteria, and have the same
+  fingerprints for everything in `inputs` except the sources. Reviewers' scores vary between
+  runs, so score the unchanged artifact more than once to learn how much they vary before
+  trusting any single change. Deciding when a change is real belongs to the loop, not here.
