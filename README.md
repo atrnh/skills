@@ -30,6 +30,7 @@ General skills apply alongside domain skills. When domain guidance differs, the 
 | [Writing principles](skills/general/writing-principles/SKILL.md) | General | Use established context to cut repetition, and present the current state while keeping history distinct. |
 | [Deep quality review](skills/general/deep-quality-review/SKILL.md) | General | Review writing for functional and deep quality using Diátaxis. |
 | [Triage feedback](skills/general/triage-feedback/SKILL.md) | General | Check a batch of proposed changes, then approve or reject each one in a dashboard before applying them. |
+| [Review council](skills/general/review-council/SKILL.md) | General | Chair a T3 Code panel of reviewers from different model families who score an artifact against a shared rubric. |
 | [Teaching principles](skills/education/teaching-principles/SKILL.md) | Education | Sequence lessons, connect examples to concepts, match language to purpose, protect practice time, and keep reasoning in view when presenting. |
 | [Create lecture](skills/education/create-lecture/SKILL.md) | Education | Sequence a list of topics into an outline, then write the full RST lecture. |
 | [Create MCQ](skills/education/create-mcq/SKILL.md) | Education | Generate multiple choice questions from supplied text or documents. |
