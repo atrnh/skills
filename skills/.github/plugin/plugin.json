@@ -2,7 +2,6 @@
   "name": "core",
   "skills": [
     "./general",
-    "./principles",
     "./education",
     "./engineering",
     "./personal"
