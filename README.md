@@ -81,6 +81,10 @@ codex plugin add all-skills@atrnh-skills
 
 To update, run `codex plugin marketplace upgrade atrnh-skills`.
 
+### Cursor
+
+In Cursor, open **Customize**, import `atrnh/skills` with **From GitHub Repository**, and install `all-skills`.
+
 ### GitHub Copilot CLI
 
 ```sh
@@ -99,6 +103,18 @@ npx skills@latest add atrnh/skills
 ```
 
 Add `--list` to see the available skills, or `--skill <name>` to install specific ones. To install one domain, add its path, as in `npx skills@latest add atrnh/skills/skills/education`. To update, run `npx skills update`.
+
+### Linking skills for live editing
+
+To use a domain's skills straight from a local clone, so your edits take effect without reinstalling, link them instead of installing the plugin:
+
+```sh
+scripts/skill-links.py link skills/fiction
+```
+
+The script links each skill into `~/.claude/skills` and `~/.codex/skills`. Cursor loads both folders. Links point at the repository's main checkout, even when you run the script from a worktree. Run it again after adding, renaming, or removing a skill. Use `status` instead of `link` to see where each link resolves, and `unlink` to remove the links. The script works on any git repository's skills, so you can also pass a path in another plugin repository.
+
+The script refuses to replace a skill it didn't link. It also refuses while an installed plugin, or another skill folder these agents load, already provides a skill of the same name, because the agent would then load both copies. Uninstall the plugin or remove the other copy, then run it again.
 
 ## License
 

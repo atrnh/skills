@@ -38,11 +38,17 @@ Ashley works as an educator, technical writer, and platform engineer. Apply stan
 
 ## Maintain the packaging
 
-The repository publishes three plugins: `fiction` for `skills/fiction/`, `core` for every other domain directory, and `all-skills` for both. A new principle, or a new workflow in an existing domain directory, needs no manifest changes. A new domain directory needs its path added to the `core` and `all-skills` entries in `.claude-plugin/marketplace.json`, which Claude Code and Codex CLI read.
+The repository publishes three plugins: `fiction` for `skills/fiction/`, `core` for every other domain directory, and `all-skills` for both. A new principle, or a new workflow in an existing domain directory, needs no manifest changes. A new domain directory needs its path added to the `core` and `all-skills` entries in each host's marketplace:
+
+- `.claude-plugin/marketplace.json` for Claude Code.
+- `.agents/plugins/marketplace.json` for Codex, which reads it instead of the Claude marketplace.
+- `.cursor-plugin/marketplace.json` for Cursor.
 
 GitHub Copilot CLI ignores the marketplace's `skills` paths and reads a `plugin.json` in each plugin's source directory instead. Add the new path to `skills/.github/plugin/plugin.json` for `core` and `.github/plugin/plugin.json` for `all-skills`.
 
-Run `claude plugin validate . --strict` after changing either manifest.
+Run `claude plugin validate . --strict` after changing the manifests.
+
+Ashley links some domains into her agents with `scripts/skill-links.py`, described in the README's [linking section](README.md#linking-skills-for-live-editing). After adding, renaming, or removing a skill in a linked domain, run `scripts/skill-links.py link` on that domain once the change reaches the main checkout.
 
 ## Make focused changes
 

@@ -1,0 +1,75 @@
+{
+  "name": "atrnh-skills",
+  "interface": {
+    "displayName": "Ashley Trinh's skills"
+  },
+  "plugins": [
+    {
+      "name": "core",
+      "description": "Every skill except fiction",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "skills": [
+        "./skills/general",
+        "./skills/principles",
+        "./skills/education",
+        "./skills/personal"
+      ],
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fiction",
+      "description": "Skills for developing, editing, and keeping a story bible for fiction",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "skills": [
+        "./skills/fiction"
+      ],
+      "interface": {
+        "displayName": "Fiction Writing",
+        "shortDescription": "Story bible and fiction editors",
+        "longDescription": "Build a source-backed internal story bible and review fiction through developmental, first-reader, and line-editing lenses. Keep your chosen manuscript, reference, and feedback destinations.",
+        "developerName": "Ashley Trinh",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": [
+          "Build or update my story bible from these manuscript pages.",
+          "Give this chapter a candid developmental edit.",
+          "Line edit this scene and explain the reader effect of each suggestion."
+        ]
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "all-skills",
+      "description": "Every skill in this repository: core and fiction. Install it instead of those plugins, not alongside them",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "skills": [
+        "./skills/general",
+        "./skills/principles",
+        "./skills/education",
+        "./skills/personal",
+        "./skills/fiction"
+      ],
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
