@@ -1,7 +1,7 @@
 # Scoring
 
 The "Scale" and "Evidence" sections go to every reviewer. The rest describes how
-`scripts/aggregate.py` combines their scores, so keep the two in step when either changes.
+`scripts/aggregate.py` combines their scores.
 
 ## Scale
 

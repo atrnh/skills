@@ -143,6 +143,16 @@ class AggregateTest(unittest.TestCase):
         self.assertIn("openai: reading log has 1 entries, not 3 to 6", out["problems"])
         self.assertIn("openai", out["reviewers"])
 
+    def test_unreadable_criteria_row_stops_the_script(self):
+        for row in ("| A1 | Typo code | |", "| AC | Accuracy | gate |", "| AC | Accuracy | yes |"):
+            mode = self.run / "mode.md"
+            mode.write_text(
+                "Version: 1\n\n| Code | Criterion | Gate |\n| --- | --- | --- |\n"
+                f"| AC | Accuracy | yes |\n{row}\n\n## Scope\n"
+            )
+            with self.subTest(row=row), self.assertRaises(SystemExit):
+                aggregate.read_mode(mode)
+
     def test_mismatched_reviewer_name_is_reported(self):
         self.review("openai")
         self.review("anthropic")

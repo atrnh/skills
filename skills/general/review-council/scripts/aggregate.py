@@ -22,6 +22,7 @@ FAILING_LINE = 3
 MIN_REVIEWS = 3
 LOG_LENGTH = (3, 6)
 ROW = re.compile(r"^\|\s*([A-Z]{2})\s*\|\s*([^|]+?)\s*\|\s*(yes)?\s*\|\s*$")
+TABLE_HEAD = re.compile(r"^\|\s*(Code\s*\||-{3,})")
 VERSION = re.compile(r"^Version:\s*(\S+)\s*$", re.MULTILINE)
 
 
@@ -34,9 +35,14 @@ def read_mode(path):
     for line in text.splitlines():
         if line.startswith("## "):
             break
+        if not line.startswith("|") or TABLE_HEAD.match(line):
+            continue
         row = ROW.match(line)
-        if row:
-            criteria[row[1]] = {"name": row[2], "gate": bool(row[3])}
+        if not row:
+            sys.exit(f"{path}: can't read criteria row {line!r}")
+        if row[1] in criteria:
+            sys.exit(f"{path}: criterion {row[1]} is listed twice")
+        criteria[row[1]] = {"name": row[2], "gate": bool(row[3])}
     if not criteria:
         sys.exit(f"{path}: no criteria table above the first '## ' heading")
     return version[1], criteria

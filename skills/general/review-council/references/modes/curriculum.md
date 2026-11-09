@@ -299,12 +299,3 @@ form best from what learners actually see. If the project can render it, such as
 build or a PDF export, add the rendered pages or slide images to the context files. Otherwise,
 say in `context.md` that reviewers have only the source. Converted text, as from a PowerPoint
 file, should keep each slide's boundary and keep notes separate from what's on the slide.
-
-### Maintain this rubric
-
-Keep the criteria table's format, because `scripts/aggregate.py` reads codes and gates from
-it. Raise the version whenever a change could move scores, so that an improvement loop never
-compares runs scored against different rubrics.
-
-This rubric is self-contained. Reviewers receive every criterion in full and nothing else, so
-make changes to the criteria here rather than relying on other skills to supply them.
