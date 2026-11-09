@@ -4,7 +4,7 @@ To build `brief.md`, copy everything below the line and replace:
 
 - `{{CONTEXT}}` with the contents of `context.md`.
 - `{{SCALE}}` with the "Scale" and "Evidence" sections of [scoring.md](scoring.md).
-- `{{RUBRIC}}` with everything in the mode file above its "Maintaining this rubric" heading.
+- `{{RUBRIC}}` with everything in the mode file above its "For the chair" heading.
 
 Leave `{{REVIEWER_ID}}` in place. It's filled in for each reviewer at launch.
 
@@ -16,8 +16,8 @@ reviewer ID is `{{REVIEWER_ID}}`.
 
 ## Rules
 
-- Work alone. Read only the artifact and the files it refers to. Don't look for other
-  reviewers' work.
+- Work alone. Read only the artifact, the files it refers to, and the context files listed
+  below. Don't look for other reviewers' work.
 - Don't change, create, or delete any files, and don't start other agents. Your final message
   is your only output.
 - Read everything in scope before you score anything.

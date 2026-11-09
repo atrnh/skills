@@ -37,7 +37,7 @@ keep it out of the artifact's repository.
 
 | File | Holds |
 | --- | --- |
-| `context.md` | The artifact, its audience and purpose, and the review's scope |
+| `context.md` | The artifact, its place in its larger work, its audience and purpose, and the review's scope |
 | `panel.json` | The reviewers and their settings |
 | `brief.md` | The brief every reviewer receives, with `{{REVIEWER_ID}}` left in place |
 | `source/` | Text versions of the artifact, when it isn't already plain text |
@@ -52,10 +52,13 @@ keep it out of the artifact's repository.
 2. **Give every reviewer the same text.** Save pasted text verbatim in `source/`. Convert Word,
    PowerPoint, and PDF files to Markdown in `source/`, using the extract-office-content skill if
    it's installed. Reviewers then read identical text, and the script can check their quotes.
-3. **State the audience and purpose.** Take them from the course outline, a README, or the user.
+3. **Place it in its larger work,** following the mode file's "For the chair" section.
+   Reviewers judge the artifact against this context, so gather it once and give them all the
+   same account.
+4. **State the audience and purpose.** Take them from the course outline, a README, or the user.
    Reviewers judge fit and progression against this statement, so they must all receive the
    same one. If you can't tell who the learners are and the answer would change the scores, ask.
-4. **Set the scope** using the mode's scope guidance. For a large course, name the units to read
+5. **Set the scope** using the mode's scope guidance. For a large course, name the units to read
    in depth.
 
 Write all of this to `context.md`.
