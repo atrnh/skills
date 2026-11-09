@@ -1,6 +1,6 @@
 # Curriculum rubric
 
-Version: 5
+Version: 6
 
 This rubric judges whether curriculum helps its learners understand and do what it sets out to
 teach. It covers lectures, labs, exercises, homework, content outlines, and whole courses. It
@@ -56,6 +56,10 @@ reading log. Then score each criterion, returning to the text for evidence.
 Score each problem under the criterion that owns it:
 
 - Support learners need that the material doesn't supply belongs to **completeness**.
+- A mismatch between the material and its course context belongs to **completeness** too, such
+  as a reference to a lab or lesson that doesn't contain what the material promises. It isn't
+  also an accuracy, objectives, or practice problem unless it separately harms what those
+  criteria measure.
 - Support that's supplied but pitched at the wrong level belongs to **audience fit**.
 - Support that's supplied but arrives after learners need it belongs to **progression**.
 - A wrong fact or a step that doesn't work belongs to **accuracy**, even when it also leaves a
