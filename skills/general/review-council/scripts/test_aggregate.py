@@ -8,7 +8,7 @@ from pathlib import Path
 import aggregate
 
 MODE = Path(__file__).resolve().parent.parent / "references" / "modes" / "curriculum.md"
-CODES = ["AC", "CO", "AU", "OB", "PR", "EX", "LA", "PD", "PF"]
+CODES = ["AC", "CO", "AU", "OB", "MM", "PR", "EX", "LA", "PD", "PF"]
 QUOTE = "Run `python loop.py` to see the output."
 
 
@@ -36,8 +36,9 @@ class AggregateTest(unittest.TestCase):
     def panel(self, ids):
         self.write("panel.json", {"reviewers": [{"id": rid} for rid in ids]})
 
-    def review(self, rid, overrides=None, file=None, entries=None):
+    def review(self, rid, overrides=None, file=None, entries=None, log_length=3):
         overrides = overrides or {}
+        log = [{"location": {"file": str(self.lab), "quote": QUOTE}, "note": "n"}] * log_length
         scores = entries if entries is not None else [
             {
                 "criterion": code,
@@ -46,7 +47,7 @@ class AggregateTest(unittest.TestCase):
             }
             for code in CODES
         ]
-        self.write(f"reviews/{rid}.json", {"reviewer": rid, "scores": scores})
+        self.write(f"reviews/{rid}.json", {"reviewer": rid, "readingLog": log, "scores": scores})
 
     def aggregate(self):
         return aggregate.aggregate(self.run, MODE)
@@ -133,6 +134,14 @@ class AggregateTest(unittest.TestCase):
         self.assertEqual(out["verdict"], "ready")
         self.assertEqual(out["finalVerdict"], "not_ready")
         self.assertEqual(out["councilScore"], 8)
+
+    def test_short_reading_log_is_reported_without_dropping_scores(self):
+        self.review("openai", log_length=1)
+        self.review("anthropic")
+        self.review("google")
+        out = self.aggregate()
+        self.assertIn("openai: reading log has 1 entries, not 3 to 6", out["problems"])
+        self.assertIn("openai", out["reviewers"])
 
     def test_mismatched_reviewer_name_is_reported(self):
         self.review("openai")

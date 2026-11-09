@@ -20,6 +20,7 @@ BANDS = ((1, 3), (4, 6), (7, 8), (9, 10))
 GATE_LINE = 7
 FAILING_LINE = 3
 MIN_REVIEWS = 3
+LOG_LENGTH = (3, 6)
 ROW = re.compile(r"^\|\s*([A-Z]{2})\s*\|\s*([^|]+?)\s*\|\s*(yes)?\s*\|\s*$")
 VERSION = re.compile(r"^Version:\s*(\S+)\s*$", re.MULTILINE)
 
@@ -140,6 +141,10 @@ def check_review(rid, review, criteria, sources, problems):
         return {}
     if review.get("reviewer") != rid:
         problems.append(f"{rid}: review names its reviewer {review.get('reviewer')!r}")
+    log = review.get("readingLog")
+    if not isinstance(log, list) or not LOG_LENGTH[0] <= len(log) <= LOG_LENGTH[1]:
+        size = len(log) if isinstance(log, list) else "no"
+        problems.append(f"{rid}: reading log has {size} entries, not {LOG_LENGTH[0]} to {LOG_LENGTH[1]}")
     valid, seen = {}, set()
     for number, entry in enumerate(review["scores"], 1):
         if not isinstance(entry, dict):

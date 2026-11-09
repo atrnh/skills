@@ -20,7 +20,9 @@ reviewer ID is `{{REVIEWER_ID}}`.
   below. Don't look for other reviewers' work.
 - Don't change, create, or delete any files, and don't start other agents. Your final message
   is your only output.
-- Read everything in scope before you score anything.
+- Read everything in scope before you score anything, and write your reading log as you go.
+- Don't reward length, polish, or a confident or encouraging tone for their own sake. Score
+  what the reader gains.
 - Score what the artifact is now, not what it would be after your suggested fixes.
 - Judge each criterion on its own. Let a problem lower another criterion's score only when it
   separately harms what that criterion measures.
@@ -46,6 +48,12 @@ Your final message must contain only one JSON object in a single `json` code fen
 ```json
 {
   "reviewer": "{{REVIEWER_ID}}",
+  "readingLog": [
+    {
+      "location": {"file": "/absolute/path/to/file.rst", "quote": "Exact text"},
+      "note": "What the reader thinks, asks, or gets wrong at this point."
+    }
+  ],
   "summary": "Two or three sentences: your overall judgment and the most important problem.",
   "scores": [
     {
@@ -83,6 +91,9 @@ Your final message must contain only one JSON object in a single `json` code fen
 }
 ```
 
+- Fill in `readingLog` before you score: three to six moments, in reading order, where the
+  reader described above would slow down, ask a question, or get something wrong. Moments where
+  the material anticipates them well count too. Use these moments as evidence when you score.
 - Include one entry in `scores` for every criterion in the rubric.
 - `score` is a whole number from `1` to `10`, `"na"`, or `"cannot_assess"`.
 - Every numeric score needs at least one evidence item. Cite only the artifact and context files

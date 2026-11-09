@@ -4,10 +4,10 @@ description: >
   Use in T3 Code when the user wants a council, panel, or multi-model review of an artifact:
   independent reviewers from different model families score it against a shared rubric while
   this session chairs the review and combines their results. Curriculum mode reviews lectures,
-  labs, exercises, homework, assessments, content outlines, and whole courses. Produces a scored
-  report, structured findings that other workflows such as triage-feedback can take up, and a
-  scores file an improvement loop can use as its measurement. Do NOT use outside T3 Code, for a
-  single-agent review, or for code or UI designs until those modes exist.
+  labs, exercises, homework, content outlines, and whole courses. Produces a scored report,
+  structured findings that other workflows such as triage-feedback can take up, and a scores
+  file an improvement loop can use as its measurement. Do NOT use outside T3 Code, for a
+  single-agent review, or for assessments, code, or UI designs until those modes exist.
 ---
 
 # Review council
@@ -24,10 +24,11 @@ isn't available, tell the user the council runs only in T3 Code and stop.
 
 | Mode | Reviews | Rubric |
 | --- | --- | --- |
-| Curriculum | Lectures, labs, exercises, homework, assessments, content outlines, and courses | [modes/curriculum.md](references/modes/curriculum.md) |
+| Curriculum | Lectures, labs, exercises, homework, content outlines, and courses | [modes/curriculum.md](references/modes/curriculum.md) |
 
-Code and UI modes aren't written yet. If the user asks for one, say so instead of improvising a
-rubric.
+Assessment, code, and UI modes aren't written yet. If the user asks for one, say so instead of
+improvising a rubric. Quizzes and tests inside curriculum are still read for how they fit the
+material, but the curriculum rubric doesn't judge how well their questions are written.
 
 ## Run folder
 

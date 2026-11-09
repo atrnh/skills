@@ -48,8 +48,9 @@ The script reads the review's files from `sources.json` and checks every review:
 - A numeric score also needs at least one evidence item whose quote appears in a listed file.
   Whitespace differences are ignored. The check confirms the quote's location, not that it
   supports the score; judging that is the chair's work.
-- Criteria a reviewer left out, a reviewer ID that doesn't match the panel, and rejected
-  evidence are reported as problems.
+- Criteria a reviewer left out, a reviewer ID that doesn't match the panel, a reading log
+  without three to six entries, and rejected evidence are reported as problems. A short reading
+  log doesn't drop any scores, but it suggests the reviewer skimmed.
 
 Then, for each criterion:
 

@@ -1,10 +1,10 @@
 # Curriculum rubric
 
-Version: 2
+Version: 3
 
 This rubric judges whether curriculum helps its learners understand and do what it sets out to
-teach. It covers lectures, labs, exercises, homework, assessments, content outlines, and whole
-courses.
+teach. It covers lectures, labs, exercises, homework, content outlines, and whole courses. It
+doesn't judge quizzes, tests, or other assessments as assessments; they need their own rubric.
 
 | Code | Criterion | Gate |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ courses.
 | CO | Completeness | yes |
 | AU | Audience fit | |
 | OB | Objectives and alignment | |
+| MM | Mental models and misconceptions | |
 | PR | Progression | |
 | EX | Examples and concepts | |
 | LA | Language for purpose | |
@@ -23,15 +24,17 @@ elsewhere.
 
 ## Scope
 
-- **A lecture, lab, exercise, homework assignment, or assessment.** Read all of it, along with
-  anything learners need from it, such as starter code, data files, or linked setup pages.
-  Score every criterion that applies.
+- **A lecture, lab, exercise, or homework assignment.** Read all of it, along with anything
+  learners need from it, such as starter code, data files, or linked setup pages. Score every
+  criterion that applies.
 - **A content outline.** Judge the plan as the material it describes. Score accuracy,
-  completeness of coverage, audience fit, objectives, progression, and the planned examples and
-  practice. Language for purpose and presented form are usually `"na"`.
+  completeness of coverage, audience fit, objectives, progression, and the planned mental
+  models, examples, and practice. Language for purpose and presented form are usually `"na"`.
 - **A whole course.** Read the course outline and index, then the units named for in-depth
   reading in the review's scope, and skim the rest. Judge progression and alignment across
-  units as well as within them, and name the unit in every quote and finding.
+  units as well as within them, and name the unit in every quote and finding. Check whether
+  skills from earlier units come back in later practice, and whether support fades as the
+  course goes on.
 
 When the review's context places the material in a course, judge it as part of that sequence:
 what learners have already been taught, what this item is meant to accomplish, and what it
@@ -41,9 +44,24 @@ material on its own.
 
 ## How to read
 
-Read the material once in order as the learner described in the review's context, at their
-pace. Note where you slow down, get lost, would need to search elsewhere, or stop trusting the
-material. Then score each criterion, returning to the text for evidence.
+Before you read the explanation, note what a newcomer to this topic would likely get wrong and
+where the hard part is. Then read the material once in order as the learner described in the
+review's context, at their pace. Note where you slow down, get lost, would need to search
+elsewhere, or stop trusting the material, and record the most telling of these moments in your
+reading log. Then score each criterion, returning to the text for evidence.
+
+## What not to reward
+
+Polished material can look like good teaching without being it. Length, polish, dense
+formatting, and an encouraging tone earn nothing by themselves. These are signs of fluent but
+shallow material. When you see them, look harder at what the learner actually gains:
+
+- "Key takeaways" or summary sections that restate the headings.
+- Analogies that stand in for how the thing actually works.
+- Objectives whose verb is "understand", "learn about", or "be familiar with".
+- Examples with no stated purpose.
+- Every section the same length, whatever its difficulty, and effort spread evenly instead of
+  concentrated on the hard part.
 
 ## Where a problem belongs
 
@@ -54,7 +72,9 @@ problem separately harms what that criterion measures.
 - Support that's supplied but pitched at the wrong level belongs to **audience fit**.
 - Support that's supplied but arrives after learners need it belongs to **progression**.
 - A wrong fact or a step that doesn't work belongs to **accuracy**, even when it also leaves a
-  gap.
+  gap. So does a wrong idea the material itself states.
+- A wrong idea learners bring with them, which the material fails to anticipate or correct,
+  belongs to **mental models and misconceptions**.
 
 ## Criteria
 
@@ -80,12 +100,15 @@ check.
 
 Learners can understand and do what's asked without knowledge, setup, or resources that the
 material neither supplies nor states as a prerequisite. Something taught earlier in the course,
-according to the review's context, counts as supplied.
+according to the review's context, counts as supplied. Terms are used consistently: an idea
+keeps the same name throughout the material and matches the name earlier items gave it, so
+learners never wonder whether two names mean two things.
 
 - **Strong (9–10):** Every step, term, prerequisite, and resource learners need is supplied or
   stated.
 - **Sound (7–8):** Small gaps that learners at this level would fill without help.
-- **Weak (4–6):** A gap that would stall many learners or send them to search elsewhere.
+- **Weak (4–6):** A gap that would stall many learners or send them to search elsewhere, or a
+  term whose name or meaning drifts enough to confuse them.
 - **Failing (1–3):** Learners can't follow or complete the material as written.
 
 ### AU Audience fit
@@ -103,17 +126,39 @@ mentoring without talking down.
 
 ### OB Objectives and alignment
 
-The material states or clearly implies what learners will be able to do afterward, and its
-explanations, practice, and checks of understanding all serve those goals. When the course
-outline states objectives for this item, judge against those.
+The material states or clearly implies what learners will be able to do afterward and why
+that's worth doing, and its explanations, practice, and checks of understanding all serve those
+goals. When the item builds toward a real task, learners see that whole task early and then
+learn its parts in context. When the course outline states objectives for this item, judge
+against those. Whether a check targets the goals belongs here; how well its questions are
+written doesn't.
 
-- **Strong (9–10):** The goals are clear, every section and activity serves them, and
-  assessment items measure the goals rather than trivia.
-- **Sound (7–8):** The goals are clear, but one or two parts drift from them, or an assessment
-  item tests something peripheral.
-- **Weak (4–6):** The goals are vague or missing, substantial content or practice serves none of
-  them, or the assessment doesn't measure them.
+- **Strong (9–10):** The goals are specific, learners can see why they matter and what real
+  work they serve, and every section, activity, and check serves them.
+- **Sound (7–8):** The goals and their value are clear, but one or two parts drift from them,
+  or a check targets something peripheral.
+- **Weak (4–6):** The goals are vague or missing, learners get no sense of why the work matters,
+  or substantial content or practice serves none of the goals.
 - **Failing (1–3):** No goal can be discerned, or the material works against its stated goal.
+
+### MM Mental models and misconceptions
+
+The material builds an accurate picture of how the thing works, one learners can reason from
+when something doesn't go as written. It anticipates the wrong ideas learners are likely to
+bring, such as a model carried over from a familiar tool or an everyday meaning of a technical
+term, and confronts them where they would form.
+
+- **Strong (9–10):** Learners come away able to explain why the thing behaves as it does, not
+  only what to do. Likely misconceptions are named at the point where they'd form, with the
+  reason they fail. The material spends its effort on the hard part.
+- **Sound (7–8):** The working model is clear, but one likely misconception goes unaddressed,
+  or is corrected only after learners would have acted on it.
+- **Weak (4–6):** Learners get steps or facts with no model connecting them, analogies stand in
+  for how the thing works, or common misconceptions go unmentioned where they'd cause errors.
+- **Failing (1–3):** The material invites a common misconception without correcting it, or
+  leaves learners with nothing to reason from when a step doesn't go as written.
+
+Compare the material with what you predicted newcomers would get wrong before you read it.
 
 ### PR Progression
 
@@ -134,15 +179,17 @@ A question left open on purpose, when resolving it is part of the learning, isn'
 ### EX Examples and concepts
 
 Examples, case studies, sample code, and demonstrations help learners recognize and use an idea
-beyond the example itself.
+beyond the example itself, including when to use it and when not to.
 
 - **Strong (9–10):** Each example has a stated purpose. Learners get the grounding to interpret
   it first, its details are tied to the concept and its terminology, and the reasoning transfers
-  to other situations. Demonstrations stay focused on the cause and result they show.
-- **Sound (7–8):** The examples work, but one lacks an explicit connection to its concept, or a
-  demonstration runs longer than its teaching value.
-- **Weak (4–6):** Learners could copy the examples without understanding why they work, or
-  concepts that need an example have none.
+  to other situations. Learners can tell when the idea applies and when it doesn't.
+  Demonstrations stay focused on the cause and result they show.
+- **Sound (7–8):** The examples work, but one lacks an explicit connection to its concept, the
+  limits of the idea are only implied, or a demonstration runs longer than its teaching value.
+- **Weak (4–6):** Learners could copy the examples without understanding why they work, would
+  apply the idea everywhere with no sense of its limits, or meet concepts that need an example
+  and have none.
 - **Failing (1–3):** The examples mislead, or have no evident connection to the concepts.
 
 An example can come before its concept when it gives learners a question or something to
@@ -152,30 +199,37 @@ concept afterward. Answer `"na"` only when the material's purpose calls for no e
 ### LA Language for purpose
 
 Each passage's language matches its teaching purpose: explaining a concept, narrating a
-demonstration, or directing practice.
+demonstration, or directing practice. Each passage also earns its place. Padding, tangents, and
+interesting but irrelevant material compete with the point, and novices suffer most from them.
+For each section, ask what the learner would lose if it were cut.
 
 - **Strong (9–10):** Explanations say what happens, why it matters, and how ideas connect.
   Demonstrations tie each step to its purpose and result. Practice instructions make the next
-  action unmistakable.
-- **Sound (7–8):** An occasional mismatch, such as an explanation that only lists steps.
-- **Weak (4–6):** Frequent mismatches, such as instructions buried in explanation, or concepts
-  delivered as commands with no reasoning.
+  action unmistakable. Cutting any passage would cost the learner something.
+- **Sound (7–8):** An occasional mismatch, such as an explanation that only lists steps, or a
+  passage that could be cut without loss.
+- **Weak (4–6):** Frequent mismatches, such as instructions buried in explanation or concepts
+  delivered as commands with no reasoning, or enough padding and tangents to bury the point.
 - **Failing (1–3):** Learners can't tell what they're meant to understand or what they're meant
   to do.
 
 ### PD Practice design
 
 Exercises, labs, and other practice spend learners' effort on the skill they're meant to
-develop. Answer `"na"` when the material has no practice and its purpose calls for none. When it
-needs practice and has none, score it low.
+develop. There's enough of it, at a challenge that suits learners at this point. Support such
+as worked examples and starter code fades as learners gain skill, and skills from earlier in
+the course come back where the sequence allows. Answer `"na"` when the material has no practice
+and its purpose calls for none. When it needs practice and has none, score it low.
 
 - **Strong (9–10):** Learners make the decisions the skill requires, with starting points
-  supplied where inventing them would be incidental work. The expected outcome and deliverable
-  are concrete, and the intended challenge is intact.
-- **Sound (7–8):** Mostly well designed, with some incidental work or a somewhat vague
-  deliverable.
+  supplied where inventing them would be incidental work. There's enough practice to build the
+  skill, support fades as learners gain it, and the expected outcome and deliverable are
+  concrete. The intended challenge is intact.
+- **Sound (7–8):** Mostly well designed, with some incidental work, a somewhat vague
+  deliverable, or support that stays the same after learners no longer need it.
 - **Weak (4–6):** Learners spend significant time on incidental work, would have to guess what
-  counts as success, or are handed the reasoning they were meant to practice.
+  counts as success, are handed the reasoning they were meant to practice, or get one attempt
+  at a skill that needs repeated practice.
 - **Failing (1–3):** The activity doesn't practice the intended skill, or can't be completed in
   the time available.
 
@@ -252,8 +306,10 @@ Keep the criteria table's format, because `scripts/aggregate.py` reads codes and
 it. Raise the version whenever a change could move scores, so that an improvement loop never
 compares runs scored against different rubrics.
 
-These criteria turn this repository's education principles into scored descriptions. When a
-principle changes, revise its criterion to match:
+Five criteria turn this repository's education principles into scored descriptions. When a
+principle changes, revise its criterion to match. The other criteria, and the additions on
+purpose, economy, knowing when to apply an idea, and practice over time, come from
+instructional-design research rather than a principle.
 
 | Criterion | Principle |
 | --- | --- |
