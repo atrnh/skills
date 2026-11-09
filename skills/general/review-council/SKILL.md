@@ -4,10 +4,10 @@ description: >
   Use in T3 Code when the user wants a council, panel, or multi-model review of an artifact:
   independent reviewers from different model families score it against a shared rubric while
   this session chairs the review and combines their results. Curriculum mode reviews lectures,
-  labs, exercises, homework, content outlines, and whole courses. Produces a scored report,
-  structured findings that other workflows such as triage-feedback can take up, and a scores
-  file an improvement loop can use as its measurement. Do NOT use outside T3 Code, for a
-  single-agent review, or for assessments, code, or UI designs until those modes exist.
+  labs, exercises, homework, content outlines, and whole courses. Shares each reviewer's findings
+  as they arrive, then a scored council report that other workflows, such as triage-feedback or
+  an improvement loop, can take up. Do NOT use outside T3 Code, for a single-agent review, or for
+  assessments, code, or UI designs until those modes exist.
 ---
 
 # Review council
@@ -38,15 +38,9 @@ keep it out of the artifact's repository.
 
 | File | Holds |
 | --- | --- |
-| `context.md` | The artifact, its place in its larger work, its audience and purpose, and the review's scope |
-| `sources.json` | Absolute paths of the files under review and the context files, which evidence must come from |
-| `panel.json` | The reviewers and their settings |
+| `context.md` | The artifact, its place in its larger work, known and tracked gaps, its audience and purpose, the review's scope, and every file reviewers may read |
 | `brief.md` | The brief every reviewer receives, with `{{REVIEWER_ID}}` left in place |
-| `source/` | Text versions of the artifact, when it isn't already plain text |
-| `reviews/<id>.json` | Each reviewer's result, as returned |
-| `blockers.json` | Confirmed blocking findings, when the chair records any |
-| `scores.json` | Combined scores and input fingerprints, written by `scripts/aggregate.py` |
-| `council-findings.json` | The merged findings, for any workflow the results go to next |
+| `source/` | Fixed copies of the artifact, such as text converted from Word or a file taken from another branch |
 | `report.md` | The council's report |
 
 ## 1. Establish what's under review
@@ -55,31 +49,30 @@ keep it out of the artifact's repository.
    history, so refer to every file by absolute path.
 2. **Give every reviewer the same text.** Save pasted text verbatim in `source/`. Convert Word,
    PowerPoint, and PDF files to Markdown in `source/`, using the extract-office-content skill if
-   it's installed. Reviewers then read identical text, and the script can check their quotes.
-3. **Place it in its larger work,** following the mode file's "For the chair" section.
+   it's installed. When the artifact is on a branch other than the one checked out, copy it from
+   that branch into `source/` rather than switching the user's checkout.
+3. **Check work in progress.** When the artifact is on a feature branch, look for related work
+   before treating a gap as a flaw: other branches that touch the same material, open pull or
+   merge requests, and open issues. Use the project's own tracker, such as GitHub with `gh` or
+   GitLab with `glab`. If you can't reach it, ask the user whether known work is pending. A gap
+   that an open issue, branch, or request already covers is known and tracked. List each one in
+   `context.md` with its link, so reviewers leave it out of their scores and findings.
+4. **Place it in its larger work,** following the mode file's "For the chair" section.
    Reviewers judge the artifact against this context, so gather it once and give them all the
    same account.
-4. **State the audience and purpose.** Take them from the course outline, a README, or the user.
+5. **State the audience and purpose.** Take them from the course outline, a README, or the user.
    Reviewers judge fit and progression against this statement, so they must all receive the
    same one. If you can't tell who the learners are and the answer would change the scores, ask.
-5. **Set the scope** using the mode's scope guidance. For a large course, name the units to read
+6. **Set the scope** using the mode's scope guidance. For a large course, name the units to read
    in depth.
 
-Write all of this to `context.md`, listing every file reviewers may read with its absolute path.
-Then write `sources.json`, with the files or folders under review as `artifact` and everything
-else reviewers may cite as `context`:
-
-```json
-{
-  "artifact": ["/tmp/review-council/lab-2-3/source/lab.md"],
-  "context": ["/path/to/course/course-outline.rst", "/path/to/course/lectures/2-2/index.rst"]
-}
-```
+Write all of this to `context.md`. End it with every file reviewers may read, by absolute path,
+divided into the files under review and the context files.
 
 ## 2. Build the panel
 
-If the user points to an earlier run's `panel.json`, reuse its reviewers and settings
-unchanged and go on to step 3.
+If the user points to an earlier run's report, reuse the reviewers and settings in its Panel
+section unchanged and go on to step 3.
 
 Otherwise, choose one reviewer per model family, up to five, from the providers whose
 `displayName` is "Cursor" or "Work" in `orchestrator_capabilities`. Look them up by display
@@ -87,8 +80,8 @@ name, because their `providerInstanceId` can differ from it. The capability list
 omits models, so use its `search` argument to look for families it may hide.
 
 - **Group models by family** using the model ID: `claude` is Anthropic, `gpt` is OpenAI,
-  `gemini` is Google, `composer` is Cursor, `grok` is xAI, and so on. Treat `default` or Auto as
-  no family.
+  `gemini` is Google, `composer` is Cursor, `kimi` is Moonshot, and so on. Treat `default` or
+  Auto as no family.
 - **Pick each family's most capable current model.** When the same family is on both providers,
   choose the stronger model, whichever provider it's on.
 - **If more than five families are available,** keep the five whose best models read most
@@ -98,134 +91,88 @@ omits models, so use its `search` argument to look for families it may hide.
   exists. Leave other options at their defaults.
 - **Use at least three families.** With fewer, tell the user and ask whether to continue.
 
-Write `panel.json`, using the family as each reviewer's ID:
-
-```json
-{
-  "reviewers": [
-    {
-      "id": "openai",
-      "provider": "Work",
-      "providerInstanceId": "codex",
-      "model": "gpt-6.1-sol",
-      "options": {"reasoningEffort": "high"}
-    }
-  ]
-}
-```
+Use each reviewer's family as its ID, such as `openai` or `google`.
 
 ## 3. Brief the reviewers
 
 Fill in [reviewer-brief.md](references/reviewer-brief.md) to make `brief.md`, following the
-instructions at its top. Every reviewer receives the same text except its own ID.
+instructions at its top. Then start one `delegate_task` per reviewer, all before you wait on
+any:
 
-Start one `delegate_task` per reviewer, all before you wait on any:
-
-- `task`: `brief.md` with `{{REVIEWER_ID}}` replaced by the reviewer's ID.
+- `task`: "You are a reviewer on a review council. Your reviewer ID is `<id>`. Read
+  `<run folder>/brief.md` in full and follow it exactly, using `<id>` wherever it says
+  `{{REVIEWER_ID}}`. In the run folder, read only the files the brief lists."
 - `target`: the reviewer's `providerInstanceId`, `model`, and `options`.
 - `role: "review"`, `isolation: "shared"`, `mode: "async"`, and the title
   `Council <slug>: <id>`.
 
-Add each `taskId` to its reviewer in `panel.json`. Then follow each task's `next` guidance to
-wait for results. Don't poll.
+Tell the user who is on the panel, then follow each task's `next` guidance to wait. Don't poll.
 
-## 4. Collect and score
+## 4. Share each review as it arrives
 
-Each reviewer ends with one JSON object. Save it to `reviews/<id>.json` as returned. If its JSON
-is malformed, repair only the syntax, never the content. A reviewer that fails, times out, or
-returns something unusable counts as missing. Don't replace it.
+When a reviewer finishes, read its result with `task_status` and share it with the user right
+away, without waiting for the others:
 
-Then combine the scores:
+- The reviewer, its model, and its scores on one line.
+- Its summary, and its priority 1 and 2 findings, each in a sentence with its location.
 
-```bash
-python3 <this skill>/scripts/aggregate.py RUN --mode <this skill>/references/modes/curriculum.md
-```
+Check that the review answers every criterion, and note any score with no evidence. These are
+one reviewer's views. Say so, and keep the council's judgment for the report.
 
-The script follows [scoring.md](references/scoring.md). It checks each review's structure and
-values, and that each score quotes text that exists in a file listed in `sources.json`. It drops
-answers that fail, lists every problem, and writes `scores.json` with fingerprints of every
-input. Don't edit `scores.json` by hand.
+A reviewer that fails, times out, or returns something unusable counts as missing. Don't
+replace it. With fewer than three usable reviews, stop and tell the user rather than reporting
+a council result.
 
-- **Invalid:** fewer than three reviews count. The script exits with an error. Stop and tell the
-  user, rather than reporting a score.
-- **Incomplete:** an applicable criterion has too few valid scores. Report the partial score as
-  diagnosis only, and say which criteria couldn't be judged and why.
+## 5. Combine, adjudicate, and merge
 
-## 5. Adjudicate and merge
+When every reviewer has finished, combine their scores by the rules in
+[scoring.md](references/scoring.md): each criterion's median, its flags, the council score, and
+the verdict.
 
-**Disagreements.** For each criterion the script flags, read the passages each side cited and
-decide which reading of the artifact holds up. For an applicability flag, decide whether the
-criterion applies. Record your ruling and its reasons in the report. Rulings explain the spread.
-They don't replace the scores.
+**Evidence.** Check the quotes behind every score that decides the verdict, such as gate scores
+below 7, and behind every finding you report. Search the cited file for each one. Leave out a
+score whose quotes aren't there, and say so. Then check that the passages support the score.
 
-**Evidence.** The script confirms only that quotes exist. For gate scores below 7, flagged
-criteria, and anything that decides the verdict, check that the cited passages support the
-score, and say in the report where they don't.
+**Disagreements.** For each flagged criterion, read the passages each side cited and decide
+which reading of the artifact holds up. For an applicability flag, decide whether the criterion
+applies. Record your ruling and its reasons in the report. Rulings explain the spread. They
+don't replace the scores.
 
 **Findings.** Merge findings that describe the same problem at the same place into one, and name
 every reviewer who raised it. A finding raised by several families is strong evidence, but one
 raised by a single reviewer can still be right. Check each finding against the artifact as the
 triage-feedback skill describes: drop findings whose quoted text doesn't exist, and begin a
-finding you can't confirm with "Unverified:". Give each merged finding an ID made of its
-criterion code and a number, such as `AC1` or `PR2`, and a priority. Priority 1 breaks the
-material or misleads learners, 2 noticeably hurts it, and 3 is polish.
+finding you can't confirm with "Unverified:". Drop findings about gaps that `context.md` lists as
+known and tracked. Give each merged finding an ID made of its criterion code and a number, such
+as `AC1` or `PR2`, and a priority. Priority 1 breaks the material or misleads learners, 2
+noticeably hurts it, and 3 is polish.
 
 **Blockers.** A median can outvote a reviewer who was right. When you've confirmed a priority 1
-finding against the artifact yourself, such as a required step that can't succeed, record it in
-`blockers.json` and run the script again:
-
-```json
-[{"finding": "AC1", "reason": "Step 3 fails: the command needs a flag the lab never installs."}]
-```
-
-The final verdict becomes not ready. The scores and the computed verdict stay as they were.
-Record only blockers you've verified, never a disagreement with the panel's judgment.
-
-Write the merged findings to `council-findings.json`, in priority order:
-
-```json
-[
-  {
-    "id": "AC1",
-    "criterion": "AC",
-    "priority": 1,
-    "title": "Step 3's command fails",
-    "problem": "The command needs a flag the lab never installs, so learners can't continue.",
-    "location": {"file": "/absolute/path/to/lab.rst", "quote": "Run `deploy --prod`"},
-    "suggestion": "Add the install step before step 3.",
-    "replacement": "",
-    "reviewers": ["openai", "google"],
-    "verified": true,
-    "blocker": true
-  }
-]
-```
-
-Keep `replacement` empty unless a reviewer proposed exact text and you've checked it. Set
-`verified` to `false` for a finding you couldn't confirm.
+finding against the artifact yourself, such as a required step that can't succeed, mark it as a
+blocker. The final verdict becomes not ready, and the scores and the computed verdict stay as
+they were. Record only blockers you've verified, never a disagreement with the panel's judgment.
 
 ## 6. Report
 
-Write `report.md` with:
+Give the report in your reply and save it as `report.md`:
 
-1. **Verdict.** The final verdict and council score from `scores.json`, and the single biggest
-   thing holding the artifact back. If a blocker changed the verdict, give the computed verdict
-   too. If the run is incomplete, give the partial score, labeled as partial.
+1. **Verdict.** The final verdict and council score, and the single biggest thing holding the
+   artifact back. If a blocker changed the verdict, give the computed verdict too. If the run is
+   incomplete, give the partial score, labeled as partial.
 2. **Scores.** A table with a row per criterion and a column per reviewer, plus the median and
    spread. Mark gate criteria, flags, and criteria that are not applicable or insufficient.
 3. **Disagreements.** Each flagged criterion, what each side cited, and your ruling.
-4. **Findings** from `council-findings.json`, in priority order. Give each one's ID, location,
-   problem, suggested fix, and the reviewers who raised it.
-5. **Strengths** reviewers cited, so the author knows what to keep.
-6. **Panel.** Each reviewer's provider, model, and settings, plus any missing reviewers and
-   dropped scores.
-
-Reply with the final verdict, the council score, the top three findings, and the report's path.
+4. **Findings,** in priority order. Give each one's ID, priority, location, problem, suggested
+   fix, any replacement text you've checked, the reviewers who raised it, and whether it's
+   verified or a blocker.
+5. **Known and tracked.** The gaps left out because open work covers them, with their links.
+6. **Strengths** reviewers cited, so the author knows what to keep.
+7. **Panel.** The rubric version, and each reviewer's provider, model, and settings, plus any
+   missing reviewers and dropped scores.
 
 ## 7. Hand off
 
-The council's results are `scores.json`, `council-findings.json`, and `report.md`. When the
-user wants them to go somewhere, build what's needed from those files:
+When the user wants the results to go somewhere, build what's needed from the report:
 
 - **Use the workflow that owns the destination.** If an installed skill handles it, follow that
   skill and convert the findings into its format. Otherwise, ask the user what form they want.
@@ -243,16 +190,15 @@ dashboard for approving each fix.
 When the council measures an artifact again and again, as in an improvement loop, every run
 must measure it the same way:
 
-- **Give each measurement its own run folder.** Copy `panel.json` without its task IDs, and copy
-  `brief.md`, `context.md`, and `sources.json` unchanged.
-- **Keep converted text in one place.** When the artifact needs converting to text, keep the
-  converted text in one folder outside the run folders, and convert into it again for each
-  version of the artifact. Its paths then stay the same, and reviewers never read a stale copy.
-- **Compare only comparable runs.** The metric is `councilScore`, where higher is better, and
-  `finalVerdict` acts as a floor. Two runs are comparable only when both are complete, apply
-  the same criteria, and have the same fingerprints for everything in `inputs` except
-  `artifact`. Only the material under review may change. If its context changed too, the runs
-  measure something different.
+- **Give each measurement its own run folder.** Copy `brief.md` and `context.md` unchanged, and
+  reuse the panel from the first run's report.
+- **Keep converted text in one place.** When the artifact needs converting or copying, keep
+  those copies in one folder outside the run folders, and refresh them for each version of the
+  artifact. Their paths then stay the same, and reviewers never read a stale copy.
+- **Compare only comparable runs.** The metric is the council score, where higher is better, and
+  the final verdict acts as a floor. Two runs are comparable only when both are complete, use
+  the same panel, brief, context, and rubric version, and apply the same criteria. Only the
+  material under review may change.
 - **Learn the noise first.** Reviewers' scores vary between runs, so score the unchanged
   artifact more than once to learn how much they vary before trusting any single change.
   Deciding when a change is real belongs to whatever runs the loop.

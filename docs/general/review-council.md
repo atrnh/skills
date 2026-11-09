@@ -9,41 +9,31 @@ Agents running a council don't need them, so they live here rather than in the s
 | --- | --- |
 | `SKILL.md` | The chair |
 | `references/reviewer-brief.md` | The chair, who fills it in; the result goes to every reviewer |
-| `references/scoring.md` | Reviewers get "Scale" and "Evidence"; the rest explains the script to the chair |
+| `references/scoring.md` | Reviewers get "Scale" and "Evidence"; the chair follows the rest to combine scores |
 | `references/modes/<mode>.md` | Reviewers get everything above "For the chair"; the chair reads the rest |
-| `scripts/aggregate.py` | Run by the chair; implements the rest of `scoring.md` |
 
 Reviewers are fresh agents that may not have this repository's skills installed. Everything
 they need must be written into the files they receive. Don't point a reviewer at another skill.
 
+Reviewers return a Markdown review, and the chair works from those results directly. There are
+no intermediate data files, so the review format in `reviewer-brief.md` is written for the
+chair to read, not for a program to parse.
+
 ## Mode file format
 
-`aggregate.py` reads each mode file and stops with an error if it can't, so keep:
+Keep:
 
 - a `Version:` line;
-- the criteria table above the first `## ` heading, with the columns `Code`, `Criterion`, and
-  `Gate`, a two-letter uppercase code per criterion, and `yes` in `Gate` for gate criteria;
-- no other table rows above the first `## ` heading;
+- the criteria table near the top, with the columns `Code`, `Criterion`, and `Gate`, a
+  two-letter uppercase code per criterion, and `yes` in `Gate` for gate criteria;
 - a `## For the chair` heading, which `reviewer-brief.md` uses as the end of what reviewers
   receive.
 
-## Changing scoring
-
-When you change how scores combine, change `scoring.md` and `aggregate.py` together, and update
-`scripts/test_aggregate.py`. Run the tests from the scripts folder:
-
-```sh
-python3 -m unittest test_aggregate
-```
-
 ## Versions and comparable runs
 
-`scores.json` records fingerprints of the material under review, its context files, the panel's
-reviewers and settings, the rubric, the scoring rules, the brief, `context.md`, and the script.
-An improvement loop compares only runs whose fingerprints match apart from the material under
-review, so any edit to the others already separates old runs from new ones. The `Version:` line is a label for
-people. Raise it when a change could move scores, so reports and commit messages can name the
-rubric they used.
+The `Version:` line is how runs are told apart. Each report records the rubric version, and an
+improvement loop compares only runs that share it, along with the same panel, brief, and
+context. Raise the version whenever a change to the rubric or to `scoring.md` could move scores.
 
 ## Adding a mode
 

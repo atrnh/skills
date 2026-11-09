@@ -24,6 +24,8 @@ reviewer ID is `{{REVIEWER_ID}}`.
 - Don't reward length, polish, or a confident or encouraging tone for their own sake. Score
   what the reader gains.
 - Score what the artifact is now, not what it would be after your suggested fixes.
+- Leave out the gaps the review's context lists as known and tracked. Open work already covers
+  them, so don't let them lower any score or appear in your findings.
 - Judge each criterion on its own. Let a problem lower another criterion's score only when it
   separately harms what that criterion measures.
 - The Strong band doesn't require perfection. Use it when the material fully serves its learners
@@ -43,59 +45,42 @@ reviewer ID is `{{REVIEWER_ID}}`.
 
 ## What to return
 
-Your final message must contain only one JSON object in a single `json` code fence:
+Your final message is your review, in this form and nothing else. The bracketed parts are
+placeholders. Cite each file by its absolute path.
 
-```json
-{
-  "reviewer": "{{REVIEWER_ID}}",
-  "readingLog": [
-    {
-      "location": {"file": "/absolute/path/to/file.rst", "quote": "Exact text"},
-      "note": "What the reader thinks, asks, or gets wrong at this point."
-    }
-  ],
-  "summary": "Two or three sentences: your overall judgment and the most important problem.",
-  "scores": [
-    {
-      "criterion": "AC",
-      "score": 7,
-      "rationale": "Why the score falls in its band, and where it sits within the band.",
-      "evidence": [
-        {"file": "/absolute/path/to/file.rst", "quote": "Exact text copied from the file"},
-        {
-          "file": "/absolute/path/to/file.rst",
-          "quote": "Step 3: Deploy the app",
-          "missing": "Optional. What you looked for here and didn't find."
-        }
-      ]
-    }
-  ],
-  "findings": [
-    {
-      "criterion": "AC",
-      "priority": 1,
-      "title": "Short name for the problem",
-      "problem": "What is wrong and how it affects learners.",
-      "location": {"file": "/absolute/path/to/file.rst", "quote": "Exact text at the problem"},
-      "suggestion": "A concrete fix.",
-      "replacement": "Optional exact replacement text for the quoted passage."
-    }
-  ],
-  "strengths": [
-    {
-      "criterion": "EX",
-      "location": {"file": "/absolute/path/to/file.rst", "quote": "Exact text"},
-      "note": "What works and why it's worth keeping."
-    }
-  ]
-}
+```markdown
+## Review: {{REVIEWER_ID}}
+
+**Summary:** Two or three sentences: your overall judgment and the most important problem.
+
+### Reading log
+
+1. `/absolute/path/to/file.rst`: "Exact text". What the reader thinks, asks, or gets wrong here.
+
+### Scores
+
+- **AC 7.** Why the score falls in its band, and where it sits within the band.
+  Evidence: `/absolute/path/to/file.rst`: "Exact text copied from the file".
+  Missing, at `/absolute/path/to/file.rst`: "Step 3: Deploy the app": what you looked for here
+  and didn't find.
+
+### Findings
+
+1. **P1, AC: Short name for the problem.** `/absolute/path/to/file.rst`: "Exact text at the
+   problem". What is wrong and how it affects learners. Fix: a concrete change.
+   Replacement: optional exact text to replace the quoted passage.
+
+### Strengths
+
+- **EX.** `/absolute/path/to/file.rst`: "Exact text". What works and why it's worth keeping.
 ```
 
-- In `readingLog`, record the moments that mattered, in reading order: where the reader described
-  above would slow down, ask a question, or get something wrong, and where the material met
-  them well. Don't add entries to reach a number. Use these moments as evidence when you score.
-- Include one entry in `scores` for every criterion in the rubric, following the scale and
-  evidence rules above.
+- In the reading log, record the moments that mattered, in reading order: where the reader
+  described above would slow down, ask a question, or get something wrong, and where the
+  material met them well. Don't add entries to reach a number. Use these moments as evidence
+  when you score.
+- Score every criterion in the rubric, in the rubric's order, following the scale and evidence
+  rules above. Write `na` or `cannot_assess` in place of a number where they apply.
 - Give each finding a priority. Priority 1 breaks the material or misleads learners, 2
   noticeably hurts it, and 3 is polish.
-- `findings` and `strengths` can be empty. Don't pad them.
+- Findings and strengths can be empty. Don't pad them.

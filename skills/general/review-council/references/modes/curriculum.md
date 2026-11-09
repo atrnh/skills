@@ -1,6 +1,6 @@
 # Curriculum rubric
 
-Version: 4
+Version: 5
 
 This rubric judges whether curriculum helps its learners understand and do what it sets out to
 teach. It covers lectures, labs, exercises, homework, content outlines, and whole courses. It
@@ -29,8 +29,8 @@ elsewhere.
   criterion that applies.
 - **A content outline.** Judge what the outline explicitly plans, and don't imagine the quality
   of explanations, examples, or activities it doesn't yet contain. Score low when the plan
-  itself leaves out something necessary. Answer `"cannot_assess"` when it doesn't say enough to
-  judge a criterion. Language for purpose and presented form are usually `"na"`.
+  itself leaves out something necessary. Answer `cannot_assess` when it doesn't say enough to
+  judge a criterion. Language for purpose and presented form are usually `na`.
 - **A whole course.** Read the course outline and index, then the units named for in-depth
   reading in the review's scope, and skim the rest. Judge progression and alignment across
   units as well as within them, and name the unit in every quote and finding. Check whether
@@ -80,7 +80,7 @@ tools and versions the material names.
   such as a required step that can't succeed as written.
 
 If you can't run the code, judge it by reading and name what you couldn't verify in the
-rationale. Answer `"cannot_assess"` only when accuracy depends entirely on something you can't
+rationale. Answer `cannot_assess` only when accuracy depends entirely on something you can't
 check.
 
 ### CO Completeness (gate)
@@ -181,7 +181,7 @@ beyond the example itself, including when to use it and when not to.
 
 An example can come before its concept when it gives learners a question or something to
 investigate. Judge whether it supplies enough context for that purpose and is connected to the
-concept afterward. Answer `"na"` only when the material's purpose calls for no examples.
+concept afterward. Answer `na` only when the material's purpose calls for no examples.
 
 ### LA Language for purpose
 
@@ -204,10 +204,12 @@ the headings is a common case.
 ### PD Practice design
 
 Exercises, labs, and other practice spend learners' effort on the skill they're meant to
-develop. There's enough of it, at a challenge that suits learners at this point. Support such
-as worked examples and starter code fades as learners gain skill, and skills from earlier in
-the course come back where the sequence allows. Answer `"na"` when the material has no practice
-and its purpose calls for none. When it needs practice and has none, score it low.
+develop. In-class activities count as practice too, such as a brainstorm, a discussion question,
+or a prediction learners make before seeing the answer, so a lecture can have practice to
+judge. There's enough of it, at a challenge that suits learners at this point. Support such as
+worked examples and starter code fades as learners gain skill, and skills from earlier in the
+course come back where the sequence allows. Answer `na` only when the material has no practice
+of any kind and its purpose calls for none. When it needs practice and has none, score it low.
 
 - **Strong (9–10):** Learners make the decisions the skill requires, with starting points
   supplied where inventing them would be incidental work. There's enough practice to build the
@@ -224,7 +226,7 @@ and its purpose calls for none. When it needs practice and has none, score it lo
 ### PF Presented form
 
 In slides, handouts, presenter notes, or another presented form, learners can follow the
-reasoning at the point where they meet each idea. Answer `"na"` when there is no presented form.
+reasoning at the point where they meet each idea. Answer `na` when there is no presented form.
 
 - **Strong (9–10):** Each idea's premises appear before it in the form learners see. Related
   ideas stay together, breaks fall at meaningful shifts, and notes add depth without holding the
@@ -237,7 +239,7 @@ reasoning at the point where they meet each idea. Answer `"na"` when there is no
 
 When the review supplies rendered slides or pages, judge from them. When you have only the
 source, judge from it if it shows where each slide or page breaks and which text is notes, and
-say so in the rationale. If it doesn't show that, answer `"cannot_assess"`.
+say so in the rationale. If it doesn't show that, answer `cannot_assess`.
 
 ## For the chair
 
@@ -261,7 +263,8 @@ judged as part of its sequence. Find that sequence before briefing the reviewers
    them. Give each source's absolute path so reviewers can check it.
 4. **Report what doesn't line up.** When the outline and the actual files disagree, as when the
    outline promises a topic the material doesn't cover, record both and don't choose between
-   them.
+   them. If open work covers the mismatch, as when the material refers to a lab that an open
+   issue or another branch is adding, list it under known and tracked gaps instead.
 5. **Say when nothing was found.** Reviewers then judge the material on its own. Ask the user
    first when the material clearly belongs to a course, such as one numbered "Lab 2.3" or kept
    in a course folder, and the placement would change the scores.
@@ -276,16 +279,19 @@ Add the placement to `context.md`:
 - **Before it:** <number>, "<title>" (</absolute/path>). Covers: <topics from its headings>
 - **After it:** <number>, "<title>" (</absolute/path>). Expects learners to: <objectives>
 - **Mismatches:** <where the outline and the files disagree, or "None found">
+- **Known and tracked:** <each gap that open work covers, with the issue, branch, or request that
+  covers it, or "None">
 ```
 
-List every placement source in `sources.json` under `context`, so reviewers can cite them.
+Add every placement source to the context files listed in `context.md`, so reviewers can cite
+them.
 
 ### Provide the presented form
 
 When the material has slides, handouts, or another presented form, reviewers judge presented
 form best from what learners actually see. If the project can render it, such as with a slide
-build or a PDF export, list the rendered pages or slide images under `artifact` in
-`sources.json`, beside the text they render, and name each image so reviewers can match it to
-its slide or page in the text. Otherwise, say in `context.md` that reviewers have only the
+build or a PDF export, list the rendered pages or slide images in `context.md` among the files
+under review, beside the text they render, and name each image so reviewers can match it to its
+slide or page in the text. Otherwise, say in `context.md` that reviewers have only the
 source. Converted text, as from a PowerPoint file, should keep each slide's boundary and keep
 notes separate from what's on the slide.
