@@ -33,6 +33,18 @@
       "skills": [
         "./skills/fiction"
       ],
+      "interface": {
+        "displayName": "Fiction Writing",
+        "shortDescription": "Story bible and fiction editors",
+        "longDescription": "Build a source-backed internal story bible and review fiction through developmental, first-reader, and line-editing lenses. Keep your chosen manuscript, reference, and feedback destinations.",
+        "developerName": "Ashley Trinh",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": [
+          "Build or update my story bible from these manuscript pages.",
+          "Give this chapter a candid developmental edit.",
+          "Line edit this scene and explain the reader effect of each suggestion."
+        ]
+      },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
