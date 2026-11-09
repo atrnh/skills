@@ -20,7 +20,6 @@ BANDS = ((1, 3), (4, 6), (7, 8), (9, 10))
 GATE_LINE = 7
 FAILING_LINE = 3
 MIN_REVIEWS = 3
-LOG_LENGTH = (3, 6)
 ROW = re.compile(r"^\|\s*([A-Z]{2})\s*\|\s*([^|]+?)\s*\|\s*(yes)?\s*\|\s*$")
 TABLE_HEAD = re.compile(r"^\|\s*(Code\s*\||-{3,})")
 VERSION = re.compile(r"^Version:\s*(\S+)\s*$", re.MULTILINE)
@@ -67,7 +66,7 @@ def read_panel(run):
         sys.exit("panel.json: every reviewer needs a string 'id'")
     if len(set(ids)) != len(ids):
         sys.exit("panel.json: reviewer IDs must be unique")
-    return ids
+    return reviewers
 
 
 def is_score(value):
@@ -93,22 +92,22 @@ class Sources:
 
     def __init__(self, run):
         data = read_json(run / "sources.json")
-        paths = []
+        self.listed = {}
         for key in ("artifact", "context"):
             value = data.get(key, []) if isinstance(data, dict) else None
             if not isinstance(value, list) or not all(isinstance(p, str) for p in value):
                 sys.exit(f"sources.json: '{key}' must be a list of paths")
-            paths += value
-        if not data.get("artifact"):
+            if not all(Path(p).is_absolute() for p in value):
+                sys.exit("sources.json: every path must be absolute")
+            self.listed[key] = [Path(p).resolve() for p in value]
+        if not self.listed["artifact"]:
             sys.exit("sources.json: 'artifact' must list at least one path")
-        if not all(Path(p).is_absolute() for p in paths):
-            sys.exit("sources.json: every path must be absolute")
-        self.roots = [Path(p).resolve() for p in paths]
+        self.roots = self.listed["artifact"] + self.listed["context"]
         self.text = {}
 
-    def files(self):
+    def files(self, key):
         found = set()
-        for root in self.roots:
+        for root in self.listed[key]:
             if root.is_dir():
                 found.update(p for p in root.rglob("*") if p.is_file())
             elif root.is_file():
@@ -148,9 +147,8 @@ def check_review(rid, review, criteria, sources, problems):
     if review.get("reviewer") != rid:
         problems.append(f"{rid}: review names its reviewer {review.get('reviewer')!r}")
     log = review.get("readingLog")
-    if not isinstance(log, list) or not LOG_LENGTH[0] <= len(log) <= LOG_LENGTH[1]:
-        size = len(log) if isinstance(log, list) else "no"
-        problems.append(f"{rid}: reading log has {size} entries, not {LOG_LENGTH[0]} to {LOG_LENGTH[1]}")
+    if not isinstance(log, list) or not log:
+        problems.append(f"{rid}: no reading log")
     valid, seen = {}, set()
     for number, entry in enumerate(review["scores"], 1):
         if not isinstance(entry, dict):
@@ -196,7 +194,7 @@ def combine(criteria, valid):
         result = {**info, "scores": answers, "flags": []}
         if not_applicable and numbers:
             result["flags"].append("applicability")
-        if not_applicable * 2 > len(values):
+        if not_applicable * 2 > usable:
             result["status"] = "na"
         elif len(numbers) >= 2 and len(numbers) * 2 >= usable:
             low, high = min(numbers), max(numbers)
@@ -253,8 +251,13 @@ def read_blockers(run):
     return blockers
 
 
-def fingerprint(run, mode, sources, problems):
-    inputs = {"sources": {str(p): digest(p) for p in sources.files()}}
+def fingerprint(run, mode, sources, panel, problems):
+    settings = [{k: v for k, v in r.items() if k != "taskId"} for r in panel]
+    inputs = {
+        "artifact": {str(p): digest(p) for p in sources.files("artifact")},
+        "contextSources": {str(p): digest(p) for p in sources.files("context")},
+        "panel": hashlib.sha256(json.dumps(settings, sort_keys=True).encode()).hexdigest(),
+    }
     for name, path in (
         ("brief", run / "brief.md"),
         ("context", run / "context.md"),
@@ -288,7 +291,8 @@ def table(results, reviewers):
 def aggregate(run, mode):
     """Write RUN/scores.json and return it."""
     version, criteria = read_mode(mode)
-    expected = read_panel(run)
+    panel = read_panel(run)
+    expected = [r["id"] for r in panel]
     sources = Sources(run)
 
     problems, valid = [], {}
@@ -332,7 +336,7 @@ def aggregate(run, mode):
         "reviewers": list(valid),
         "missingReviewers": [rid for rid in expected if rid not in valid],
         "criteria": results,
-        "inputs": fingerprint(run, mode, sources, problems),
+        "inputs": fingerprint(run, mode, sources, panel, problems),
         "problems": problems,
     }
     (run / "scores.json").write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")

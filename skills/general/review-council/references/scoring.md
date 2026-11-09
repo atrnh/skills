@@ -5,7 +5,7 @@ The "Scale" and "Evidence" sections go to every reviewer. The rest describes how
 
 ## Scale
 
-Score each criterion from 1 to 10 in two steps. First choose the band whose description fits
+Score each criterion with a whole number from 1 to 10, in two steps. First choose the band whose description fits
 the material. Each mode's rubric describes the bands for every criterion; use these general
 meanings when a case falls between its descriptions. Then choose a score within the band: its
 top when the band's problems are few or minor there, and its bottom when they're many or close
@@ -31,10 +31,15 @@ Every numeric score must cite the text it rests on. For a low score, quote the p
 high score, quote what earns it. Explain in the rationale why the score falls in its band, and
 why it sits where it does within the band.
 
-Quote only from the artifact and context files the review lists, by their absolute paths. When
-the problem is something missing, such as an unstated prerequisite or a step with no
-instructions, quote the place where it belongs, such as the step that needs it or the heading of
-its section, and add `missing` to the evidence item to say what you looked for and didn't find.
+Quote only from the files the review lists, by their absolute paths. Copy each quote exactly,
+including its markup, and keep it short and on one line where you can. Quotes are checked
+automatically, and a score with no quote that can be found is discarded.
+
+- **Something missing,** such as an unstated prerequisite or a step with no instructions: quote
+  the place where it belongs, such as the step that needs it or the heading of its section, and
+  add `missing` to the evidence item to say what you looked for and didn't find.
+- **Something seen in an image,** such as a rendered slide: images can't be quoted, so quote the
+  matching text from a text file and name the image in your rationale.
 
 ## Combining scores
 
@@ -48,14 +53,13 @@ The script reads the review's files from `sources.json` and checks every review:
 - A numeric score also needs at least one evidence item whose quote appears in a listed file.
   Whitespace differences are ignored. The check confirms the quote's location, not that it
   supports the score; judging that is the chair's work.
-- Criteria a reviewer left out, a reviewer ID that doesn't match the panel, a reading log
-  without three to six entries, and rejected evidence are reported as problems. A short reading
-  log doesn't drop any scores, but it suggests the reviewer skimmed.
+- Criteria a reviewer left out, a reviewer ID that doesn't match the panel, a missing reading
+  log, and rejected evidence are reported as problems.
 
 Then, for each criterion:
 
-- If more than half the reviewers who answered said `"na"`, the criterion is not applicable and
-  is left out of the score.
+- If more than half the reviews that count say `"na"`, the criterion is not applicable and is
+  left out of the score. A reviewer who didn't answer doesn't count toward that half.
 - Otherwise, the criterion is scored when at least two valid numeric scores make up at least
   half of the reviews that count. Its score is their median, and its spread is the highest
   score minus the lowest.

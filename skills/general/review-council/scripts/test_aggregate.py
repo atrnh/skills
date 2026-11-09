@@ -36,7 +36,7 @@ class AggregateTest(unittest.TestCase):
     def panel(self, ids):
         self.write("panel.json", {"reviewers": [{"id": rid} for rid in ids]})
 
-    def review(self, rid, overrides=None, file=None, entries=None, log_length=3):
+    def review(self, rid, overrides=None, file=None, entries=None, log_length=3, skip=()):
         overrides = overrides or {}
         log = [{"location": {"file": str(self.lab), "quote": QUOTE}, "note": "n"}] * log_length
         scores = entries if entries is not None else [
@@ -46,6 +46,7 @@ class AggregateTest(unittest.TestCase):
                 "evidence": [{"file": str(file or self.lab), "quote": QUOTE}],
             }
             for code in CODES
+            if code not in skip
         ]
         self.write(f"reviews/{rid}.json", {"reviewer": rid, "readingLog": log, "scores": scores})
 
@@ -61,7 +62,26 @@ class AggregateTest(unittest.TestCase):
         self.assertEqual(out["councilScore"], 8)
         self.assertEqual(out["problems"], [])
         self.assertIn("aggregator", out["inputs"])
-        self.assertEqual(list(out["inputs"]["sources"]), [str(self.lab)])
+        self.assertEqual(list(out["inputs"]["artifact"]), [str(self.lab)])
+        self.assertEqual(out["inputs"]["contextSources"], {})
+
+    def test_panel_fingerprint_ignores_task_ids_only(self):
+        for rid in ("openai", "anthropic", "google"):
+            self.review(rid)
+        first = self.aggregate()["inputs"]["panel"]
+        reviewers = [{"id": rid, "taskId": "t"} for rid in ("openai", "anthropic", "google")]
+        self.write("panel.json", {"reviewers": reviewers})
+        self.assertEqual(self.aggregate()["inputs"]["panel"], first)
+        reviewers[0]["model"] = "other"
+        self.write("panel.json", {"reviewers": reviewers})
+        self.assertNotEqual(self.aggregate()["inputs"]["panel"], first)
+
+    def test_one_na_among_missing_answers_does_not_exclude_criterion(self):
+        self.review("openai", {"PD": "na"})
+        self.review("anthropic", skip=("PD",))
+        self.review("google", skip=("PD",))
+        criteria = self.aggregate()["criteria"]
+        self.assertEqual(criteria["PD"]["status"], "insufficient")
 
     def test_malformed_entries_are_reported_not_fatal(self):
         self.review("openai", entries=[None, {"criterion": "AC", "score": []}])
@@ -135,12 +155,13 @@ class AggregateTest(unittest.TestCase):
         self.assertEqual(out["finalVerdict"], "not_ready")
         self.assertEqual(out["councilScore"], 8)
 
-    def test_short_reading_log_is_reported_without_dropping_scores(self):
-        self.review("openai", log_length=1)
-        self.review("anthropic")
+    def test_missing_reading_log_is_reported_without_dropping_scores(self):
+        self.review("openai", log_length=0)
+        self.review("anthropic", log_length=1)
         self.review("google")
         out = self.aggregate()
-        self.assertIn("openai: reading log has 1 entries, not 3 to 6", out["problems"])
+        self.assertIn("openai: no reading log", out["problems"])
+        self.assertNotIn("anthropic: no reading log", out["problems"])
         self.assertIn("openai", out["reviewers"])
 
     def test_unreadable_criteria_row_stops_the_script(self):

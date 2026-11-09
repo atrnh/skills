@@ -250,8 +250,9 @@ must measure it the same way:
   version of the artifact. Its paths then stay the same, and reviewers never read a stale copy.
 - **Compare only comparable runs.** The metric is `councilScore`, where higher is better, and
   `finalVerdict` acts as a floor. Two runs are comparable only when both are complete, apply
-  the same criteria, and have the same fingerprints for everything in `inputs` except the
-  sources.
+  the same criteria, and have the same fingerprints for everything in `inputs` except
+  `artifact`. Only the material under review may change. If its context changed too, the runs
+  measure something different.
 - **Learn the noise first.** Reviewers' scores vary between runs, so score the unchanged
   artifact more than once to learn how much they vary before trusting any single change.
   Deciding when a change is real belongs to whatever runs the loop.

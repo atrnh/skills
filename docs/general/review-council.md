@@ -38,9 +38,10 @@ python3 -m unittest test_aggregate
 
 ## Versions and comparable runs
 
-`scores.json` records fingerprints of the rubric, the scoring rules, the brief, the context, and
-the script. An improvement loop compares only runs whose fingerprints match, so any edit to
-those files already separates old runs from new ones. The `Version:` line is a label for
+`scores.json` records fingerprints of the material under review, its context files, the panel's
+reviewers and settings, the rubric, the scoring rules, the brief, `context.md`, and the script.
+An improvement loop compares only runs whose fingerprints match apart from the material under
+review, so any edit to the others already separates old runs from new ones. The `Version:` line is a label for
 people. Raise it when a change could move scores, so reports and commit messages can name the
 rubric they used.
 
@@ -74,7 +75,8 @@ The rest comes from instructional-design and learning research:
   [retrieval practice and spacing](https://journals.sagepub.com/stoken/rbtfl/Z10jaVH/60XQM/full),
   and the [expertise reversal effect](https://doi.org/10.1207/s15326985ep3801_4) on fading
   support.
-- What not to reward and the reading log: findings that AI judges are lenient and reward length
+- The rule against rewarding polish, the signs of shallow material written into the criteria,
+  and the reading log: findings that AI judges are lenient and reward length
   and confident tone, and Sadler's argument that
   [quality judgment is learned from examples](https://doi.org/10.1080/02602930801956059).
 

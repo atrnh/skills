@@ -1,6 +1,6 @@
 # Curriculum rubric
 
-Version: 3
+Version: 4
 
 This rubric judges whether curriculum helps its learners understand and do what it sets out to
 teach. It covers lectures, labs, exercises, homework, content outlines, and whole courses. It
@@ -27,9 +27,10 @@ elsewhere.
 - **A lecture, lab, exercise, or homework assignment.** Read all of it, along with anything
   learners need from it, such as starter code, data files, or linked setup pages. Score every
   criterion that applies.
-- **A content outline.** Judge the plan as the material it describes. Score accuracy,
-  completeness of coverage, audience fit, objectives, progression, and the planned mental
-  models, examples, and practice. Language for purpose and presented form are usually `"na"`.
+- **A content outline.** Judge what the outline explicitly plans, and don't imagine the quality
+  of explanations, examples, or activities it doesn't yet contain. Score low when the plan
+  itself leaves out something necessary. Answer `"cannot_assess"` when it doesn't say enough to
+  judge a criterion. Language for purpose and presented form are usually `"na"`.
 - **A whole course.** Read the course outline and index, then the units named for in-depth
   reading in the review's scope, and skim the rest. Judge progression and alignment across
   units as well as within them, and name the unit in every quote and finding. Check whether
@@ -39,8 +40,8 @@ elsewhere.
 When the review's context places the material in a course, judge it as part of that sequence:
 what learners have already been taught, what this item is meant to accomplish, and what it
 prepares them for. Files listed as context aren't under review. Cite them only to show that the
-material doesn't match them. When the context says no course structure was found, judge the
-material on its own.
+material doesn't match them. Rendered slides or pages of the material are part of the material,
+not context. When the context says no course structure was found, judge the material on its own.
 
 ## How to read
 
@@ -50,23 +51,9 @@ review's context, at their pace. Note where you slow down, get lost, would need 
 elsewhere, or stop trusting the material, and record the most telling of these moments in your
 reading log. Then score each criterion, returning to the text for evidence.
 
-## What not to reward
-
-Polished material can look like good teaching without being it. Length, polish, dense
-formatting, and an encouraging tone earn nothing by themselves. These are signs of fluent but
-shallow material. When you see them, look harder at what the learner actually gains:
-
-- "Key takeaways" or summary sections that restate the headings.
-- Analogies that stand in for how the thing actually works.
-- Objectives whose verb is "understand", "learn about", or "be familiar with".
-- Examples with no stated purpose.
-- Every section the same length, whatever its difficulty, and effort spread evenly instead of
-  concentrated on the hard part.
-
 ## Where a problem belongs
 
-Score each problem under the criterion that owns it. Lower another criterion only when the
-problem separately harms what that criterion measures.
+Score each problem under the criterion that owns it:
 
 - Support learners need that the material doesn't supply belongs to **completeness**.
 - Support that's supplied but pitched at the wrong level belongs to **audience fit**.
@@ -116,12 +103,12 @@ learners never wonder whether two names mean two things.
 The level, assumed knowledge, pace, and tone suit the stated learners. The tone is friendly and
 mentoring without talking down.
 
-- **Strong (9–10):** Pitched for the stated learners throughout. New terms are defined where
-  they first appear, and the tone encourages without padding.
+- **Strong (9–10):** Explanations and support are pitched for the stated learners throughout,
+  and the tone encourages without padding.
 - **Sound (7–8):** Mostly right, with a few passages that are too advanced, too basic, or off in
   tone.
-- **Weak (4–6):** Repeatedly assumes knowledge the learners lack or labors what they already
-  know, or uses a tone that would discourage them.
+- **Weak (4–6):** Explanations are repeatedly too advanced or too elementary for the stated
+  learners, or the tone would discourage them.
 - **Failing (1–3):** Written for a different audience.
 
 ### OB Objectives and alignment
@@ -138,7 +125,8 @@ written doesn't.
 - **Sound (7–8):** The goals and their value are clear, but one or two parts drift from them,
   or a check targets something peripheral.
 - **Weak (4–6):** The goals are vague or missing, learners get no sense of why the work matters,
-  or substantial content or practice serves none of the goals.
+  or substantial content or practice serves none of the goals. A goal to "understand" or "be
+  familiar with" something is vague unless the material makes clear what learners will do.
 - **Failing (1–3):** No goal can be discerned, or the material works against its stated goal.
 
 ### MM Mental models and misconceptions
@@ -151,8 +139,7 @@ term, and confronts them where they would form.
 - **Strong (9–10):** Learners come away able to explain why the thing behaves as it does, not
   only what to do. Likely misconceptions are named at the point where they'd form, with the
   reason they fail. The material spends its effort on the hard part.
-- **Sound (7–8):** The working model is clear, but one likely misconception goes unaddressed,
-  or is corrected only after learners would have acted on it.
+- **Sound (7–8):** The working model is clear, but one likely misconception goes unaddressed.
 - **Weak (4–6):** Learners get steps or facts with no model connecting them, analogies stand in
   for how the thing works, or common misconceptions go unmentioned where they'd cause errors.
 - **Failing (1–3):** The material invites a common misconception without correcting it, or
@@ -201,7 +188,8 @@ concept afterward. Answer `"na"` only when the material's purpose calls for no e
 Each passage's language matches its teaching purpose: explaining a concept, narrating a
 demonstration, or directing practice. Each passage also earns its place. Padding, tangents, and
 interesting but irrelevant material compete with the point, and novices suffer most from them.
-For each section, ask what the learner would lose if it were cut.
+For each section, ask what the learner would lose if it were cut. A summary that only restates
+the headings is a common case.
 
 - **Strong (9–10):** Explanations say what happens, why it matters, and how ideas connect.
   Demonstrations tie each step to its purpose and result. Practice instructions make the next
@@ -296,6 +284,8 @@ List every placement source in `sources.json` under `context`, so reviewers can 
 
 When the material has slides, handouts, or another presented form, reviewers judge presented
 form best from what learners actually see. If the project can render it, such as with a slide
-build or a PDF export, add the rendered pages or slide images to the context files. Otherwise,
-say in `context.md` that reviewers have only the source. Converted text, as from a PowerPoint
-file, should keep each slide's boundary and keep notes separate from what's on the slide.
+build or a PDF export, list the rendered pages or slide images under `artifact` in
+`sources.json`, beside the text they render, and name each image so reviewers can match it to
+its slide or page in the text. Otherwise, say in `context.md` that reviewers have only the
+source. Converted text, as from a PowerPoint file, should keep each slide's boundary and keep
+notes separate from what's on the slide.
