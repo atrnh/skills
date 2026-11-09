@@ -5,10 +5,9 @@ description: >
   independent reviewers from different model families score it against a shared rubric while
   this session chairs the review and combines their results. Curriculum mode reviews lectures,
   labs, exercises, homework, assessments, content outlines, and whole courses. Produces a scored
-  report and
-  a scores file that an improvement loop can use as its measurement, and can hand the findings to
-  the triage-feedback dashboard. Do NOT use outside T3 Code, for a single-agent review, or for
-  code or UI designs until those modes exist.
+  report, structured findings that other workflows such as triage-feedback can take up, and a
+  scores file an improvement loop can use as its measurement. Do NOT use outside T3 Code, for a
+  single-agent review, or for code or UI designs until those modes exist.
 ---
 
 # Review council
@@ -46,6 +45,7 @@ keep it out of the artifact's repository.
 | `reviews/<id>.json` | Each reviewer's result, as returned |
 | `blockers.json` | Confirmed blocking findings, when the chair records any |
 | `scores.json` | Combined scores and input fingerprints, written by `scripts/aggregate.py` |
+| `council-findings.json` | The merged findings, for any workflow the results go to next |
 | `report.md` | The council's report |
 
 ## 1. Establish what's under review
@@ -180,6 +180,29 @@ finding against the artifact yourself, such as a required step that can't succee
 The final verdict becomes not ready. The scores and the computed verdict stay as they were.
 Record only blockers you've verified, never a disagreement with the panel's judgment.
 
+Write the merged findings to `council-findings.json`, in priority order:
+
+```json
+[
+  {
+    "id": "AC1",
+    "criterion": "AC",
+    "priority": 1,
+    "title": "Step 3's command fails",
+    "problem": "The command needs a flag the lab never installs, so learners can't continue.",
+    "location": {"file": "/absolute/path/to/lab.rst", "quote": "Run `deploy --prod`"},
+    "suggestion": "Add the install step before step 3.",
+    "replacement": "",
+    "reviewers": ["openai", "google"],
+    "verified": true,
+    "blocker": true
+  }
+]
+```
+
+Keep `replacement` empty unless a reviewer proposed exact text and you've checked it. Set
+`verified` to `false` for a finding you couldn't confirm.
+
 ## 6. Report
 
 Write `report.md` with:
@@ -190,8 +213,8 @@ Write `report.md` with:
 2. **Scores.** A table with a row per criterion and a column per reviewer, plus the median and
    spread. Mark gate criteria, flags, and criteria that are not applicable or insufficient.
 3. **Disagreements.** Each flagged criterion, what each side cited, and your ruling.
-4. **Findings,** in priority order. Give each one's ID, location, problem, suggested fix, and the
-   reviewers who raised it.
+4. **Findings** from `council-findings.json`, in priority order. Give each one's ID, location,
+   problem, suggested fix, and the reviewers who raised it.
 5. **Strengths** reviewers cited, so the author knows what to keep.
 6. **Panel.** Each reviewer's provider, model, and settings, plus any missing reviewers and
    dropped scores.
@@ -200,17 +223,34 @@ Reply with the final verdict, the council score, the top three findings, and the
 
 ## 7. Hand off
 
-- **Triage dashboard.** If the user asked for one, follow the triage-feedback skill, with one
-  card per merged finding that has a location. Use the merged IDs, and the criterion names as
-  categories. If they didn't ask, end your reply with a one-line offer.
-- **Improvement loop.** A loop that uses the council as its measurement needs the same
-  measurement each time. Give each measurement its own run folder. Copy `panel.json` without
-  its task IDs, and copy `brief.md`, `context.md`, and `sources.json` unchanged. When the
-  artifact needs converting to text, keep the converted text in one folder outside the run
-  folders, and convert into it again for each version of the artifact. Its paths then stay the
-  same, and reviewers never read a stale copy.
-  The metric is `councilScore`, where higher is better, and `finalVerdict` acts as a floor. Two
-  runs are comparable only when both are complete, apply the same criteria, and have the same
-  fingerprints for everything in `inputs` except the sources. Reviewers' scores vary between
-  runs, so score the unchanged artifact more than once to learn how much they vary before
-  trusting any single change. Deciding when a change is real belongs to the loop, not here.
+The council's results are `scores.json`, `council-findings.json`, and `report.md`. When the
+user wants them to go somewhere, build what's needed from those files:
+
+- **Use the workflow that owns the destination.** If an installed skill handles it, follow that
+  skill and convert the findings into its format. Otherwise, ask the user what form they want.
+- **Keep what makes the findings council findings:** their IDs, priorities, locations, whether
+  they're verified or blockers, and the reviewers who raised them.
+- **Leave the artifact alone** unless the user asks for fixes to be applied, whether directly or
+  through a workflow that gets their approval first.
+
+If the user didn't say where the results should go, end your reply with a one-line question
+about what to do with the findings, naming one or two options that fit, such as a triage
+dashboard for approving each fix.
+
+## Measuring repeatedly
+
+When the council measures an artifact again and again, as in an improvement loop, every run
+must measure it the same way:
+
+- **Give each measurement its own run folder.** Copy `panel.json` without its task IDs, and copy
+  `brief.md`, `context.md`, and `sources.json` unchanged.
+- **Keep converted text in one place.** When the artifact needs converting to text, keep the
+  converted text in one folder outside the run folders, and convert into it again for each
+  version of the artifact. Its paths then stay the same, and reviewers never read a stale copy.
+- **Compare only comparable runs.** The metric is `councilScore`, where higher is better, and
+  `finalVerdict` acts as a floor. Two runs are comparable only when both are complete, apply
+  the same criteria, and have the same fingerprints for everything in `inputs` except the
+  sources.
+- **Learn the noise first.** Reviewers' scores vary between runs, so score the unchanged
+  artifact more than once to learn how much they vary before trusting any single change.
+  Deciding when a change is real belongs to whatever runs the loop.
