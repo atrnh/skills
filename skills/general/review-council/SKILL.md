@@ -1,13 +1,14 @@
 ---
 name: review-council
 description: >
-  Use in T3 Code when the user wants a council, panel, or multi-model review of an artifact:
-  independent reviewers from different model families score it against a shared rubric while
-  this session chairs the review and combines their results. Curriculum mode reviews lectures,
-  labs, exercises, homework, content outlines, and whole courses. Shares each reviewer's findings
-  as they arrive, then a scored council report that other workflows, such as triage-feedback or
-  an improvement loop, can take up. Do NOT use outside T3 Code, for a single-agent review, or for
-  assessments, code, or UI designs until those modes exist.
+  Use when the user wants a council, panel, or multi-model review of an artifact: independent
+  reviewers from different model families score it against a shared rubric while this session
+  chairs the review and combines their results. Starts reviewers through T3 Code, the host's own
+  subagents, or the cursor-agent, codex, and claude CLIs. Curriculum mode reviews lectures, labs,
+  exercises, homework, content outlines, and whole courses. Shares each reviewer's findings as
+  they arrive, then a scored council report that other workflows, such as triage-feedback or an
+  improvement loop, can take up. Do NOT use for a single-agent review, or for assessments, code,
+  or UI designs until those modes exist.
 ---
 
 # Review council
@@ -17,8 +18,9 @@ the same rubric without seeing each other's work. Their agreement is evidence, a
 disagreement. You chair the council: you set up the review, brief every reviewer identically,
 check their evidence, and combine their scores. You don't score the artifact yourself.
 
-The council needs T3 Code's orchestration tools. Call `orchestrator_capabilities` first. If it
-isn't available, tell the user the council runs only in T3 Code and stop.
+The council needs a way to start reviewers on other models: T3 Code's orchestration tools, your
+host's own subagents, or the `cursor-agent`, `codex`, and `claude` CLIs. Step 2 chooses among
+them.
 
 ## Modes
 
@@ -41,6 +43,7 @@ keep it out of the artifact's repository.
 | `context.md` | The artifact, its place in its larger work, known and tracked gaps, its audience and purpose, the review's scope, and every file reviewers may read |
 | `brief.md` | The brief every reviewer receives, with `{{REVIEWER_ID}}` left in place |
 | `source/` | Fixed copies of the artifact, such as text converted from Word or a file taken from another branch |
+| `reviews/` | The reviews and error logs of reviewers started through a CLI |
 | `report.md` | The council's report |
 
 ## 1. Establish what's under review
@@ -71,24 +74,42 @@ divided into the files under review and the context files.
 
 ## 2. Build the panel
 
-If the user points to an earlier run's report, reuse the reviewers and settings in its Panel
-section unchanged and go on to step 3.
+If the user points to an earlier run's report, reuse the reviewers, launchers, and settings in
+its Panel section unchanged and go on to step 3.
 
-Otherwise, choose one reviewer per model family, up to five, from the providers whose
-`displayName` is "Cursor" or "Work" in `orchestrator_capabilities`. Look them up by display
-name, because their `providerInstanceId` can differ from it. The capability list is short and
-omits models, so use its `search` argument to look for families it may hide.
+Otherwise, read `${XDG_CONFIG_HOME:-~/.config}/review-council/settings.md` if it exists. The
+setup-review-council skill writes it. Each of its lines replaces one default named below, and the
+user's instructions for this review override both. Don't save a change meant for one review
+unless the user asks.
+
+**Find the models you can reach** through each launcher in the `launchers` setting. By default
+that's `t3, subagents, cursor-agent, codex, claude`, in that order of preference.
+
+| Launcher | Models it offers |
+| --- | --- |
+| `t3` | Call `orchestrator_capabilities`, and skip this launcher if it isn't available. Use the providers named in the `t3 providers` setting, by default any. Look them up by `displayName`, because their `providerInstanceId` can differ from it. Skip providers that are disabled or can't run child tasks. The list is short and omits models, so use its `search` argument to look for families it may hide. |
+| `subagents` | The models your host's subagent tool accepts, such as Claude Code's `Agent` or Cursor's `Task` |
+| `cursor-agent` | `cursor-agent models` |
+| `codex` | `codex debug models`, which prints the catalog as JSON |
+| `claude` | No list command. It accepts aliases such as `opus` and `sonnet` for the latest model of each line. |
+
+Skip a CLI that `command -v` doesn't find. Then choose one reviewer per model family:
 
 - **Group models by family** using the model ID: `claude` is Anthropic, `gpt` is OpenAI,
-  `gemini` is Google, `composer` is Cursor, `kimi` is Moonshot, and so on. Treat `default` or
-  Auto as no family.
-- **Pick each family's most capable current model.** When the same family is on both providers,
-  choose the stronger model, whichever provider it's on.
-- **If more than five families are available,** keep the five whose best models read most
-  carefully, and tell the user which you left out.
-- **Set each reviewer's reasoning to `high`.** The option's ID varies by model, such as
-  `effort`, `reasoningEffort`, `reasoning`, or `reasoning_effort`. Turn fast mode off where it
-  exists. Leave other options at their defaults.
+  `gemini` is Google, `composer` is Cursor, `kimi` is Moonshot, and so on. Treat `default`,
+  `auto`, `inherit`, and other aliases as no family.
+- **Leave out** the families in the `skip families` setting, by default none.
+- **Seat pinned families first.** A line such as `pin google: gemini-4-argon via t3 Cursor` fixes
+  that family's model, launcher, and, for `t3`, provider. If a pinned model isn't available,
+  tell the user and choose for that family as if it had no pin.
+- **Pick each other family's most capable current model.** When several launchers or providers
+  offer the family, choose the strongest model wherever it is. When they offer the same model,
+  start it through the launcher listed first.
+- **If more families are available than the `most reviewers` setting allows,** by default five,
+  keep the ones whose best models read most carefully, and tell the user which you left out.
+- **Set each reviewer's reasoning** to the `reasoning` setting, by default `high`, or to the
+  model's highest level below it. Turn fast mode off unless the `fast mode` setting is `on`.
+  Leave other options at their defaults. Step 3 shows how each launcher takes these settings.
 - **Use at least three families.** With fewer, tell the user and ask whether to continue.
 
 Use each reviewer's family as its ID, such as `openai` or `google`.
@@ -96,22 +117,57 @@ Use each reviewer's family as its ID, such as `openai` or `google`.
 ## 3. Brief the reviewers
 
 Fill in [reviewer-brief.md](references/reviewer-brief.md) to make `brief.md`, following the
-instructions at its top. Then start one `delegate_task` per reviewer, all before you wait on
-any:
+instructions at its top. Every reviewer then gets the same task:
 
-- `task`: "You are a reviewer on a review council. Your reviewer ID is `<id>`. Read
-  `<run folder>/brief.md` in full and follow it exactly, using `<id>` wherever it says
-  `{{REVIEWER_ID}}`. In the run folder, read only the files the brief lists."
-- `target`: the reviewer's `providerInstanceId`, `model`, and `options`.
-- `role: "review"`, `isolation: "shared"`, `mode: "async"`, and the title
-  `Council <slug>: <id>`.
+> You are a reviewer on a review council. Your reviewer ID is `<id>`. Read
+> `<run folder>/brief.md` in full and follow it exactly, using `<id>` wherever it says
+> `{{REVIEWER_ID}}`. In the run folder, read only the files the brief lists.
 
-Tell the user who is on the panel, then follow each task's `next` guidance to wait. Don't poll.
+Start every reviewer before you wait on any.
+
+**Through `t3`,** call `delegate_task` with that `task`, a `target` holding the reviewer's
+`providerInstanceId`, `model`, and `options`, `role: "review"`, `isolation: "shared"`,
+`mode: "async"`, and the title `Council <slug>: <id>`. The reasoning option's ID varies by model,
+such as `effort`, `reasoningEffort`, `reasoning`, or `reasoning_effort`.
+
+**Through `subagents`,** start your host's subagent tool with the task and the reviewer's model,
+in the background or in parallel where the tool allows it. When the tool can't take a setting,
+such as reasoning, record that in the report's Panel section.
+
+**Through a CLI,** create `reviews/` in the run folder. Run each command in the background from
+the artifact's repository root, or from the run folder when there's no repository, without a
+timeout that would cut a long review short. Each command keeps its reviewer read-only and saves
+the review in `reviews/`:
+
+```sh
+cursor-agent -p --trust --mode ask --model '<model>' --add-dir '<run folder>' '<task>' \
+  > '<run folder>/reviews/<id>.md' 2> '<run folder>/reviews/<id>.log'
+
+codex exec -s read-only --ephemeral --skip-git-repo-check -m '<model>' \
+  -c model_reasoning_effort='"<reasoning>"' -o '<run folder>/reviews/<id>.md' '<task>' \
+  > /dev/null 2> '<run folder>/reviews/<id>.log'
+
+printf '%s' '<task>' | claude -p --model '<model>' --effort '<reasoning>' \
+  --tools Read,Grep,Glob --add-dir '<run folder>' \
+  > '<run folder>/reviews/<id>.md' 2> '<run folder>/reviews/<id>.log'
+```
+
+- `cursor-agent` sets reasoning and fast mode through the model name. Choose the variant ending
+  in the reasoning level, such as `claude-opus-5-5-high`, and with fast mode off, the one without
+  `-fast`.
+- `claude` takes several values after `--add-dir` and `--tools`, so the task goes in on standard
+  input.
+- Give `cursor-agent` and `claude` another `--add-dir` for each folder outside the repository
+  and the run folder that reviewers must read.
+
+Tell the user who is on the panel, then wait. Follow each T3 task's `next` guidance without
+polling, and wait on subagents and CLI processes the way your host provides.
 
 ## 4. Share each review as it arrives
 
-When a reviewer finishes, read its result with `task_status` and share it with the user right
-away, without waiting for the others:
+When a reviewer finishes, read its result and share it with the user right away, without
+waiting for the others. A T3 reviewer's result comes from `task_status`, a subagent's from its
+final message, and a CLI reviewer's from `reviews/<id>.md`. Share:
 
 - The reviewer, its model, and its scores on one line.
 - Its summary, and its priority 1 and 2 findings, each in a sentence with its location.
@@ -119,9 +175,10 @@ away, without waiting for the others:
 Check that the review answers every criterion, and note any score with no evidence. These are
 one reviewer's views. Say so, and keep the council's judgment for the report.
 
-A reviewer that fails, times out, or returns something unusable counts as missing. Don't
-replace it. With fewer than three usable reviews, stop and tell the user rather than reporting
-a council result.
+A reviewer that fails, times out, or returns something unusable counts as missing. For a CLI
+reviewer, that includes exiting with an error or leaving `reviews/<id>.md` empty; its
+`reviews/<id>.log` says why. Don't replace it. With fewer than three usable reviews, stop and
+tell the user rather than reporting a council result.
 
 ## 5. Combine, adjudicate, and merge
 
@@ -167,8 +224,8 @@ Give the report in your reply and save it as `report.md`:
    verified or a blocker.
 5. **Known and tracked.** The gaps left out because open work covers them, with their links.
 6. **Strengths** reviewers cited, so the author knows what to keep.
-7. **Panel.** The rubric version, and each reviewer's provider, model, and settings, plus any
-   missing reviewers and dropped scores.
+7. **Panel.** The rubric version, and each reviewer's launcher, provider, model, and settings,
+   plus any missing reviewers and dropped scores.
 
 ## 7. Hand off
 
