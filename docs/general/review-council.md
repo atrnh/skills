@@ -19,6 +19,17 @@ Reviewers return a Markdown review, and the chair works from those results direc
 no intermediate data files, so the review format in `reviewer-brief.md` is written for the
 chair to read, not for a program to parse.
 
+## Panel settings
+
+The [setup-review-council](../../skills/general/setup-review-council/SKILL.md) skill writes
+`${XDG_CONFIG_HOME:-~/.config}/review-council/settings.md`, and the chair reads it in step 2.
+Each setting's default appears in both skills: setup shows the full file, and step 2 names the
+default beside each rule. Change both together. Settings stay personal, because a panel depends
+on the accounts and CLIs on one machine.
+
+The CLI commands in step 3 were checked on `cursor-agent`, `codex`, and `claude`: each read a
+file at an absolute path and refused a request to write one. Check again after changing a flag.
+
 ## Mode file format
 
 Keep:
