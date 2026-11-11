@@ -26,7 +26,7 @@ them.
 
 | Mode | Reviews | Rubric |
 | --- | --- | --- |
-| Curriculum | Lectures, labs, exercises, homework, content outlines, and courses | [modes/curriculum.md](references/modes/curriculum.md) |
+| Curriculum | Lectures, labs, exercises, homework, content outlines, and courses | [core](references/modes/curriculum/core.md), plus the [lab](references/modes/curriculum/lab.md) or [lecture](references/modes/curriculum/lecture.md) module |
 
 Assessment, code, and UI modes aren't written yet. If the user asks for one, say so instead of
 improvising a rubric. Quizzes and tests inside curriculum are still read for how they fit the
@@ -62,7 +62,8 @@ keep it out of the artifact's repository.
    `context.md` with its link, so reviewers leave it out of their scores and findings.
 4. **Place it in its larger work,** following the mode file's "For the chair" section.
    Reviewers judge the artifact against this context, so gather it once and give them all the
-   same account.
+   same account. When the mode has modules, choose one there too, and follow its own "For the
+   chair" section.
 5. **State the audience and purpose.** Take them from the course outline, a README, or the user.
    Reviewers judge fit and progression against this statement, so they must all receive the
    same one. If you can't tell who the learners are and the answer would change the scores, ask.
@@ -224,7 +225,8 @@ Give the report in your reply and save it as `report.md`:
    verified or a blocker.
 5. **Known and tracked.** The gaps left out because open work covers them, with their links.
 6. **Strengths** reviewers cited, so the author knows what to keep.
-7. **Panel.** The rubric version, and each reviewer's launcher, provider, model, and settings,
+7. **Panel.** The rubric and its version, with any module, such as `curriculum core 7 + lab 1`,
+   and each reviewer's launcher, provider, model, and settings,
    plus any missing reviewers and dropped scores.
 
 ## 7. Hand off
@@ -254,7 +256,7 @@ must measure it the same way:
   artifact. Their paths then stay the same, and reviewers never read a stale copy.
 - **Compare only comparable runs.** The metric is the council score, where higher is better, and
   the final verdict acts as a floor. Two runs are comparable only when both are complete, use
-  the same panel, brief, context, and rubric version, and apply the same criteria. Only the
+  the same panel, brief, context, rubric, module, and versions, and apply the same criteria. Only the
   material under review may change.
 - **Learn the noise first.** Reviewers' scores vary between runs, so score the unchanged
   artifact more than once to learn how much they vary before trusting any single change.

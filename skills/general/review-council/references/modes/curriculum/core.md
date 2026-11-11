@@ -1,6 +1,6 @@
 # Curriculum rubric
 
-Version: 6
+Version: 7
 
 This rubric judges whether curriculum helps its learners understand and do what it sets out to
 teach. It covers lectures, labs, exercises, homework, content outlines, and whole courses. It
@@ -17,7 +17,6 @@ doesn't judge quizzes, tests, or other assessments as assessments; they need the
 | EX | Examples and concepts | |
 | LA | Language for purpose | |
 | PD | Practice design | |
-| PF | Presented form | |
 
 A gate criterion with a median below 7 means the material isn't ready, however well it scores
 elsewhere.
@@ -30,7 +29,7 @@ elsewhere.
 - **A content outline.** Judge what the outline explicitly plans, and don't imagine the quality
   of explanations, examples, or activities it doesn't yet contain. Score low when the plan
   itself leaves out something necessary. Answer `cannot_assess` when it doesn't say enough to
-  judge a criterion. Language for purpose and presented form are usually `na`.
+  judge a criterion. Language for purpose is usually `na`.
 - **A whole course.** Read the course outline and index, then the units named for in-depth
   reading in the review's scope, and skim the rest. Judge progression and alignment across
   units as well as within them, and name the unit in every quote and finding. Check whether
@@ -63,7 +62,8 @@ Score each problem under the criterion that owns it:
 - Support that's supplied but pitched at the wrong level belongs to **audience fit**.
 - Support that's supplied but arrives after learners need it belongs to **progression**.
 - A wrong fact or a step that doesn't work belongs to **accuracy**, even when it also leaves a
-  gap. So does a wrong idea the material itself states.
+  gap. So does a wrong idea the material itself states, such as a wrong explanation of what
+  code does. It isn't also a mental models problem.
 - A wrong idea learners bring with them, which the material fails to anticipate or correct,
   belongs to **mental models and misconceptions**.
 
@@ -227,27 +227,30 @@ of any kind and its purpose calls for none. When it needs practice and has none,
 - **Failing (1–3):** The activity doesn't practice the intended skill, or can't be completed in
   the time available.
 
-### PF Presented form
-
-In slides, handouts, presenter notes, or another presented form, learners can follow the
-reasoning at the point where they meet each idea. Answer `na` when there is no presented form.
-
-- **Strong (9–10):** Each idea's premises appear before it in the form learners see. Related
-  ideas stay together, breaks fall at meaningful shifts, and notes add depth without holding the
-  essential connection.
-- **Sound (7–8):** Mostly followable, with one awkward split or one connection that appears only
-  in notes.
-- **Weak (4–6):** Essential reasoning lives only in the source or the notes, or slides present
-  conclusions without their premises.
-- **Failing (1–3):** Learners can't follow the presented form.
-
-When the review supplies rendered slides or pages, judge from them. When you have only the
-source, judge from it if it shows where each slide or page breaks and which text is notes, and
-say so in the rationale. If it doesn't show that, answer `cannot_assess`.
-
 ## For the chair
 
 Everything above this heading goes to reviewers. This section is for the chair alone.
+
+### Choose a module
+
+A module adds criteria for one kind of artifact. Choose at most one before briefing, by what
+learners do with the artifact rather than by its file name:
+
+| Module | For |
+| --- | --- |
+| [lab.md](lab.md) | Labs, exercises, and homework: learners carry out steps or build something themselves |
+| [lecture.md](lecture.md) | Lectures with slides or another presented form that an instructor delivers |
+| None | Readings, handouts, content outlines, and whole courses |
+
+Decide from what the user said, then the project's structure, such as a `lectures/` or
+`exercises/` folder or a "Lab 2.1" heading in the course outline, then the artifact's form:
+slide directives or presenter notes point to a lecture, and numbered steps with commands and a
+deliverable point to a lab. Ask the user when two choices would fit and the scores would differ.
+
+A small embedded part gets no module of its own. A lecture with a short in-class exercise uses
+the lecture module, and the core judges the exercise. When an embedded part is its own file or
+takes a substantial share of learners' time, review it separately, with the other part listed as
+context. State the choice and its reason in `context.md`.
 
 ### Place the material in its course
 
@@ -282,6 +285,7 @@ Add the placement to `context.md`:
 - **This item:** <unit and number>, "<title>". The outline's objectives for it: <objectives>
 - **Before it:** <number>, "<title>" (</absolute/path>). Covers: <topics from its headings>
 - **After it:** <number>, "<title>" (</absolute/path>). Expects learners to: <objectives>
+- **Time slot:** <how long learners have for this item, with its source, or "Not stated">
 - **Mismatches:** <where the outline and the files disagree, or "None found">
 - **Known and tracked:** <each gap that open work covers, with the issue, branch, or request that
   covers it, or "None">
@@ -289,13 +293,3 @@ Add the placement to `context.md`:
 
 Add every placement source to the context files listed in `context.md`, so reviewers can cite
 them.
-
-### Provide the presented form
-
-When the material has slides, handouts, or another presented form, reviewers judge presented
-form best from what learners actually see. If the project can render it, such as with a slide
-build or a PDF export, list the rendered pages or slide images in `context.md` among the files
-under review, beside the text they render, and name each image so reviewers can match it to its
-slide or page in the text. Otherwise, say in `context.md` that reviewers have only the
-source. Converted text, as from a PowerPoint file, should keep each slide's boundary and keep
-notes separate from what's on the slide.
