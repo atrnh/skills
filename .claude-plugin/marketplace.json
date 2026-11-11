@@ -1,6 +1,6 @@
 {
   "name": "atrnh-skills",
-  "description": "Ashley Trinh's agent skills for education, engineering, documentation, fiction, and personal workflows",
+  "description": "Ashley Trinh's agent skills for engineering, documentation, fiction, and personal workflows",
   "owner": {
     "name": "Ashley Trinh",
     "url": "https://github.com/atrnh"
@@ -13,7 +13,6 @@
       "strict": false,
       "skills": [
         "./skills/general",
-        "./skills/education",
         "./skills/engineering",
         "./skills/personal"
       ]
@@ -34,7 +33,6 @@
       "strict": false,
       "skills": [
         "./skills/general",
-        "./skills/education",
         "./skills/engineering",
         "./skills/personal",
         "./skills/fiction"

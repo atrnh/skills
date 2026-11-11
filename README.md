@@ -1,27 +1,27 @@
 # Ashley's skills
 
-Reusable agent skills for engineering, education, documentation, fiction, and personal workflows. Principle skills, such as `teaching-principles`, guide judgment. Workflow skills describe how to carry out a task.
+Reusable agent skills for engineering, documentation, fiction, and personal workflows. Principle skills, such as `writing-principles`, guide judgment. Workflow skills describe how to carry out a task.
+
+Skills for Ashley's curriculum work, including `teaching-principles` and `review-council`, live in a separate work repository.
 
 ## Organization
 
-Each skill lives in a folder named for its domain, such as `skills/education/`. The [skill table](#available-skills) lists each skill's domain.
+Each skill lives in a folder named for its domain, such as `skills/fiction/`. The [skill table](#available-skills) lists each skill's domain.
 
 | Domain | Purpose |
 | --- | --- |
 | General | Principles and workflows whose guidance transfers intact across domains. |
 | Engineering | Building and maintaining software, extensions, and internal tooling. |
-| Education | Curriculum design, teaching prose, exercises, assessments, and demos that develop learners' understanding and ability. |
 | Documentation | Helping readers understand and use systems through explanations, procedures, reference material, and guides. |
 | Fiction | Developing, editing, and keeping a story bible for Ashley's fiction. Skills here share the editorial contract in `skills/fiction/references/`; the editors also share its review conduct and delivery guidance. |
 | Personal | Ashley's own assistant workflows, such as sending messages on her behalf and saving responses to Obsidian. |
 
 Domains follow the primary audience and purpose of the work. File format and technology alone do not determine the domain:
 
-- Python for a student exercise belongs primarily to education.
 - Python for a Sphinx extension belongs to engineering.
 - An administrator's guide to that extension belongs to documentation.
 
-General skills apply alongside domain skills. When domain guidance differs, the artifact's primary audience and purpose decide which applies. A course demo can use engineering guidance for correctness while education determines what the code needs to teach.
+General skills apply alongside domain skills. When domain guidance differs, the artifact's primary audience and purpose decide which applies. An extension's README can use engineering guidance for correctness while documentation determines what its readers need to know.
 
 ## Available skills
 
@@ -30,13 +30,6 @@ General skills apply alongside domain skills. When domain guidance differs, the 
 | [Writing principles](skills/general/writing-principles/SKILL.md) | General | Use established context to cut repetition, and present the current state while keeping history distinct. |
 | [Deep quality review](skills/general/deep-quality-review/SKILL.md) | General | Review writing for functional and deep quality using Diátaxis. |
 | [Triage feedback](skills/general/triage-feedback/SKILL.md) | General | Check a batch of proposed changes, then approve or reject each one in a dashboard before applying them. |
-| [Review council](skills/general/review-council/SKILL.md) | General | Chair a panel of reviewers from different model families who score an artifact against a shared rubric. |
-| [Set up review council](skills/general/setup-review-council/SKILL.md) | General | Save which launchers, providers, and models the review council may seat, after previewing the panel. |
-| [Teaching principles](skills/education/teaching-principles/SKILL.md) | Education | Sequence lessons, connect examples to concepts, match language to purpose, protect practice time, and keep reasoning in view when presenting. |
-| [Create lecture](skills/education/create-lecture/SKILL.md) | Education | Sequence a list of topics into an outline, then write the full RST lecture. |
-| [Create MCQ](skills/education/create-mcq/SKILL.md) | Education | Generate multiple choice questions from supplied text or documents. |
-| [Review lab](skills/education/review-lab/SKILL.md) | Education | Give structured editorial feedback on a subject matter expert's lab or exercise draft. |
-| [Student question pass](skills/education/student-question-pass/SKILL.md) | Education | Roleplay a target learner, add their questions as comments, and turn selected ones into content. |
 | [Sync from the source of truth](skills/engineering/sync-from-the-source-of-truth/SKILL.md) | Engineering | Define ownership of synchronized values before reconciling them. |
 | [Graduate skill](skills/engineering/graduate-skill/SKILL.md) | Engineering | Move a tested skill into the plugin repo that fits it, leaving one copy that every host links to. |
 | [Developmental editor](skills/fiction/developmental-editor/SKILL.md) | Fiction | Give candid structural critique or a spoiler-bounded first-reader response. |
@@ -99,7 +92,7 @@ Use the [`skills` CLI](https://github.com/vercel-labs/skills) when your agent do
 npx skills@latest add atrnh/skills
 ```
 
-Add `--list` to see the available skills, or `--skill <name>` to install specific ones. To install one domain, add its path, as in `npx skills@latest add atrnh/skills/skills/education`. To update, run `npx skills update`.
+Add `--list` to see the available skills, or `--skill <name>` to install specific ones. To install one domain, add its path, as in `npx skills@latest add atrnh/skills/skills/fiction`. To update, run `npx skills update`.
 
 ### Linking skills for live editing
 

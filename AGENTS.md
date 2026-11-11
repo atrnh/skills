@@ -1,6 +1,6 @@
 # Working in this repository
 
-This repository is the canonical source for Ashley's reusable agent skills and the place to reinstall them from. Skills still kept in agent- or provider-specific folders will move here. Read [README.md](README.md) for the domain map, available skills, and installation.
+This repository is the canonical source for Ashley's personal agent skills and the place to reinstall them from. Personal skills still kept in agent- or provider-specific folders will move here. Work-related skills, such as curriculum, Canvas, and SharePoint workflows, belong in her work skills repository, cloned at `~/work/skills`, instead. Read [README.md](README.md) for the domain map, available skills, and installation.
 
 ## Find the relevant guidance
 
@@ -22,16 +22,16 @@ Ashley works as an educator, technical writer, and platform engineer. Apply stan
 ## Place skills
 
 - Assign a skill to the domain whose audience and purpose its guidance serves, as described in the README's [Organization](README.md#organization) section, and record it in the README's skill table.
-- Put principles and workflows in their domain's directory, such as `skills/education/`.
+- Put principles and workflows in their domain's directory, such as `skills/fiction/`.
 - Keep a skill in the domain where its guidance has concrete support. Make it general when that guidance applies across domains without losing the distinctions that make it useful. A general skill moves into `skills/general/`.
-- Give each skill its own directory containing a `SKILL.md`, such as `skills/education/teaching-principles/SKILL.md`. Keep names unique across the repository.
+- Give each skill its own directory containing a `SKILL.md`, such as `skills/general/writing-principles/SKILL.md`. Keep names unique across the repository.
 - Keep skill-specific examples, scripts, and references beside their `SKILL.md`. Add further organizational layers only when the collection needs them.
 - Keep project-specific syntax, folder conventions, and build commands in the project's own instructions or workflows. Extract a reusable principle only when the broader judgment is useful independently of those details.
 
 ## Write skills
 
 - Write principles as compact guidance for judgment. A principle should explain when it applies, what judgment to make, how that changes the work, and where the guidance stops applying. Keep each part concrete.
-- Group principles that apply to the same kind of work into one skill with a section for each, such as `teaching-principles`. Agents tend to load only some of several separate skills that apply together. Give a principle its own skill only when it applies to a narrow, distinct task, as `sync-from-the-source-of-truth` does, and name that skill for the action it guides.
+- Group principles that apply to the same kind of work into one skill with a section for each, such as `writing-principles`. Agents tend to load only some of several separate skills that apply together. Give a principle its own skill only when it applies to a narrow, distinct task, as `sync-from-the-source-of-truth` does, and name that skill for the action it guides.
 - Write workflow skills to describe how to carry out a task.
 - Agents load skills, including principles, by matching their descriptions to the current work. Begin a description with when the skill applies, and name the concrete artifacts or tasks where that happens, such as slides, labs, READMEs, or sync tooling.
 - Keep originating examples out of the skill body so the guidance stays general.
