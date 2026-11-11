@@ -4,7 +4,8 @@ To build `brief.md`, copy everything below the line and replace:
 
 - `{{CONTEXT}}` with the contents of `context.md`.
 - `{{SCALE}}` with the "Scale" and "Evidence" sections of [scoring.md](scoring.md).
-- `{{RUBRIC}}` with everything in the mode file above its "For the chair" heading.
+- `{{RUBRIC}}` with everything in the mode file above its "For the chair" heading. For a mode
+  split into a core and modules, use the core's text, then the chosen module's, if any.
 
 Leave `{{REVIEWER_ID}}` in place. It's filled in for each reviewer at launch.
 
