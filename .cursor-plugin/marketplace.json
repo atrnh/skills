@@ -4,7 +4,7 @@
     "name": "Ashley Trinh"
   },
   "metadata": {
-    "description": "Ashley Trinh's agent skills for education, engineering, documentation, fiction, and personal workflows"
+    "description": "Ashley Trinh's agent skills for engineering, documentation, fiction, and personal workflows"
   },
   "plugins": [
     {
@@ -14,7 +14,6 @@
       "skills": [
         "./skills/general",
         "./skills/engineering",
-        "./skills/education",
         "./skills/personal"
       ]
     },
@@ -33,7 +32,6 @@
       "skills": [
         "./skills/general",
         "./skills/engineering",
-        "./skills/education",
         "./skills/personal",
         "./skills/fiction"
       ]

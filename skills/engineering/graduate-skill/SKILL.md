@@ -22,7 +22,7 @@ The work has two phases. **Propose** is read-only and ends with a written propos
 From this skill's directory, run `python3 scripts/survey.py copies <name>` and `python3 scripts/survey.py repos`. Both are read-only and print JSON.
 
 - `copies` lists every directory and symlink with the skill's name in the incubator, host skill folders, Claude's synced folder, plugin install caches, and plugin repos. `kind` is `incubator`, `link`, `host-copy`, `claude-sync`, `plugin-install`, or `repo`. `state` is `clean`, `modified`, `uncommitted` (added to git but never committed), or `untracked`. `commits` counts the commits that touch the copy. Copies with the same `digest` have identical contents. A `managed` key lists the installer markers the survey recognizes. Its absence doesn't rule out an installer that records its state elsewhere; step 4 covers those.
-- `repos` lists the git repos that hold `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, or `.agents/plugins/` manifests at any depth. Each entry gives the remote, plugins, manifest authors, skill count, and `user_commits`, the number of commits by the current git user.
+- `repos` lists the git repos that hold `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, or `.agents/plugins/` manifests at any depth, and the repos without manifests whose top-level `skills/` folder holds skill folders directly. Each entry gives the remote, plugins, manifest authors, skill count, and `user_commits`, the number of commits by the current git user.
 
 Hosts can also read the incubator directly; Cursor and Codex load `~/.agents/skills`. Treat the incubator copy as a live load, not as storage.
 

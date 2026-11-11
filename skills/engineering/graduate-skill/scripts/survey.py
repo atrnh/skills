@@ -54,10 +54,19 @@ def is_manifest_dir(path):
     return path.name in MANIFEST_DIRS or path.parts[-2:] == (".agents", "plugins")
 
 
+def is_skills_dir(path, dirs):
+    """A repo's top-level `skills/` folder that holds skill folders directly, as repos without manifests use."""
+    return (path.name == "skills" and (path.parent / ".git").exists()
+            and any((path / d / "SKILL.md").is_file() for d in dirs))
+
+
 def find_repos(roots):
     repos = set()
     for root in roots:
-        for current, _, files in walk(root, 6, keep_hidden=(*MANIFEST_DIRS, ".agents")):
+        for current, dirs, files in walk(root, 6, keep_hidden=(*MANIFEST_DIRS, ".agents")):
+            if is_skills_dir(current, dirs) and not current.is_relative_to(HOME / ".agents"):
+                repos.add(current.parent.resolve())
+                continue
             if (not is_manifest_dir(current) or not any(f.endswith(".json") for f in files)
                     or current.is_relative_to(HOME / ".agents")):
                 continue
@@ -191,7 +200,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="command", required=True)
-    repos = sub.add_parser("repos", help="list plugin repos found by manifest")
+    repos = sub.add_parser("repos", help="list skill repos found by manifest or top-level skills folder")
     repos.add_argument("--root", action="append", type=Path)
     copies = sub.add_parser("copies", help="list every copy and link of a skill")
     copies.add_argument("name")
